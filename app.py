@@ -113,7 +113,7 @@ def after_request(response):
 
 @app.route('/')
 def home():
-    return 'It works.'
+    return 'Funcionou!.'
 
 
 def predict(model, text):
