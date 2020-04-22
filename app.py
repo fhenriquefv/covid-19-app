@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import BRKGA as brkga
+import DataLoad as dl
 
 from sklearn.externals import joblib
 
@@ -17,40 +18,50 @@ app = Flask(__name__)
 
 @app.route('/brkga', methods=['POST'])
 def run_brkga():
-    dem = pd.read_csv("Instances/RJDemographicData.csv", index_col=0)
-    dem = dem.reindex(index=sorted(dem.index))
-
-    prox = pd.read_csv(
-        "Instances/Neighboorhood/RJNeighboorhood.csv", dtype=int, index_col=0)
-    prox.columns = prox.columns.to_numpy(int)
-    prox = prox.reindex(index=sorted(prox.index), columns=sorted(prox.columns))
-
+	
+    data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
-    #pd.read_json(request.get_json(), dtype={
-    #                      "N": int, "M": int, "P": int, "Elite": int, "Mutant": int, "K": int, "S": str, "Type": bool})
 
-    _relation = pd.read_csv("Input/Facilities.csv", index_col=0)
-
+    _relation = pd.DataFrame()
+    _relation['City'] = pd.Series(params["City"]["Value"])
+    _relation["Cover"] = pd.Series(params["Cover"]["Value"])
+    _relation["Cost"] = pd.Series(params["Cost"]["Value"])
+    
     facilities_cost = []
     facilities_cover = []
 
+    
     for i in _relation["Cost"].values:
         facilities_cost.append(i.copy())
 
     for i in _relation["Cover"].values:
         facilities_cover.append(i.copy())
 
-    for i in range(0, params["N"]["Value"]):
-        facilities_cover[i] = facilities_cover[i] / \
-            dem["Urban Density (People/Km2)"][i] * \
-            _relation["City"].value_counts()[_relation["City"][i]]
-        facilities_cost[i] = facilities_cost[i]*_relation["City"].value_counts(
-        )[_relation["City"][i]]/dem["Urban Density (People/Km2)"][i]
+
+# In[139]:
+
+
+    for i in range(0,params["N"]["Value"]):
+        location = _relation["City"][i]
+        state = location.split('-')[0]
+        city_id = int(location.split('-')[1])
+    
+        redundance = _relation["City"].value_counts()[_relation["City"].value_counts().index == location][location]
+        density = data.DemographicData[state].loc[city_id]["Density"]
+    
+        facilities_cover[i]= facilities_cover[i]/density*redundance
+        facilities_cost[i] = facilities_cost[i]*redundance/density
 
     Heuristic = brkga.BRKGA(facilities_cover, facilities_cost,
                             params["M"]["Value"], params["P"]["Value"],
                             params["Elite"]["Value"], params["Mutant"]["Value"],
                             params["K"]["Value"], params["Type"]["Value"])
+
+
+    Heuristic = brkga.BRKGA(facilities_cover,facilities_cost,
+                        params["M"]["Value"],params["P"]["Value"],
+                        params["Elite"]["Value"],params["Mutant"]["Value"],
+                        params["K"]["Value"],params["Type"]["Value"])
 
     solutions, facilities = Heuristic.Solve()
 
