@@ -99,7 +99,6 @@ class StaticPlots:
             d_ratio = pd.Series(1)
             label_ext = ""
             co = 1
-            
         elif ratio == "Population":
             #If ratio is equal to 'Population'
             #The desired ratio will be a pandas Series of the
@@ -111,8 +110,7 @@ class StaticPlots:
                                         ignore_index = True)
             hash_value += "_b100k"
             label_ext = " / 100000 Habitants"
-            co = 100000
-            
+            co = 100000 
         elif ratio == "Area":
             #If ratio is equal to 'Population'
             #The desired ratio will be a pandas Series of the
