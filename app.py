@@ -126,9 +126,14 @@ def after_request(response):
 def home():
     return 'Funcionou!.'
 
-@app.route('/teste', methods=['GET'])
+@app.route('/teste', methods=['POST'])
 def teste():
-    return 'Teste funcionou!'
+    params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+    _relation['mortes'] = pd.Series(params["deaths"])
+    
+    return _relation['mortes']
 
 def predict(model, text):
     return label[model.predict([text])[0]]
