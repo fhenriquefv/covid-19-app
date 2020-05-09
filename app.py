@@ -128,24 +128,8 @@ def home():
 
 @app.route('/teste', methods=['POST'])
 def teste():
-    data = dl.DataLoad()
-    params = pd.DataFrame(request.get_json()) 
-
-    _relation = pd.DataFrame()
-    _relation['City'] = pd.Series(params["City"]["Value"])
-    _relation["Cover"] = pd.Series(params["Cover"]["Value"])
-    _relation["Cost"] = pd.Series(params["Cost"]["Value"])
-    
-    facilities_cost = []
-    facilities_cover = []
-
-    
-    for i in _relation["Cost"].Value:
-        facilities_cost.append(i.copy())
-
-    for i in _relation["Cover"].Value:
-        facilities_cover.append(i.copy())
-    return 'Testando'
+    value = request.json['chave']
+    return value
 
     
 
