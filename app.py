@@ -145,7 +145,7 @@ def teste():
     for i in _relation["Cover"].values:
         facilities_cover.append(i.copy())
     
-    return params['chave']
+    return str(request.get_json())
 
     
 
