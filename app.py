@@ -128,10 +128,7 @@ def home():
 
 @app.route('/teste', methods=['POST', 'GET'])
 def teste():
-    if(request.method == 'GET'):
-        return 'Teste GET'
-    params = pd.DataFrame(request.get_json()) 
-    return params['chave']
+    return 'Testando'
 
     
 
