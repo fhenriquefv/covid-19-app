@@ -132,21 +132,11 @@ def teste():
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
-    _relation['City'] = pd.Series(params["City"]["Value"])
-    _relation["Cover"] = pd.Series(params["Cover"]["Value"])
-    _relation["Cost"] = pd.Series(params["Cost"]["Value"])
+    _relation['deaths'] = pd.Series(params["mortes"]["Value"])
+    _relation["ratio"] = pd.Series(params["taxa"]["Value"])
+    _relation["select"] = pd.Series(params["selecionado"]["Value"])
     
-    facilities_cost = []
-    facilities_cover = []
-
-    
-    for i in _relation["Cost"].values:
-        facilities_cost.append(i.copy())
-
-    for i in _relation["Cover"].values:
-        facilities_cover.append(i.copy())
-    
-    return str(params["chave"]["Value"])
+    return str(_relation)
 
     
 
