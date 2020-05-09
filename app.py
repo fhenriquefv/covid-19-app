@@ -129,7 +129,7 @@ def home():
 
 @app.route('/teste', methods=['GET'])
 def teste():
-    return staticPlots.teste()
+    return 'Teste'
 
 def predict(model, text):
     return label[model.predict([text])[0]]
