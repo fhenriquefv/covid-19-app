@@ -145,7 +145,7 @@ def teste():
     for i in _relation["Cover"].values:
         facilities_cover.append(i.copy())
     
-    return 'Teste funcionou'
+    return params['chave']
 
     
 
