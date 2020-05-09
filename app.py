@@ -133,8 +133,6 @@ def teste():
     _relation = pd.DataFrame()
     _relation['mortes'] = pd.Series(params["deaths"])
     
-    for i in _relation["Cost"].values:
-        facilities_cost.append(i.copy())
     return _relation.to_json()
 
 def predict(model, text):
