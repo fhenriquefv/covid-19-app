@@ -127,7 +127,7 @@ def after_request(response):
 def home():
     return 'Funcionou!.'
 
-@app.route('/teste', methods=['get'])
+@app.route('/teste', methods=['GET'])
 def teste():
     return staticPlots.teste()
 
