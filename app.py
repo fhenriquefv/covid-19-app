@@ -126,9 +126,28 @@ def after_request(response):
 def home():
     return 'Funcionou!.'
 
-@app.route('/teste', methods=['GET'])
+@app.route('/teste', methods=['POST'])
 def teste():
-    return staticPlots.teste()
+    data = dl.DataLoad()
+    params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+    _relation['City'] = pd.Series(params["City"]["Value"])
+    _relation["Cover"] = pd.Series(params["Cover"]["Value"])
+    _relation["Cost"] = pd.Series(params["Cost"]["Value"])
+    
+    facilities_cost = []
+    facilities_cover = []
+
+    
+    for i in _relation["Cost"].values:
+        facilities_cost.append(i.copy())
+
+    for i in _relation["Cover"].values:
+        facilities_cover.append(i.copy())
+    return 'Testando'
+
+    
 
 def predict(model, text):
     return label[model.predict([text])[0]]
