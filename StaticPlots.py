@@ -8,9 +8,7 @@ import import_ipynb
 import DataLoad as dl
 register_matplotlib_converters()
 plt.style.use('seaborn')
-data = dl.DataLoad()
-plots = StaticPlots(data)
-plots.totalBarState(ratio="Area")
+
 
 class StaticPlots:
     """
@@ -427,3 +425,7 @@ class StaticPlots:
                     self.TemporalSeries(j.encode('utf-8'),'city',j.encode('utf-8'))
                 else: 
                     break
+
+'''data = dl.DataLoad()
+plots = StaticPlots(data)
+plots.totalBarState(ratio="Area")'''
