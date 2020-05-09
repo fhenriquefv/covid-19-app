@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import BRKGA as brkga
 import DataLoad as dl
+import StaticPlots as staticPlots
 
 from sklearn.externals import joblib
 
@@ -126,10 +127,9 @@ def after_request(response):
 def home():
     return 'Funcionou!.'
 
-@app.route('/teste', methods=['POST'])
+@app.route('/teste', methods=['get'])
 def teste():
-    params = pd.DataFrame(request.get_json()) 
-    return params.to_json()
+    return staticPlots.teste()
 
 def predict(model, text):
     return label[model.predict([text])[0]]
