@@ -128,9 +128,13 @@ def home():
 @app.route('/teste', methods=['POST'])
 def teste():
     data = dl.DataLoad()
-    params = pd.DataFrame(request.get_json()) 
-    
-    return params['chave']
+    params = pd.DataFrame(request.get_json())
+    _relation = pd.DataFrame()
+    _relation['City'] = pd.Series(params["City"]["Value"])
+    _relation["Cover"] = pd.Series(params["Cover"]["Value"])
+    _relation["Cost"] = pd.Series(params["Cost"]["Value"])
+    _relation["chave"] = pd.Series(params["chave"])
+    return _relation['chave']
 
     
 
