@@ -126,6 +126,9 @@ def after_request(response):
 def home():
     return 'Funcionou!.'
 
+@app.route('/teste', methods=['GET'])
+def teste():
+    return 'Teste funcionou!'
 
 def predict(model, text):
     return label[model.predict([text])[0]]
