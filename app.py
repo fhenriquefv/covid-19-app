@@ -129,11 +129,7 @@ def home():
 @app.route('/teste', methods=['POST'])
 def teste():
     params = pd.DataFrame(request.get_json()) 
-
-    _relation = pd.DataFrame()
-    _relation['mortes'] = pd.Series(params["deaths"])
-    
-    return _relation.to_json()
+    return params.to_json()
 
 def predict(model, text):
     return label[model.predict([text])[0]]
