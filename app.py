@@ -140,10 +140,10 @@ def teste():
     facilities_cover = []
 
     
-    for i in _relation["Cost"].values:
+    for i in _relation["Cost"].Value:
         facilities_cost.append(i.copy())
 
-    for i in _relation["Cover"].values:
+    for i in _relation["Cover"].Value:
         facilities_cover.append(i.copy())
     return 'Testando'
 
