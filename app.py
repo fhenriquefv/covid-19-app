@@ -136,7 +136,13 @@ def teste():
     _relation["ratio"] = pd.Series(params["taxa"]["Value"])
     _relation["select"] = pd.Series(params["selecionado"]["Value"])
     
-    staticPlots = sPlots.StaticPlots()
+    data['BR_Cases_By_State'] = 2000
+    data['BR_Cases_By_City'] = 3000
+    data['BR_Cases_Total'] = 5000
+    data['states'] = 4
+    data['cities'] = 6
+
+    staticPlots = sPlots.StaticPlots(data)
     staticPlots.totalBarCity(_relation['deaths'],_relation['ratio'])
 
     return 'Funcionou?'

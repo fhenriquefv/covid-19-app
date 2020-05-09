@@ -31,7 +31,7 @@ class StaticPlots:
     cities = None
     data = None
     
-    def __init__(self):
+    def __init__(self, data):
         
         """
         data: A instance of the DataLoad class
@@ -39,13 +39,13 @@ class StaticPlots:
         Example:
             sp = StaticPlots(DataLoad())
         """
-        '''
+    
         self.data = data
         self.BR_Cases_By_State = data.BR_Cases_By_State
         self.BR_Cases_By_City = data.BR_Cases_By_City
         self.BR_Cases_Total = data.BR_Cases_Total
         self.states = data.states
-        self.cities = data.cities'''
+        self.cities = data.cities
         
     def TemporalSeries(self, gvalue, gtype='state',ratio = None, hash_value=""):
         """
