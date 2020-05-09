@@ -24,10 +24,6 @@ class StaticPlots:
     states = None
     cities = None
     data = None
-
-
-    def teste():
-        return 'Tá importando'
     
     def __init__(self,data):
         
