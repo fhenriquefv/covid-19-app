@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import BRKGA as brkga
 import DataLoad as dl
+import StaticPlots as sPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
@@ -145,7 +146,7 @@ def teste():
     for i in _relation["Cover"].values:
         facilities_cover.append(i.copy())
     
-    return str(params["chave"])
+    return str(params["chave"]["Value"])
 
     
 

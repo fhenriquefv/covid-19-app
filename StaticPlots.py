@@ -1,13 +1,19 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
-
 from pandas.plotting import register_matplotlib_converters
 import matplotlib.pyplot as plt
-import import_ipynb
-import DataLoad as dl
 register_matplotlib_converters()
 plt.style.use('seaborn')
+
+
+# In[2]:
 
 
 class StaticPlots:
@@ -247,12 +253,12 @@ class StaticPlots:
         
         for i in bar.patches:
             for i in bar.patches:
-            if ratio == "Population":
-                string = str(int(i.get_height()))
-            elif round(i.get_height(),2) > 0 and ratio == "Area":
-                string = str(round(i.get_height(),2))
-            else:
-                string = "_"
+                if ratio == "Population":
+                    string = str(int(i.get_height()))
+                elif round(i.get_height(),2) > 0 and ratio == "Area":
+                    string = str(round(i.get_height(),2))
+                else:
+                    string = "_"
 
         bar.annotate(string,(i.get_x(),i.get_height()),fontsize=10,ha='left')
 
@@ -422,6 +428,3 @@ class StaticPlots:
                 else: 
                     break
 
-'''data = dl.DataLoad()
-plots = StaticPlots(data)
-plots.totalBarState(ratio="Area")'''
