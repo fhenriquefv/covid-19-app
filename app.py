@@ -128,8 +128,8 @@ def home():
 
 @app.route('/teste', methods=['POST'])
 def teste():
-    value = request.json['chave']
-    return value
+    params = pd.DataFrame(request.get_json()) 
+    return params['chave']
 
     
 
