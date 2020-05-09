@@ -10,7 +10,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import BRKGA as brkga
 import DataLoad as dl
-import StaticPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
@@ -126,9 +125,12 @@ def after_request(response):
 def home():
     return 'Funcionou!.'
 
-@app.route('/teste', methods=['GET'])
+@app.route('/teste', methods=['POST'])
 def teste():
-    return 'Testando'
+    data = dl.DataLoad()
+    params = pd.DataFrame(request.get_json()) 
+    
+    return params['chave']
 
     
 
