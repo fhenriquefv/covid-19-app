@@ -137,7 +137,7 @@ def teste():
     _relation["select"] = pd.Series(params["selecionado"]["Value"])
     
     staticPlots = sPlots.StaticPlots()
-    staticPlots.totalBarState(_relation['deaths']['Value'],_relation['ratio']['Value'], _relation['select']['Value'])
+    staticPlots.totalBarState(_relation['deaths'],_relation['ratio'], _relation['select'])
 
     return 'Funcionou?'
 
