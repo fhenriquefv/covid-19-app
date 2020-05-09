@@ -127,7 +127,7 @@ def home():
 
 @app.route('/teste', methods=['POST'])
 def teste():
-    return request['chave']
+    return str(request.get_json())
 
     
 
