@@ -139,7 +139,7 @@ def teste():
     #staticPlots = sPlots.StaticPlots(data)
     #staticPlots.totalBarCity(_relation['select'],_relation['deaths'],_relation['ratio'])
 
-    return str(data)
+    return str(data.BR_Cases_By_State)
 
     
 
