@@ -18,3 +18,4 @@ virtualenv==13.1.0
 Werkzeug==0.14.0
 matplotlib==3.2.1
 flask-cors==3.0.7
+seaborn==0.10.1
