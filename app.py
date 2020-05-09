@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import BRKGA as brkga
 import DataLoad as dl
-from StaticPlots import StaticPlots
+import StaticPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
