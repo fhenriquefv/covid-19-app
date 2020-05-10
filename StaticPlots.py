@@ -208,7 +208,6 @@ class StaticPlots:
             d_ratio = pd.Series(1)
             label_ext = ""
             co = 1
-            
         elif ratio == "Population":
             d_ratio = pd.Series()
             for i in _temp["city"].values:
