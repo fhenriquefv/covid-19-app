@@ -132,9 +132,9 @@ def teste():
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
-    _relation['deaths'] = pd.Series(params["mortes"]["Value"])
-    _relation["ratio"] = pd.Series(params["taxa"]["Value"])
-    _relation["select"] = pd.Series(params["selecionado"]["Value"])
+    _relation['deaths'] = pd.Series(params["mortes"][0])
+    _relation["ratio"] = pd.Series(params["taxa"][0])
+    _relation["select"] = pd.Series(params["selecionado"][0])
 
     staticPlots = sPlots.StaticPlots(data)
     staticPlots.totalBarState(_relation['deaths'],_relation['ratio'], 'totalBarState')
