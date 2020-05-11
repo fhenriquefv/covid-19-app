@@ -132,12 +132,12 @@ def teste():
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
-    _relation['deaths'] = pd.Series(params["mortes"][0])
-    _relation["ratio"] = pd.Series(params["taxa"][0])
-    _relation["select"] = pd.Series(params["selecionado"][0])
+    _relation['deaths'] = pd.Series(params["mortes"])
+    _relation["ratio"] = pd.Series(params["taxa"])
+    _relation["select"] = pd.Series(params["selecionado"])
 
     staticPlots = sPlots.StaticPlots(data)
-    staticPlots.totalBarState(_relation['deaths'],_relation['ratio'], 'totalBarState')
+    staticPlots.totalBarState(_relation['deaths'].values[0],_relation['ratio'].values[0], 'totalBarState')
 
     return 'Funcionou'
 
