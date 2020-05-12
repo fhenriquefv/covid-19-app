@@ -273,7 +273,7 @@ class DinamicPlots:
     def HeatmapCity(self,cities_list,deaths=False,hash_value=""):
         df = pd.DataFrame()
         
-        bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0].decode('utf-8')
+        bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
         
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
