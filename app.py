@@ -145,7 +145,7 @@ def teste():
     dinamicPlots = dPlots.DinamicPlots(data)
     #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
     #dinamicPlots.ComparisonStateBar(_relation['select'].values[0],_relation['select'].values[1],_relation['deaths'].values[0],'comparisonStateBar')
-    dinamicPlots.HeatmapState(['RJ','MG', 'SP', 'ES'],_relation['deaths'].values[0],'comparisonStateBar')
+    dinamicPlots.HeatmapState(['RJ','MG', 'SP', 'ES'],_relation['deaths'].values[0],'heatMap')
     
     
     return 'Funcionou'
