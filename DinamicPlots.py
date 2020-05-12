@@ -97,7 +97,7 @@ class DinamicPlots:
         del comp
         
     def ComparisonMultipleStatesBar(self,states,deaths=False,hash_value=""):
-        hash_value = hash_value.decode('utf-8')
+        #hash_value = hash_value.decode('utf-8')
         
         states_list = []
         
