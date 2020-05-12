@@ -328,7 +328,7 @@ class StaticPlots:
         hash_value: The suffix of the .png file name, must be unique
         """
     
-        hash_value = hash_value.decode('utf-8')
+        #hash_value = hash_value.decode('utf-8')
         date = self.BR_Cases_By_City.date.unique()[-1]
         
         if gtype == 'state':
