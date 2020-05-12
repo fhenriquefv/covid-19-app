@@ -1,9 +1,20 @@
-import DataLoad as dl
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from pandas.plotting import register_matplotlib_converters
 import matplotlib.pyplot as plt
+register_matplotlib_converters()
+plt.style.use('seaborn')
+
+
+# In[2]:
+
 
 class DinamicPlots:
     
@@ -144,7 +155,55 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del states_list
+
+    def ComparisonMultipleCitiesBar(self,cities,deaths=False,hash_value=""):
+        #hash_value = hash_value.decode('utf-8')
         
+        cities_list = []
+        
+        for i in cities:
+            cities_list.append(self.BR_Cases_By_City[self.BR_Cases_By_City["city"].values == i].copy())
+    
+        legend = "Cities"
+        title = "Comparison States"
+        
+        if deaths == True:
+            for i in cities_list:
+                i = i[i["deaths"] > 0]
+                i = i[i["deaths"] > 0]
+            
+            _type = "deaths"
+            path = u"__temp/__custom/__mcdbc/mcdbc_"+hash_value+".png"
+            
+            xlabel = "Days Since First Death Case"
+        else:
+            _type = "totalCases"
+            path = u"__temp/__custom/__mcibc/mcibc_"+hash_value+".png"
+        
+            xlabel = "Days Since First Infected"
+        Figure, Axes = plt.subplots(figsize=(8,8))
+        
+        aux = 0
+        for i in cities_list:
+            lenght = len(i.index)
+            i.loc[:,"date"] = range(lenght)
+            i.index = range(lenght)
+
+            Axes.plot("date",_type,data=i,label=cities[aux])
+            aux+=1
+        
+        Axes.legend(fontsize=12).set_title(legend,prop={"size":14})
+        Axes.set_title("Comparison Multiple Cities",fontsize=20)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
+        Axes.set_xlabel(xlabel,labelpad=10,fontsize=14)
+        
+        Figure.tight_layout()
+        Figure.savefig(path)
+        Figure.clear()
+        
+        plt.close()
+        Axes.cla()
+        del cities_list
         
     def ComparisonCityBar(self,city1,city2,deaths=False,hash_value=""):
         #city1 = city1.decode('utf-8')
@@ -274,7 +333,6 @@ class DinamicPlots:
         df = pd.DataFrame()
         
         bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
-        
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
             title = "Days Since First Death Case"
@@ -366,3 +424,4 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+
