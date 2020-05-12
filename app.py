@@ -145,7 +145,7 @@ def teste():
     dinamicPlots = dPlots.DinamicPlots(data)
     #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
     #dinamicPlots.ComparisonStateBar(_relation['select'].values[0],_relation['select'].values[1],_relation['deaths'].values[0],'comparisonStateBar')
-    dinamicPlots.HeatmapCity(['Rio de Janeiro-RJ','Belo Horizonte-MG', 'São Paulo-SP', 'Vitória-ES'],_relation['deaths'].values[0],'heatMap')
+    dinamicPlots.ComparisonCityBar('Rio de Janeiro-RJ','Belo Horizonte-MG',_relation['deaths'].values[0],'comparison')
     
     
     return 'Funcionou'
