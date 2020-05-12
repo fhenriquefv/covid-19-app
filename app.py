@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import BRKGA as brkga
 import DataLoad as dl
 import StaticPlots as sPlots
+import DinamicPlots as dPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
@@ -141,8 +142,9 @@ def teste():
     _relation["select"] = pd.Series(params["selecionado"])
 
     staticPlots = sPlots.StaticPlots(data)
-    staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
-
+    dinamicPlots = dPlots.DinamicPlots(data)
+    #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
+    dinamicPlots.ComparisonStateBar(_relation['select'].values[0],_relation['select'].values[1],_relation['deaths'].values[0],'comparisonStateBar')
     return 'Funcionou'
 
     
