@@ -122,6 +122,10 @@ def after_request(response):
     return response
 
 
+@app.route('/__temp/<path:path>')
+def send_js(path):
+    return send_from_directory('__temp', path)
+
 @app.route('/')
 def home():
     return 'Funcionou!.'
