@@ -147,9 +147,9 @@ class DinamicPlots:
         
         
     def ComparisonCityBar(self,city1,city2,deaths=False,hash_value=""):
-        city1 = city1.decode('utf-8')
-        city2 = city2.decode('utf-8')
-        hash_value = hash_value.decode('utf-8')
+        #city1 = city1.decode('utf-8')
+        #city2 = city2.decode('utf-8')
+        #hash_value = hash_value.decode('utf-8')
         
         _temp = self.BR_Cases_By_City[self.BR_Cases_By_City["city"].values == city1].copy()
         _temp2 = self.BR_Cases_By_City[self.BR_Cases_By_City["city"].values == city2].copy()
@@ -290,7 +290,7 @@ class DinamicPlots:
         comp = len(self.BR_Cases_By_City[bol])
         
         for i in cities_list[1:]:
-            bol_expr1 = self.BR_Cases_By_City["city"].values == i.decode('utf-8')
+            bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
             
             lenght = len(self.BR_Cases_By_City[bol])
@@ -298,7 +298,7 @@ class DinamicPlots:
         comp = lenght if lenght < comp else comp
 
         for i in cities_list:
-            bol_expr1 = self.BR_Cases_By_City["city"].values == i.decode('utf-8')
+            bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
             
             _temp = self.BR_Cases_By_City[bol].copy()
@@ -327,21 +327,21 @@ class DinamicPlots:
     
     def HeatmapDeathsByCity(self,cities_list,hash_value=""):
         df = pd.DataFrame()
-        bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0].decode('utf-8')
+        bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
         bol_expr2 = self.BR_Cases_By_City["deaths"]>0
         bol = bol_expr1 & bol_expr2
         comp = len(self.BR_Cases_By_City[bol])
 
         for i in cities_list[1:]:
             
-            bol_expr1 = self.BR_Cases_By_City["city"].values == i.decode('utf-8')
+            bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
             lenght = len(self.BR_Cases_By_City[bol])
             comp = lenght if lenght < comp else comp
 
         for i in cities_list:
             
-            bol_expr1 = self.BR_Cases_By_City["city"].values == i.decode('utf-8')
+            bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
             _temp = self.BR_Cases_By_City[bol].copy()
             _temp["date"] = range(len(_temp.date))
