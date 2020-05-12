@@ -141,7 +141,7 @@ def teste():
     _relation["select"] = pd.Series(params["selecionado"])
 
     staticPlots = sPlots.StaticPlots(data)
-    staticPlots.totalBarState(_relation['deaths'].values[0],_relation['ratio'].values[0], 'totalBarState')
+    staticPlots.PieDeaths(self,_relation['select'].values[0],'state','pieGraphSP')
 
     return 'Funcionou'
 
