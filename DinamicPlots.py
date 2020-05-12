@@ -34,7 +34,7 @@ class DinamicPlots:
                
             
     def ComparisonStateBar(self,state1,state2,deaths=False,hash_value=""):
-        hash_value = hash_value.decode('utf-8')
+        #hash_value = hash_value.decode('utf-8')
         
         _temp = self.BR_Cases_By_State[self.BR_Cases_By_State["state"].values == state1].copy()
         _temp2 = self.BR_Cases_By_State[self.BR_Cases_By_State["state"].values == state2].copy()
