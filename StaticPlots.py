@@ -332,7 +332,7 @@ class StaticPlots:
         date = self.BR_Cases_By_City.date.unique()[-1]
         
         if gtype == 'state':
-            _temp = self.BR_Cases_By_State[data.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)
+            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)
             _main = _temp[:5]
             _others = pd.DataFrame([[None,"Brazil","Others","Others",None,sum(_temp[5:]["deaths"]),None,None,None,None]],columns=_main.columns)
             path = '__temp/__fixed/pdbs.png'
