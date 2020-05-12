@@ -139,7 +139,7 @@ def teste():
     _relation = pd.DataFrame()
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["ratio"] = pd.Series(params["taxa"])
-    _relation["select"] = pd.Series(params["selecionado"])
+    _relation["select"] = pd.Series(params["selecionado"]["Value"])
 
     staticPlots = sPlots.StaticPlots(data)
     dinamicPlots = dPlots.DinamicPlots(data)
