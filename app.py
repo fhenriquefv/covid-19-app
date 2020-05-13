@@ -18,6 +18,10 @@ from sklearn.externals import joblib
 app = Flask(__name__)
 CORS(app)
 
+data = dl.DataLoad()
+staticPlots = sPlots.StaticPlots(data)
+dinamicPlots = dPlots.DinamicPlots(data)
+
 @app.route('/brkga', methods=['POST'])
 def run_brkga():
 	
@@ -136,7 +140,7 @@ def home():
 
 @app.route('/teste', methods=['POST'])
 def teste():
-    data = dl.DataLoad()
+    #data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
@@ -147,8 +151,7 @@ def teste():
     #_relation["ratio"] = pd.Series(params["taxa"])
     _relation["select"] = pd.Series(params["selecionado"])
 
-    staticPlots = sPlots.StaticPlots(data)
-    dinamicPlots = dPlots.DinamicPlots(data)
+    
     hash_value = ''
     hash_value += str(_relation['type'].values[0])
     hash_value += str(_relation['param'].values[0])
@@ -169,19 +172,64 @@ def teste():
 
 @app.route('/comparison/states/<string:method>', methods=['POST'])
 def comparar_estados(method):
-    return 'Comparando Estados: '+method
+    params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+
+    _relation['deaths'] = pd.Series(params["mortes"])
+    _relation["estados"] = pd.Series(params["selecionado"])
+    
+    strMortes = str(_relation['deaths'].values[0])
+    strEstados = str(_relation['estados'].Value)
+    if method == 'Multiple':
+        return 'Comparison Multiple States: '+strMortes+' '+strEstados
+    else:
+        return 'Comparison Two States: '+strMortes+' '+strEstados
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
-def comparar_cidades(method):
-    return 'Comparando Cidades: '+method
+def comparar_cidades(method):params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+
+    _relation['deaths'] = pd.Series(params["mortes"])
+    _relation["cidades"] = pd.Series(params["selecionado"])
+    
+    strMortes = str(_relation['deaths'].values[0])
+    strCidades = str(_relation['cidades'].Value)
+    if method == 'Multiple':
+        return 'Comparison Multiple Cities: '+strMortes+' '+strCidades
+    else:
+        return 'Comparison Two Cities: '+strMortes+' '+strCidades
 
 @app.route('/heatmap/states', methods=['POST'])
 def mapear_estados():
-    return 'Mapeando Estados'
+    params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+
+    _relation['deaths'] = pd.Series(params["mortes"])
+    _relation["estados"] = pd.Series(params["selecionado"])
+    
+    strMortes = str(_relation['deaths'].values[0])
+    strEstados = str(_relation['estados'].Value)
+    if method == 'Multiple':
+        return 'HeatMap Multiple States: '+strMortes+' '+strEstados
+    else:
+        return 'HeatMap Two States: '+strMortes+' '+strEstados
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
-    return 'Mapeando Cidades'
+    _relation = pd.DataFrame()
+
+    _relation['deaths'] = pd.Series(params["mortes"])
+    _relation["cidades"] = pd.Series(params["selecionado"])
+    
+    strMortes = str(_relation['deaths'].values[0])
+    strCidades = str(_relation['cidades'].Value)
+    if method == 'Multiple':
+        return 'HeatMap Multiple Cities: '+strMortes+' '+strCidades
+    else:
+        return 'HeatMap Two Cities: '+strMortes+' '+strCidades
 
 def predict(model, text):
     return label[model.predict([text])[0]]
