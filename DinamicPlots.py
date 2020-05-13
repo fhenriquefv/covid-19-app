@@ -330,6 +330,7 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+        return path
 
     def HeatmapCity(self,cities_list,deaths=False,hash_value=""):
         df = pd.DataFrame()

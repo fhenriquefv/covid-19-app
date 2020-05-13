@@ -217,16 +217,24 @@ def comparar_cidades(method):
 
 @app.route('/heatmap/states', methods=['POST'])
 def mapear_estados():
+    #Coleta de dados
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
-
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["estados"] = pd.Series(params["selecionado"])
+
+    #Estados e mortes
+    states_list = _relation['estados'].Value
+    deaths = _relation['deaths'].values[0]
+
+    #Hashvaluee
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
-    return hash_value
+
+    path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
+    return 'https://covid-19-flask-api.herokuapp.com/'+path
     #return 'HeatMap States: '+strMortes+' '+strEstados
 
 @app.route('/heatmap/cities', methods=['POST'])
