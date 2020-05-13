@@ -140,7 +140,6 @@ def teste():
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["ratio"] = pd.Series(params["taxa"])
     _relation["select"] = pd.Series(params["selecionado"])
-    _relation["selec"] = pd.Series(params['selecionado']['Value'])
 
     staticPlots = sPlots.StaticPlots(data)
     dinamicPlots = dPlots.DinamicPlots(data)
@@ -149,7 +148,7 @@ def teste():
     #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')
     
     
-    return str(_relation['select'].Value[1])+str(_relation['selec'].Value[0])
+    return str(_relation['select'].Value[1])
 
     
 
