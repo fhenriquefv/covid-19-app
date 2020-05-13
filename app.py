@@ -148,7 +148,7 @@ def teste():
     dinamicPlots = dPlots.DinamicPlots(data)
     hash_value = ''
     hash_value += str(_relation['type'].values[0])
-    hash_value += str(_relation['method'].values[0])
+    hash_value += str(_relation['param'].values[0])
     if _relation['deaths'].values[0]: 
         hash_value += 'deaths'
     else:
