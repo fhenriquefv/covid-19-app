@@ -213,10 +213,7 @@ def mapear_estados():
     
     strMortes = str(_relation['deaths'].values[0])
     strEstados = str(_relation['estados'].Value)
-    if method == 'Multiple':
-        return 'HeatMap Multiple States: '+strMortes+' '+strEstados
-    else:
-        return 'HeatMap Two States: '+strMortes+' '+strEstados
+    return 'HeatMap States: '+strMortes+' '+strEstados
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -229,10 +226,7 @@ def mapear_cidades():
     
     strMortes = str(_relation['deaths'].values[0])
     strCidades = str(_relation['cidades'].Value)
-    if method == 'Multiple':
-        return 'HeatMap Multiple Cities: '+strMortes+' '+strCidades
-    else:
-        return 'HeatMap Two Cities: '+strMortes+' '+strCidades
+    return 'HeatMap Cities: '+strMortes+' '+strCidades
 
 def predict(model, text):
     return label[model.predict([text])[0]]
