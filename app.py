@@ -185,7 +185,7 @@ def comparar_estados(method):
     estados = _relation['estados'].Value
 
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp))
+    hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
     '''if method == 'Multiple':
         #return hash_value
@@ -207,7 +207,7 @@ def comparar_cidades(method):
     _relation["cidades"] = pd.Series(params["selecionado"])
     
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp))
+    hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
     '''if method == 'Multiple':
         #return 'Comparison Multiple Cities: '+strMortes+' '+strCidades
@@ -224,7 +224,7 @@ def mapear_estados():
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["estados"] = pd.Series(params["selecionado"])
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp))
+    hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
     return hash_value
     #return 'HeatMap States: '+strMortes+' '+strEstados
@@ -238,7 +238,7 @@ def mapear_cidades():
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["cidades"] = pd.Series(params["selecionado"])
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp))
+    hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
     return hash_value
     #return 'HeatMap Cities: '+strMortes+' '+strCidades
