@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS
 
 import json
 import logging
@@ -15,7 +16,7 @@ import DinamicPlots as dPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/brkga', methods=['POST'])
 def run_brkga():
