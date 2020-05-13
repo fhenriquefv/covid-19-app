@@ -132,7 +132,7 @@ def send_js(path):
 
 @app.route('/')
 def home():
-    return 'Funcionou!.'
+    return 'Funcionou!'
 
 @app.route('/teste', methods=['POST'])
 def teste():
@@ -167,11 +167,11 @@ def teste():
     return str(params)
     '''
 
-@app.route('/comparison/states/<string: method>', methods=['POST'])
+@app.route('/comparison/states/<string:method>', methods=['POST'])
 def comparar_estados(method):
     return 'Comparando Estados: '+method
 
-@app.route('/comparison/cities/<string: method>', methods=['POST'])
+@app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
     return 'Comparando Cidades: '+method
 
@@ -182,9 +182,6 @@ def mapear_estados():
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
     return 'Mapeando Cidades'
-
-
-    
 
 def predict(model, text):
     return label[model.predict([text])[0]]
