@@ -187,12 +187,12 @@ def comparar_estados(method):
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp))
     hash_value = hash_object.hexdigest()
-    if method == 'Multiple':
+    '''if method == 'Multiple':
         #return hash_value
         #caminho = dinamicPlots.ComparisonMultipleStatesBar(_relation['estados'].Value,_relation['deaths'],hash_value)
         #return 'Comparison Multiple States: '+strMortes+' '+strEstados
     else:
-        #return hash_value
+        #return hash_value'''
     
     return hash_value
         #return 'Comparison Two States: '+strMortes+' '+strEstados
@@ -209,10 +209,10 @@ def comparar_cidades(method):
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp))
     hash_value = hash_object.hexdigest()
-    if method == 'Multiple':
+    '''if method == 'Multiple':
         #return 'Comparison Multiple Cities: '+strMortes+' '+strCidades
     else:
-        #return 'Comparison Two Cities: '+strMortes+' '+strCidades
+        #return 'Comparison Two Cities: '+strMortes+' '+strCidades'''
     return hash_value
 
 @app.route('/heatmap/states', methods=['POST'])
