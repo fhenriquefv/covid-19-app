@@ -136,7 +136,7 @@ def teste():
     data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
 
-    #_relation = pd.DataFrame()
+    _relation = pd.DataFrame()
 
     _relation['type'] = pd.Series(params['tipo'])
     _relation['param'] = pd.Series(params['parametro'])
