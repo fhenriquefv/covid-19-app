@@ -205,6 +205,7 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del cities_list
+        return path
         
     def ComparisonCityBar(self,city1,city2,deaths=False,hash_value=""):
         #city1 = city1.decode('utf-8')
