@@ -136,17 +136,31 @@ def teste():
     data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
 
-    _relation = pd.DataFrame()
+    #_relation = pd.DataFrame()
+
+    _relation['type'] = pd.Series(params['tipo'])
+    _relation['param'] = pd.Series(params['parametro'])
     _relation['deaths'] = pd.Series(params["mortes"])
-    _relation["ratio"] = pd.Series(params["taxa"])
+    #_relation["ratio"] = pd.Series(params["taxa"])
     _relation["select"] = pd.Series(params["selecionado"])
 
     staticPlots = sPlots.StaticPlots(data)
     dinamicPlots = dPlots.DinamicPlots(data)
+    hash_value = ''
+    hash_value += str(_relation['type'].values[0])
+    hash_value += str(_relation['method'].values[0])
+    if _relation['deaths'].values[0]: 
+        hash_value += 'deaths'
+    else:
+        hash_value += 'infected'
+    return hash_value
+
+    #dinamicPlots.ComparisonMultipleStatesBar(_relation['select'].Value, _relation['deaths'].values[0], hash_value)
+    '''
     #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
-    dinamicPlots.ComparisonStateBar(str(_relation['select'].Value[0]),str(_relation['select'].Value[1]),_relation['deaths'].values[0],'comparisonStateBar2')
+    #dinamicPlots.ComparisonStateBar(str(_relation['select'].Value[0]),str(_relation['select'].Value[1]),_relation['deaths'].values[0],'comparisonStateBar2')
     #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')    
-    return 'Funcionou'
+    return str(params)
 
     
 
