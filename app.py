@@ -181,7 +181,7 @@ def comparar_estados(method):
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["estados"] = pd.Series(params["selecionado"])
     
-    mortes = _relation['deaths'].values[0]
+    deaths = _relation['deaths'].values[0]
     states = _relation['estados'].Value
 
     timestamp = datetime.datetime.now().timestamp()
