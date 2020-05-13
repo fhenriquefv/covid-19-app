@@ -190,7 +190,7 @@ def comparar_estados(method):
     if method == 'Multiple':
         path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
     else:
-        path = dinamicPlots.ComparisonStatesBar(states[0],states[1],deaths,hash_value)
+        path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
 
     
     return 'https://covid-19-flask-api.herokuapp.com/'+path
