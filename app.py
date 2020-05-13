@@ -139,7 +139,7 @@ def teste():
 
     _relation = pd.DataFrame()
 
-    #_relation['type'] = pd.Series(params['tipo'])
+    _relation['type'] = pd.Series(params['tipo'])
     _relation['param'] = pd.Series(params['parametro'])
     _relation['deaths'] = pd.Series(params["mortes"])
     #_relation["ratio"] = pd.Series(params["taxa"])
@@ -148,7 +148,7 @@ def teste():
     staticPlots = sPlots.StaticPlots(data)
     dinamicPlots = dPlots.DinamicPlots(data)
     hash_value = ''
-    #hash_value += str(_relation['type'].values[0])
+    hash_value += str(_relation['type'].values[0])
     hash_value += str(_relation['param'].values[0])
     if _relation['deaths'].values[0]: 
         hash_value += 'deaths'
