@@ -145,10 +145,8 @@ def teste():
     dinamicPlots = dPlots.DinamicPlots(data)
     #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
     dinamicPlots.ComparisonStateBar(str(_relation['select'].Value[0]),str(_relation['select'].Value[1]),_relation['deaths'].values[0],'comparisonStateBar2')
-    #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')
-    
-    
-    return 
+    #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')    
+    return 'Funcionou'
 
     
 
