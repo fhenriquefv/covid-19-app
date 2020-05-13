@@ -149,7 +149,7 @@ def teste():
     #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')
     
     
-    return str(_relation['select'].Value[1]+_relation['selec'].Value[0])
+    return str(_relation['select'].Value[1])+str(_relation['selec'].Value[0])
 
     
 
