@@ -251,7 +251,7 @@ def mapear_cidades():
     _relation["cidades"] = pd.Series(params["selecionado"])
 
     #Estados e mortes
-    cities_list = _relation['estados'].Value
+    cities_list = _relation['cidades'].Value
     deaths = _relation['deaths'].values[0]
 
     timestamp = datetime.datetime.now().timestamp()
