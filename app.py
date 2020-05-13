@@ -182,20 +182,18 @@ def comparar_estados(method):
     _relation["estados"] = pd.Series(params["selecionado"])
     
     mortes = _relation['deaths'].values[0]
-    estados = _relation['estados'].Value
+    states = _relation['estados'].Value
 
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
-    '''if method == 'Multiple':
-        #return hash_value
-        #caminho = dinamicPlots.ComparisonMultipleStatesBar(_relation['estados'].Value,_relation['deaths'],hash_value)
-        #return 'Comparison Multiple States: '+strMortes+' '+strEstados
+    if method == 'Multiple':
+        path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
     else:
-        #return hash_value'''
+        path = dinamicPlots.ComparisonStatesBar(states[0],states[1],deaths,hash_value)
+
     
-    return hash_value
-        #return 'Comparison Two States: '+strMortes+' '+strEstados
+    return 'https://covid-19-flask-api.herokuapp.com/'+path
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
@@ -206,14 +204,21 @@ def comparar_cidades(method):
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["cidades"] = pd.Series(params["selecionado"])
     
+    #Tratar os dados
+    deaths = _relation['deaths'].values[0]
+    cities = _relation['cidades'].Value
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
-    '''if method == 'Multiple':
-        #return 'Comparison Multiple Cities: '+strMortes+' '+strCidades
+
+    path = ''
+    if method == 'Multiple':
+        path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
     else:
-        #return 'Comparison Two Cities: '+strMortes+' '+strCidades'''
-    return hash_value
+        path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
+        #return 'Comparison Two Cities: '+strMortes+' '+strCidades
+    return 'https://covid-19-flask-api.herokuapp.com/'+path
+
 
 @app.route('/heatmap/states', methods=['POST'])
 def mapear_estados():
@@ -235,7 +240,6 @@ def mapear_estados():
 
     path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
     return 'https://covid-19-flask-api.herokuapp.com/'+path
-    #return 'HeatMap States: '+strMortes+' '+strEstados
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -245,11 +249,17 @@ def mapear_cidades():
 
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["cidades"] = pd.Series(params["selecionado"])
+
+    #Estados e mortes
+    cities_list = _relation['estados'].Value
+    deaths = _relation['deaths'].values[0]
+
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
-    return hash_value
-    #return 'HeatMap Cities: '+strMortes+' '+strCidades
+
+    path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+    return 'https://covid-19-flask-api.herokuapp.com/'+path
 
 def predict(model, text):
     return label[model.predict([text])[0]]

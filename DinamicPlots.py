@@ -106,6 +106,7 @@ class DinamicPlots:
         del _temp
         del _temp2
         del comp
+        return path
         
     def ComparisonMultipleStatesBar(self,states,deaths=False,hash_value=""):
         #hash_value = hash_value.decode('utf-8')
@@ -275,6 +276,7 @@ class DinamicPlots:
         del _temp
         del _temp2
         del comp
+        return path
 
     
     def HeatmapState(self,states_list,deaths=False,hash_value=""):
@@ -385,6 +387,7 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+        return path
     
     def HeatmapDeathsByCity(self,cities_list,hash_value=""):
         df = pd.DataFrame()
