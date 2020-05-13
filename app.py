@@ -187,7 +187,8 @@ def comparar_estados(method):
         return 'Comparison Two States: '+strMortes+' '+strEstados
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
-def comparar_cidades(method):params = pd.DataFrame(request.get_json()) 
+def comparar_cidades(method):
+    params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
 
@@ -219,6 +220,8 @@ def mapear_estados():
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
+    params = pd.DataFrame(request.get_json()) 
+
     _relation = pd.DataFrame()
 
     _relation['deaths'] = pd.Series(params["mortes"])
