@@ -6,6 +6,8 @@ import json
 import logging
 import os
 
+import hashlib
+import datetime
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -179,12 +181,21 @@ def comparar_estados(method):
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["estados"] = pd.Series(params["selecionado"])
     
-    strMortes = str(_relation['deaths'].values[0])
-    strEstados = str(_relation['estados'].Value)
+    mortes = _relation['deaths'].values[0]
+    estados = _relation['estados'].Value
+
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp))
+    hash_value = hash_object.hexdigest()
     if method == 'Multiple':
-        return 'Comparison Multiple States: '+strMortes+' '+strEstados
+        #return hash_value
+        #caminho = dinamicPlots.ComparisonMultipleStatesBar(_relation['estados'].Value,_relation['deaths'],hash_value)
+        #return 'Comparison Multiple States: '+strMortes+' '+strEstados
     else:
-        return 'Comparison Two States: '+strMortes+' '+strEstados
+        #return hash_value
+    
+    return hash_value
+        #return 'Comparison Two States: '+strMortes+' '+strEstados
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
@@ -195,12 +206,14 @@ def comparar_cidades(method):
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["cidades"] = pd.Series(params["selecionado"])
     
-    strMortes = str(_relation['deaths'].values[0])
-    strCidades = str(_relation['cidades'].Value)
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp))
+    hash_value = hash_object.hexdigest()
     if method == 'Multiple':
-        return 'Comparison Multiple Cities: '+strMortes+' '+strCidades
+        #return 'Comparison Multiple Cities: '+strMortes+' '+strCidades
     else:
-        return 'Comparison Two Cities: '+strMortes+' '+strCidades
+        #return 'Comparison Two Cities: '+strMortes+' '+strCidades
+    return hash_value
 
 @app.route('/heatmap/states', methods=['POST'])
 def mapear_estados():
@@ -210,10 +223,11 @@ def mapear_estados():
 
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["estados"] = pd.Series(params["selecionado"])
-    
-    strMortes = str(_relation['deaths'].values[0])
-    strEstados = str(_relation['estados'].Value)
-    return 'HeatMap States: '+strMortes+' '+strEstados
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp))
+    hash_value = hash_object.hexdigest()
+    return hash_value
+    #return 'HeatMap States: '+strMortes+' '+strEstados
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -223,10 +237,11 @@ def mapear_cidades():
 
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["cidades"] = pd.Series(params["selecionado"])
-    
-    strMortes = str(_relation['deaths'].values[0])
-    strCidades = str(_relation['cidades'].Value)
-    return 'HeatMap Cities: '+strMortes+' '+strCidades
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp))
+    hash_value = hash_object.hexdigest()
+    return hash_value
+    #return 'HeatMap Cities: '+strMortes+' '+strCidades
 
 def predict(model, text):
     return label[model.predict([text])[0]]
