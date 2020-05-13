@@ -155,6 +155,7 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del states_list
+        return path
 
     def ComparisonMultipleCitiesBar(self,cities,deaths=False,hash_value=""):
         #hash_value = hash_value.decode('utf-8')

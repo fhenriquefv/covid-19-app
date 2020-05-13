@@ -153,9 +153,10 @@ def teste():
         hash_value += 'deaths'
     else:
         hash_value += 'infected'
-    return hash_value
 
-    #dinamicPlots.ComparisonMultipleStatesBar(_relation['select'].Value, _relation['deaths'].values[0], hash_value)
+    #return str(_relation['select'].Value)
+    res = dinamicPlots.ComparisonMultipleStatesBar(_relation['select'].Value, _relation['deaths'].values[0], hash_value)
+    return res
     '''
     #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
     #dinamicPlots.ComparisonStateBar(str(_relation['select'].Value[0]),str(_relation['select'].Value[1]),_relation['deaths'].values[0],'comparisonStateBar2')
