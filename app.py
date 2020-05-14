@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, request, send_from_directory
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 import json
 import logging
@@ -18,8 +18,9 @@ import DinamicPlots as dPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
-#CORS(app, resources={r"/*": {"origins": "*"}})
-app.config['CORS_SUPPORTS_CREDENTIALS'] = True
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 data = dl.DataLoad()
 staticPlots = sPlots.StaticPlots(data)
@@ -174,6 +175,7 @@ def teste():
     '''
 
 @app.route('/comparison/states/<string:method>', methods=['POST'])
+@cross_origin()
 def comparar_estados(method):
     params = pd.DataFrame(request.get_json()) 
 
