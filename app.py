@@ -19,7 +19,7 @@ from sklearn.externals import joblib
 
 app = Flask(__name__)
 CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+#app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 data = dl.DataLoad()
@@ -123,7 +123,7 @@ label = {0: 'negative', 1: 'positive'}
 
 @app.after_request
 def after_request(response):
-    #response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
                          'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods',
@@ -173,9 +173,8 @@ def teste():
     #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')    
     return str(params)
     '''
-
+#@cross_origin()
 @app.route('/comparison/states/<string:method>', methods=['POST'])
-@cross_origin()
 def comparar_estados(method):
     params = pd.DataFrame(request.get_json()) 
 
