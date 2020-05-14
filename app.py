@@ -18,8 +18,8 @@ import DinamicPlots as dPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
-#CORS(app, resources={r"/*": {"origins": "*"}})
-#app.config['CORS_SUPPORTS_CREDENTIALS'] = True
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 
 data = dl.DataLoad()
 staticPlots = sPlots.StaticPlots(data)
@@ -122,7 +122,7 @@ label = {0: 'negative', 1: 'positive'}
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    #response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
                          'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods',
