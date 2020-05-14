@@ -18,7 +18,8 @@ import DinamicPlots as dPlots
 from sklearn.externals import joblib
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 
 data = dl.DataLoad()
 staticPlots = sPlots.StaticPlots(data)
