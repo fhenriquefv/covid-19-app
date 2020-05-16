@@ -147,7 +147,7 @@ def teste():
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
     res += BASEURL+staticPlots.totalBarCity('RJ', True, 'Population', 'totalBarCidade')+' '
-    res += BASEURL+staticPlots.PieInfected('RJ', 'Cities', 'totalBarEstado')+' '
+    res += BASEURL+staticPlots.PieInfected('RJ', 'city', 'totalBarEstado')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'totalBarEstado')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' '
     res += BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
