@@ -125,7 +125,7 @@ label = {0: 'negative', 1: 'positive'}
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type,Authorization')
+                         'Content-Type,Authorization,append,delete,entries,foreach,get,has,keys,set,values,')
     response.headers.add('Access-Control-Allow-Methods',
                          'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
@@ -164,16 +164,8 @@ def teste():
     else:
         hash_value += 'infected'
 
-    #return str(_relation['select'].Value)
     res = dinamicPlots.ComparisonMultipleCitiesBar(_relation['select'].Value, _relation['deaths'].values[0], hash_value)
     return res
-    '''
-    #staticPlots.PieDeaths(_relation['select'].values[0],'state','pieGraphSP')
-    #dinamicPlots.ComparisonStateBar(str(_relation['select'].Value[0]),str(_relation['select'].Value[1]),_relation['deaths'].values[0],'comparisonStateBar2')
-    #dinamicPlots.ComparisonStateBar('RJ','SP',_relation['deaths'].values[0],'comparison')    
-    return str(params)
-    '''
-#@cross_origin()
 @app.route('/comparison/states/<string:method>', methods=['POST'])
 def comparar_estados(method):
     params = pd.DataFrame(request.get_json()) 
