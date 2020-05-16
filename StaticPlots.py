@@ -294,7 +294,7 @@ class StaticPlots:
         
         else:
             _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("totalCases",ascending=False)[:5]
-            path = '__temp/__fixed/__pibc/pibc_'+hash_value+'.png'
+            path = '__temp/__fixed/pibc_'+hash_value+'.png'
 
         colors = ['#FF214B','#FF5745','#FD6865','#FD8978','#FDA978','#DCDCDC']
         
@@ -332,7 +332,7 @@ class StaticPlots:
         
         else:
             _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)[:5]
-            path = '__temp/__fixed/__pdbc/pdbc_'+hash_value+'.png'
+            path = '__temp/__fixed/pdbc_'+hash_value+'.png'
         
         colors = ['#FF214B','#FF5745','#FD6865','#FD8978','#FDA978','#DCDCDC']
         
