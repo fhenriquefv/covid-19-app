@@ -120,20 +120,6 @@ label = {0: 'negative', 1: 'positive'}
 #    data = request.get_json()
 #    return jsonify(data)
 
-
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type,Authorization,append,delete,entries,foreach,get,has,keys,set,values')
-    response.headers.add('Access-Control-Allow-Methods',
-                         'GET,PUT,POST,DELETE,OPTIONS')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
-
-
-
-
 @app.route('/__temp/<path:path>')
 def send_js(path):
     return send_from_directory('__temp', path)
@@ -254,6 +240,19 @@ def mapear_cidades():
 
     path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
     return 'https://covid-19-flask-api.herokuapp.com/'+path
+
+
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization,append,delete,entries,foreach,get,has,keys,set,values')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
+
 
 def predict(model, text):
     return label[model.predict([text])[0]]
