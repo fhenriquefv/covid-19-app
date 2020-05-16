@@ -80,7 +80,7 @@ class DataLoad:
         del df2
     
     def getDemographicDataValue(self,state,city,value):
-        return self.DemographicData[state][self.DemographicData[state]["City"].values == city][value].values[0]
+        return self.DemographicData[state][self.DemographicData[state]["City"].values == city[value].values[0]
     
     def getStateDemographicDataValue(self,state,value):
         return self.DemographicData["BR"].loc[state][value]
