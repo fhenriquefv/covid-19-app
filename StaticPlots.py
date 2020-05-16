@@ -400,7 +400,6 @@ class StaticPlots:
         del colors
         del reg
         del total
-        del path
         del gtype
         Axes.cla()
         Figure.clear()
