@@ -152,7 +152,8 @@ def teste():
 
     res = dinamicPlots.ComparisonMultipleCitiesBar(_relation['select'].Value, _relation['deaths'].values[0], hash_value)
     return res
-@app.route('/comparison/states/<string:method>', methods=['POST', 'OPTIONS'])
+
+@app.route('/comparison/states/<string:method>', methods=['POST'])
 def comparar_estados(method):
     params = pd.DataFrame(request.get_json()) 
 
@@ -175,7 +176,7 @@ def comparar_estados(method):
     
     return 'https://covid-19-flask-api.herokuapp.com/'+path
 
-@app.route('/comparison/cities/<string:method>', methods=['POST', 'OPTIONS'])
+@app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
     params = pd.DataFrame(request.get_json()) 
 
@@ -200,7 +201,7 @@ def comparar_cidades(method):
     return 'https://covid-19-flask-api.herokuapp.com/'+path
 
 
-@app.route('/heatmap/states', methods=['POST', 'OPTIONS'])
+@app.route('/heatmap/states', methods=['POST'])
 def mapear_estados():
     #Coleta de dados
     params = pd.DataFrame(request.get_json()) 
@@ -221,7 +222,7 @@ def mapear_estados():
     path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
     return 'https://covid-19-flask-api.herokuapp.com/'+path
 
-@app.route('/heatmap/cities', methods=['POST', 'OPTIONS'])
+@app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
     params = pd.DataFrame(request.get_json()) 
 
