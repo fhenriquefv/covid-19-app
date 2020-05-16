@@ -125,7 +125,7 @@ label = {0: 'negative', 1: 'positive'}
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type,Authorization,append,delete,entries,foreach,get,has,keys,set,values,')
+                         'Content-Type,Authorization,append,delete,entries,foreach,get,has,keys,set,values')
     response.headers.add('Access-Control-Allow-Methods',
                          'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
