@@ -25,6 +25,7 @@ app = Flask(__name__)
 data = dl.DataLoad()
 staticPlots = sPlots.StaticPlots(data)
 dinamicPlots = dPlots.DinamicPlots(data)
+BASEURL = 'https://covid-19-flask-api.herokuapp.com/'
 
 @app.route('/brkga', methods=['POST'])
 def run_brkga():
@@ -131,26 +132,25 @@ def home():
 @app.route('/teste', methods=['POST'])
 def teste():
     #data = dl.DataLoad()
-    params = pd.DataFrame(request.get_json()) 
+    #params = pd.DataFrame(request.get_json()) 
 
-    _relation = pd.DataFrame()
+    #_relation = pd.DataFrame()
 
+    '''
     _relation['type'] = pd.Series(params['tipo'])
     _relation['param'] = pd.Series(params['parametro'])
     _relation['deaths'] = pd.Series(params["mortes"])
     #_relation["ratio"] = pd.Series(params["taxa"])
     _relation["select"] = pd.Series(params["selecionado"])
+    '''
 
-    
-    hash_value = ''
-    hash_value += str(_relation['type'].values[0])
-    hash_value += str(_relation['param'].values[0])
-    if _relation['deaths'].values[0]: 
-        hash_value += 'deaths'
-    else:
-        hash_value += 'infected'
-
-    res = dinamicPlots.ComparisonMultipleCitiesBar(_relation['select'].Value, _relation['deaths'].values[0], hash_value)
+    #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
+    res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
+    res += BASEURL+staticPlots.totalBarCity('SP', True, 'Population', 'totalBarCidade')+' '
+    res += BASEURL+staticPlots.PieInfected('RJ', 'Cities', 'totalBarEstado')+' '
+    res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'totalBarEstado')+' '
+    res += BASEURL+staticPlots.PieRegion(True)+' '
+    res += BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
     return res
 
 @app.route('/comparison/states/<string:method>', methods=['POST'])

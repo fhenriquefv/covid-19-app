@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[2]:
+# In[19]:
 
 
 class StaticPlots:
@@ -31,7 +31,7 @@ class StaticPlots:
     cities = None
     data = None
     
-    def __init__(self, data):
+    def __init__(self,data):
         
         """
         data: A instance of the DataLoad class
@@ -39,7 +39,6 @@ class StaticPlots:
         Example:
             sp = StaticPlots(DataLoad())
         """
-    
         self.data = data
         self.BR_Cases_By_State = data.BR_Cases_By_State
         self.BR_Cases_By_City = data.BR_Cases_By_City
@@ -55,8 +54,8 @@ class StaticPlots:
         
         hash_value: The suffix of the .png file name, must be unique
         """
-        gvalue = gvalue.decode('utf-8')
-        hash_value = hash_value.decode('utf-8')
+        #gvalue = gvalue.decode('utf-8')
+        #hash_value = hash_value.decode('utf-8')
         
         if gtype == 'state':
             _temp = self.BR_Cases_By_State[self.BR_Cases_By_State[gtype].values == gvalue]
@@ -85,6 +84,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
             
     
     def totalBarState(self,deaths=False,ratio = None, hash_value=""):
@@ -187,6 +187,7 @@ class StaticPlots:
         del bar
         del _temp
         del df
+        return path
     
     def totalBarCity(self,state,deaths=False,ratio=None,hash_value=""):
         """
@@ -204,10 +205,11 @@ class StaticPlots:
         _temp.sort_values("totalCases",ascending=False,inplace=True)
         _temp = _temp.loc[_temp.index[:10]]
         
-        if ratio == None:
+        if ratio is None:
             d_ratio = pd.Series(1)
             label_ext = ""
             co = 1
+            
         elif ratio == "Population":
             d_ratio = pd.Series()
             for i in _temp["city"].values:
@@ -279,26 +281,20 @@ class StaticPlots:
         del bar
         del _temp
         del df
+        return path
     
     def PieInfected(self,gvalue=None,gtype='state', hash_value = ""):
         
-        hash_value = hash_value.decode('utf-8')
+        #hash_value = hash_value.decode('utf-8')
         date = self.BR_Cases_By_City.date.unique()[-1]
         
         if gtype == 'state':
-            _temp = self.BR_Cases_By_State[data.BR_Cases_By_State['date'] == date].sort_values("totalCases",ascending=False)
-            
-            _main = _temp[:5]
-            _others = pd.DataFrame([[None,None,"Others",None,None,None,None,sum(_temp[5:]["totalCases"]),None,None]],columns=_main.columns)
-            path = '__temp/__fixed/pibs.png'
+            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("totalCases",ascending=False)[:5]
+            path = '__temp/__fixed/pibs_'+hash_value+'.png'
         
         else:
-            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("totalCases",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame([[None,None,"Others","Others",None,None,None,None,sum(_temp[5:]["totalCases"])]],columns=_main.columns)
+            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("totalCases",ascending=False)[:5]
             path = '__temp/__fixed/__pibc/pibc_'+hash_value+'.png'
-        
-        _temp = pd.concat([_main,_others],ignore_index=True)
 
         colors = ['#FF214B','#FF5745','#FD6865','#FD8978','#FDA978','#DCDCDC']
         
@@ -312,12 +308,11 @@ class StaticPlots:
 
         del date
         del _temp
-        del _main
-        del _others
         del colors
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
 
     def PieDeaths(self,gvalue=None,gtype='state',hash_value = ""):
         """
@@ -332,19 +327,13 @@ class StaticPlots:
         date = self.BR_Cases_By_City.date.unique()[-1]
         
         if gtype == 'state':
-            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame([[None,"Brazil","Others","Others",None,sum(_temp[5:]["deaths"]),None,None,None,None]],columns=_main.columns)
+            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)[:5]
             path = '__temp/__fixed/pdbs.png'
         
         else:
-            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame([[date,"Brazil",None,None,None,0,sum(_temp[5:]["deaths"]),None,None]],columns=_main.columns)
+            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)[:5]
             path = '__temp/__fixed/__pdbc/pdbc_'+hash_value+'.png'
         
-        _temp = pd.concat([_main,_others],ignore_index=True)
-
         colors = ['#FF214B','#FF5745','#FD6865','#FD8978','#FDA978','#DCDCDC']
         
         Figure, Axes = plt.subplots(figsize=(8,8))
@@ -357,12 +346,11 @@ class StaticPlots:
 
         del date
         del _temp
-        del _main
-        del _others
         del colors
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
         
     
     def PieRegion(self,deaths=False):
@@ -390,7 +378,7 @@ class StaticPlots:
 
         date = self.BR_Cases_By_State.date.unique()[-1]
 
-        _temp = self.BR_Cases_By_State[data.BR_Cases_By_State.date == date]
+        _temp = self.BR_Cases_By_State[self.BR_Cases_By_State.date == date]
 
         for i in reg.keys():
             for j in reg[i]:
@@ -417,6 +405,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
 
     def MakeTemporalSeries(self):
         plt.ioff()
@@ -427,4 +416,7 @@ class StaticPlots:
                     self.TemporalSeries(j.encode('utf-8'),'city',j.encode('utf-8'))
                 else: 
                     break
+
+
+
 
