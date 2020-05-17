@@ -152,6 +152,57 @@ def teste():
     res += BASEURL+staticPlots.PieRegion(True)+' '
     return res
 
+@app.route('/totalbar/<string:method>', methods=['POST'])
+def gerar_grafico_barras(method):
+    data = dl.DataLoad()
+    params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+
+    
+    _relation['ratio'] = pd.Series(params['taxa'])
+    _relation['deaths'] = pd.Series(params["mortes"])
+
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = hash_object.hexdigest()
+    #_relation["ratio"] = pd.Series(params["taxa"])
+    if(method == 'city'):
+        _relation["state"] = pd.Series(params["estado"])
+        path = staticPlots.totalBarCity(_relation['state'].values[0], _relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+    else:
+        path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+    return BASEURL+path
+
+    
+
+@app.route('/pie/<string:coverage>', methods=['POST'])
+def gerar_grafico_pizza(coverage):
+    data = dl.DataLoad()
+    params = pd.DataFrame(request.get_json()) 
+
+    _relation = pd.DataFrame()
+    
+    _relation['deaths'] = pd.Series(params["mortes"])
+    _relation['gvalue'] = pd.Series(params['valor'])
+
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = hash_object.hexdigest()
+    
+    mortes = _relation['deaths'].values[0]
+
+    if(coverage == 'region'):
+        path = staticPlots.PieRegion(mortes)
+    else:
+        if(mortes):
+            path = staticPlots.PieDeaths(_relation['gvalue'].values[0],coverage,hash_value)
+        else:
+            path = staticPlots.PieInfected(_relation['gvalue'].values[0],coverage,hash_value)
+    return BASEURL+path
+    
+    
+
 @app.route('/comparison/states/<string:method>', methods=['POST'])
 def comparar_estados(method):
     params = pd.DataFrame(request.get_json()) 
@@ -173,7 +224,7 @@ def comparar_estados(method):
         path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
 
     
-    return 'https://covid-19-flask-api.herokuapp.com/'+path
+    return BASEURL+path
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
@@ -197,7 +248,7 @@ def comparar_cidades(method):
     else:
         path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
         #return 'Comparison Two Cities: '+strMortes+' '+strCidades
-    return 'https://covid-19-flask-api.herokuapp.com/'+path
+    return BASEURL+path
 
 
 @app.route('/heatmap/states', methods=['POST'])
@@ -219,7 +270,7 @@ def mapear_estados():
     hash_value = hash_object.hexdigest()
 
     path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
-    return 'https://covid-19-flask-api.herokuapp.com/'+path
+    return BASEURL+path
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -239,7 +290,7 @@ def mapear_cidades():
     hash_value = hash_object.hexdigest()
 
     path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
-    return 'https://covid-19-flask-api.herokuapp.com/'+path
+    return BASEURL+path
 
 
 
