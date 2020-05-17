@@ -192,7 +192,7 @@ def gerar_grafico_pizza(coverage):
     if(coverage == 'region'):
         path = staticPlots.PieRegion(mortes)
     else:
-        if(coverage == 'city')
+        if(coverage == 'city'):
             _relation['gvalue'] = pd.Series(params['valor'])
             gvalue = _relation['gvalue'].values[0]
         else:
