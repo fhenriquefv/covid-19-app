@@ -192,11 +192,15 @@ def gerar_grafico_pizza(coverage):
     if(coverage == 'region'):
         path = staticPlots.PieRegion(mortes)
     else:
-        _relation['gvalue'] = pd.Series(params['valor'])
-        if(mortes):
-            path = staticPlots.PieDeaths(_relation['gvalue'].values[0],coverage,hash_value)
+        if(coverage == 'city')
+            _relation['gvalue'] = pd.Series(params['valor'])
+            gvalue = _relation['gvalue'].values[0]
         else:
-            path = staticPlots.PieInfected(_relation['gvalue'].values[0],coverage,hash_value)
+            gvalue = None
+        if(mortes):
+            path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
+        else:
+            path = staticPlots.PieInfected(gvalue,coverage,hash_value)
     
     return BASEURL+path
     
