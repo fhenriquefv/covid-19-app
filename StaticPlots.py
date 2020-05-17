@@ -202,7 +202,7 @@ class StaticPlots:
         
         _temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == self.BR_Cases_By_State.date.unique()[-1]]
         _temp = _temp[_temp["state"] == state]
-        _temp = _temp[_temp["city"].values != "CASO SEM LOCALIZAÇÃO DEFINIDA-".decode('utf-8')+state]
+        _temp = _temp[_temp["city"].values != "CASO SEM LOCALIZAÇÃO DEFINIDA-"+state]
         _temp.sort_values("totalCases",ascending=False,inplace=True)
         _temp = _temp.loc[_temp.index[:10]]
         
