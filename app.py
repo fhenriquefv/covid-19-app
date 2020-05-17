@@ -154,7 +154,7 @@ def teste():
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
-    data = dl.DataLoad()
+    #data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
@@ -178,27 +178,26 @@ def gerar_grafico_barras(method):
 
 @app.route('/pie/<string:coverage>', methods=['POST'])
 def gerar_grafico_pizza(coverage):
-    data = dl.DataLoad()
+    #data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
-
-    _relation = pd.DataFrame()
-    
-    _relation['deaths'] = pd.Series(params["mortes"])
-    _relation['gvalue'] = pd.Series(params['valor'])
 
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
-    
+
+    _relation = pd.DataFrame()
+    _relation['deaths'] = pd.Series(params["mortes"])
     mortes = _relation['deaths'].values[0]
 
     if(coverage == 'region'):
         path = staticPlots.PieRegion(mortes)
     else:
+        _relation['gvalue'] = pd.Series(params['valor'])
         if(mortes):
             path = staticPlots.PieDeaths(_relation['gvalue'].values[0],coverage,hash_value)
         else:
             path = staticPlots.PieInfected(_relation['gvalue'].values[0],coverage,hash_value)
+    
     return BASEURL+path
     
     
