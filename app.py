@@ -221,6 +221,15 @@ def comparar_estados(method):
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
+
+    i = 0
+    for state in states:
+        if(i == len(states) -1)
+            hash_value += states
+        else
+            hash_value += states+'X'
+        i += 1
+
     if method == 'Multiple':
         path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
     else:
@@ -244,6 +253,14 @@ def comparar_cidades(method):
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
+
+    i = 0
+    for city in cities:
+        if(i == len(cities) -1)
+            hash_value += city
+        else
+            hash_value += city+'X'
+        i += 1
 
     path = ''
     if method == 'Multiple':
@@ -272,6 +289,15 @@ def mapear_estados():
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
 
+    
+    i = 0
+    for city in cities:
+        if(i == len(cities) -1)
+            hash_value += city
+        else
+            hash_value += city+'X'
+        i += 1
+
     path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
     return BASEURL+path
 
@@ -291,6 +317,15 @@ def mapear_cidades():
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
+
+    i = 0
+    for city in cities:
+        if(i == len(cities) -1)
+            hash_value += city
+        else
+            hash_value += city+'X'
+        i += 1
+
 
     path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
     return BASEURL+path
