@@ -241,12 +241,12 @@ def gerar_grafico_barras(method):
             sufixo += '_ba'
 
         if(not file_exists(prefixo, sufixo)):
-            path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
+            path = BASEURL+staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
         else:
             path = 'ERRO'
     else:
-        path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
-    return BASEURL+path
+        path = BASEURL+staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+    return path
 
     
 
@@ -281,7 +281,7 @@ def gerar_grafico_pizza(coverage):
             else:
                 prefixo = 'pdbc_'
             if(not file_exists(prefixo, sufixo)):
-                path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
+                path = BASEURL+staticPlots.PieDeaths(gvalue,coverage,hash_value)
             else:
                 path = 'ERRO'
         else:
@@ -291,11 +291,11 @@ def gerar_grafico_pizza(coverage):
             else:
                 prefixo = 'pibc_'
             if(not file_exists(prefixo, sufixo)):
-                path = staticPlots.PieInfected(gvalue,coverage,hash_value)
+                path = BASEURL+staticPlots.PieInfected(gvalue,coverage,hash_value)
             else:
                 path = 'ERRO'
     
-    return BASEURL+path
+    return path
     
     
 
@@ -332,7 +332,7 @@ def comparar_estados(method):
         else:
             prefixo = 'mcibs_'
         if(not file_exists(prefixo, sufixo)):
-            path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
+            path = BASEURL+dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
         else:
             path = 'ERRO'
     else:
@@ -341,12 +341,12 @@ def comparar_estados(method):
         else:
             prefixo = 'cibs_'
         if(not file_exists(prefixo, sufixo)):
-            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            path = BASEURL+dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
         else:
             path = 'ERRO'
 
     
-    return BASEURL+path
+    return path
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
@@ -382,7 +382,7 @@ def comparar_cidades(method):
         else:
             prefixo = 'mcibc_'
         if(not file_exists(prefixo, sufixo)):
-            path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
+            path = BASEURL+dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
         else:
             path = 'ERRO'
     else:
@@ -391,12 +391,12 @@ def comparar_cidades(method):
         else:
             prefixo = 'cibc_'
         if(not file_exists(prefixo, sufixo)):
-            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            path = BASEURL+dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
         else:
             path = 'ERRO'
-        path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
+        #path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
         #return 'Comparison Two Cities: '+strMortes+' '+strCidades
-    return BASEURL+path
+    return path
 
 
 @app.route('/heatmap/states', methods=['POST'])
@@ -433,10 +433,10 @@ def mapear_estados():
     else:
         prefixo = 'hibs_'
     if(not file_exists(prefixo, sufixo)):
-        path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
+        path = BASEURL+dinamicPlots.HeatmapState(states_list,deaths,hash_value)
     else:
         path = 'ERRO'
-    return BASEURL+path
+    return path
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -473,10 +473,10 @@ def mapear_cidades():
         prefixo = 'hibc_'
 
     if(not file_exists(prefixo, sufixo)):
-        path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+        path = BASEURL+dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
     else:
         path = 'ERRO'
-    return BASEURL+path
+    return path
 
 
 
