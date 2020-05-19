@@ -146,11 +146,11 @@ def teste():
     '''
 
     diretorio = pathlib.Path('__temp')
-    arquivos = diretorio.glob('__custom/**')
+    arquivos = diretorio.glob('__custom/**/**.png')
 
     filestr = ''
     for file in arquivos:
-        filestr += str(file)+'///'
+        filestr += str(file)+'\n'
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
