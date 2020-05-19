@@ -177,10 +177,34 @@ def teste(suffix):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    if(len(matches) > 0):
-        return 'Gera'
-    else:
-        return 'Não gera' 
+    return len(matches) > 0
+
+def file_exists(preffix, suffix):
+    diretorio = pathlib.Path('__temp')
+    
+    arquivos = diretorio.glob('**/*.png')
+
+    filepaths = []
+    for file in arquivos:
+        filepaths.append(str(file))
+    
+    nomes = []
+
+    for fullpath in filepaths:
+        fullpath.encode()
+        *caminho, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        nomes.append(nome)
+    
+    
+    matches = []
+
+
+    for nome in nomes:
+        if(nome.endswith(suffix) and nome.startswith(preffix)):
+            matches.append(nome)    
+    
+    return len(matches) > 0
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
@@ -195,11 +219,29 @@ def gerar_grafico_barras(method):
     timestamp = datetime.datetime.now().timestamp()
     hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = hash_object.hexdigest()
+
+
+    taxa = _relation['ratio'].values[0]
+    mortes = _relation['deaths'].values[0]
+
     #_relation["ratio"] = pd.Series(params["taxa"])
     if(method == 'city'):
         _relation["state"] = pd.Series(params["estado"])
+        estado = _relation['state'].values[0]
+        prefixo = ''
+        if(deaths):
+            prefixo = 'tdbc_'
+        else:
+            prefixo = 'tibc_'
 
-        path = staticPlots.totalBarCity(_relation['state'].values[0], _relation['deaths'].values[0], _relation['ratio'].values[0], hash_value+_relation['state'].values[0])
+        sufixo = str(estado)
+        if(taxa == 'Population'):
+            sufixo += '_b100k'
+        else:
+            sufixo = '_ba'
+
+        return prefixo+' '+sufixo
+        #path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
     else:
         path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
     return BASEURL+path
