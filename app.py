@@ -157,12 +157,12 @@ def teste(suffix):
     for fullpath in filepaths:
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
-        nomes.append(nome.encode('utf8'))
+        nomes.append(nome)
     
     matches = []
 
     for nome in nomes:
-        if(str(nome).endswith(suffix)):
+        if(nome.endswith(suffix)):
             matches.append(nome)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
