@@ -162,7 +162,7 @@ def teste():
     matches = []
 
     for nome in nomes:
-        if(nome.endswith('suffix'))
+        if(nome.endswith(suffix)):
             matches.append(nome)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
