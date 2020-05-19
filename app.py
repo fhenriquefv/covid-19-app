@@ -229,7 +229,7 @@ def gerar_grafico_barras(method):
         _relation["state"] = pd.Series(params["estado"])
         estado = _relation['state'].values[0]
         prefixo = ''
-        if(deaths):
+        if(mortes):
             prefixo = 'tdbc_'
         else:
             prefixo = 'tibc_'
