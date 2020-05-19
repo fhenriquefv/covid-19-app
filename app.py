@@ -238,12 +238,10 @@ def gerar_grafico_barras(method):
         if(taxa == 'Population'):
             sufixo += '_b100k'
         else:
-            sufixo = '_ba'
+            sufixo += '_ba'
 
-        if(not file_exists(sufixo, prefixo)):
-            path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
-        else:
-            path = 'ERRO'
+        path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
+        path += '//'+str(file_exists(sufixo, prefixo)) + '//'+prefixo+'//'+sufixo
     else:
         path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
     return BASEURL+path
