@@ -237,7 +237,7 @@ def gerar_temporal_series():
         path = BASEURL+staticPlots.TemporalSeries(gvalue, gtype, ratio, hash_value)
     else:
         path = 'ERRO'
-    return geral
+    return path
 
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
