@@ -167,7 +167,7 @@ def teste(suffix):
 
 
     for nome in nomes:
-        if(nome.find(suffix) != 1):
+        if(nome.endswith(suffix) != 1):
             matches.append(nome)    
     
 
