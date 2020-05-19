@@ -150,7 +150,7 @@ def teste():
 
     filestr = ''
     for file in arquivos:
-        filestr += file+'///'
+        filestr += str(file)+'///'
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
