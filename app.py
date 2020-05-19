@@ -206,13 +206,35 @@ def file_exists(preffix, suffix):
     
     return len(matches) > 0
 
-@app.route('/temporalseries/<string:temporal>/<string:gtype>', methods=['GET'])
+@app.route('/temporalseries', methods=['GET'])
 def gerar_temporal_series(temporal, gtype):
 
-    geral = ''
+    _relation = pd.DataFrame()
+    
+    _relation['ratio'] = pd.Series(params['taxa'])
+    _relation['gtype'] = pd.Series(params['tipo'])
+    _relation['gvalue'] = pd.Series(params['valor'])
+    
+    ratio = _relation['ratio'].values[0]
+    gvalue = _relation['gvalue'].values[0]
+    gtype = _relation['gtype'].values[0]
+    prefixo = ''
+    if(gtype == 'city'):
+        prefixo = 'tsc_'
+    else:
+        prefixo = 'tss_'
+    
+    timestamp = datetime.datetime.now().timestamp()
+    hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = hash_object.hexdigest()
 
-    geral += BASEURL+staticPlots.TemporalSeries('RJ', 'state','Population', "populacaoRJ")
-    geral +=  '\n'+BASEURL+staticPlots.TemporalSeries(temporal, gtype,'Area', "area"+temporal+gtype)
+    hash_value += gvalue
+    sufixo = gvalue
+
+    if(not file_exists(prefixo, sufixo)):
+        path = BASEURL+staticPlots.TemporalSeries(gvalue, gtype, ratio, hash_value)
+    else:
+        path = 'ERRO'
     return geral
 
 
