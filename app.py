@@ -264,7 +264,16 @@ def gerar_grafico_pizza(coverage):
     mortes = _relation['deaths'].values[0]
 
     if(coverage == 'region'):
-        path = staticPlots.PieRegion(mortes)
+        prefixo = ''
+        if(mortes):
+            prefixo = 'pdbr'
+        else:
+            prefixo = 'pibr'
+
+        if(not file_exists(prefixo, '')):
+            path = BASEURL+staticPlots.PieRegion(mortes)
+        else:
+            path = 'ERRO'
     else:
         sufixo = ''
         if(coverage == 'city'):
