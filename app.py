@@ -148,7 +148,7 @@ def teste(suffix):
 
     diretorio = pathlib.Path('__temp')
     
-    arquivos = diretorio.glob('**/*'+sys.getfilesystemencoding(suffix)+'.png')
+    arquivos = diretorio.glob('**/*'+suffix.encode(sys.getfilesystemencoding(), 'ignore')+'.png')
 
     filepaths = []
     for file in arquivos:
