@@ -212,7 +212,7 @@ def gerar_temporal_series(temporal):
     geral = ''
 
     geral += BASEURL+staticPlots.TemporalSeries('RJ', 'state','Population', "populacaoRJ")
-    geral +=  '\n'+BASEURL+staticPlots.TemporalSeries(temporal, 'city','Population', "areaRJ")
+    geral +=  '\n'+BASEURL+staticPlots.TemporalSeries(temporal, 'state','Population', "areaRJ")
     return geral
 
 
