@@ -16,6 +16,7 @@ import DataLoad as dl
 import pathlib
 import StaticPlots as sPlots
 import DinamicPlots as dPlots
+import sys
 from sklearn.externals import joblib
 
 app = Flask(__name__)
@@ -146,7 +147,8 @@ def teste(suffix):
     '''
 
     diretorio = pathlib.Path('__temp')
-    arquivos = diretorio.glob('**/*'+suffix.decode('utf8')+'.png')
+    
+    arquivos = diretorio.glob('**/*'+sys.getfilesystemencoding(suffix)+'.png')
 
     filepaths = []
     for file in arquivos:
