@@ -130,7 +130,7 @@ def send_js(path):
 def home():
     return 'Funcionou!'
 
-@app.route('/teste', methods=['POST'])
+@app.route('/teste/<string:suffix>', methods=['POST'])
 def teste():
     #data = dl.DataLoad()
     #params = pd.DataFrame(request.get_json()) 
@@ -158,6 +158,12 @@ def teste():
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         nomes.append(nome)
+    
+    matches = []
+
+    for nome in nomes:
+        if(nome.endswith('suffix'))
+            matches.append(nome)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
@@ -165,7 +171,7 @@ def teste():
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return str(nomes)
+    return str(matches)
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
