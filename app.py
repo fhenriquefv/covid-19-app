@@ -148,9 +148,16 @@ def teste():
     diretorio = pathlib.Path('__temp')
     arquivos = diretorio.glob('**/*.png')
 
-    filestr = ''
+    filepaths = []
     for file in arquivos:
-        filestr += str(file)+'\n'
+        filepaths.push(str(file))
+    
+    nomes = []
+
+    for fullpath in filepaths:
+        *caminho, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        nomes.push(nome)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
@@ -158,7 +165,7 @@ def teste():
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return filestr
+    return str(nomes)
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
