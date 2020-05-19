@@ -224,7 +224,7 @@ def comparar_estados(method):
 
     i = 0
     for state in states:
-        if(i == len(states) -1)
+        if(i == len(states) - 1):
             hash_value += states
         else
             hash_value += states+'X'
@@ -256,7 +256,7 @@ def comparar_cidades(method):
 
     i = 0
     for city in cities:
-        if(i == len(cities) -1)
+        if(i == len(cities) -1):
             hash_value += city
         else
             hash_value += city+'X'
@@ -292,7 +292,7 @@ def mapear_estados():
     
     i = 0
     for city in cities:
-        if(i == len(cities) -1)
+        if(i == len(cities) -1):
             hash_value += city
         else
             hash_value += city+'X'
@@ -320,7 +320,7 @@ def mapear_cidades():
 
     i = 0
     for city in cities:
-        if(i == len(cities) -1)
+        if(i == len(cities) -1):
             hash_value += city
         else
             hash_value += city+'X'
