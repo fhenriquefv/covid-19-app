@@ -245,7 +245,22 @@ def gerar_grafico_barras(method):
         else:
             path = 'ERRO'
     else:
-        path = BASEURL+staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+        prefixo = ''
+        if(mortes):
+            prefixo = 'tdbs_'
+        else:
+            prefixo = 'tibs_'
+
+        sufixo = ''
+        if(taxa == 'Population'):
+            sufixo += '_b100k'
+        else:
+            sufixo += '_ba'
+
+        if(not file_exists(prefixo, sufixo)):
+            path = BASEURL+staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+        else:
+            path = 'ERRO'
     return path
 
     
