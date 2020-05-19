@@ -278,7 +278,7 @@ def gerar_grafico_pizza(coverage):
                 prefixo = 'pdbs_'
             else:
                 prefixo = 'pdbc_'
-            if(not file_exists(prefixo, '')):
+            if(not file_exists(prefixo, gvalue)):
                 path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
             else:
                 path = 'ERRO'
@@ -288,7 +288,7 @@ def gerar_grafico_pizza(coverage):
                 prefixo = 'pibs_'
             else:
                 prefixo = 'pibc_'
-            if(not file_exists(prefixo, '')):
+            if(not file_exists(prefixo, gvalue)):
                 path = staticPlots.PieInfected(gvalue,coverage,hash_value)
             else:
                 path = 'ERRO'
