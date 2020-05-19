@@ -206,13 +206,13 @@ def file_exists(preffix, suffix):
     
     return len(matches) > 0
 
-@app.route('/temporalseries/<string:temporal>', methods=['GET'])
-def gerar_temporal_series(temporal):
+@app.route('/temporalseries/<string:temporal>/<string:gtype>', methods=['GET'])
+def gerar_temporal_series(temporal, gtype):
 
     geral = ''
 
     geral += BASEURL+staticPlots.TemporalSeries('RJ', 'state','Population', "populacaoRJ")
-    geral +=  '\n'+BASEURL+staticPlots.TemporalSeries(temporal, 'state','Population', "areaRJ")
+    geral +=  '\n'+BASEURL+staticPlots.TemporalSeries(temporal, gtype,'Area', "area"+temporal+gtype)
     return geral
 
 
