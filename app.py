@@ -226,9 +226,9 @@ def comparar_estados(method):
     i = 0
     for state in states:
         if(i == len(states) - 1):
-            hash_value += states
+            hash_value += state
         else:
-            hash_value += states+'X'
+            hash_value += state+'X'
         i += 1
 
     if method == 'Multiple':
