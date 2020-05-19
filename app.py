@@ -273,9 +273,25 @@ def gerar_grafico_pizza(coverage):
         else:
             gvalue = None
         if(mortes):
-            path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
+            prefixo = ''
+            if(coverage == 'state'):
+                prefixo = 'pdbs_'
+            else:
+                prefixo = 'pdbc_'
+            if(not file_exists(prefixo, '')):
+                path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
+            else:
+                path = 'ERRO'
         else:
-            path = staticPlots.PieInfected(gvalue,coverage,hash_value)
+            prefixo = ''
+            if(coverage == 'state'):
+                prefixo = 'pibs_'
+            else:
+                prefixo = 'pibc_'
+            if(not file_exists(prefixo, '')):
+                path = staticPlots.PieInfected(gvalue,coverage,hash_value)
+            else:
+                path = 'ERRO'
     
     return BASEURL+path
     
