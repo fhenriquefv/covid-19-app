@@ -177,7 +177,10 @@ def teste(suffix):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return str(matches)
+    if(empty(matches)):
+        return 'Gera'
+    else:
+        return 'Não gera' 
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
