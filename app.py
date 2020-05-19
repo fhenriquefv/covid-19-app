@@ -240,8 +240,10 @@ def gerar_grafico_barras(method):
         else:
             sufixo += '_ba'
 
-        path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
-        path += '//'+str(file_exists(sufixo, prefixo)) + '//'+prefixo+'//'+sufixo
+        if(not file_exists(prefixo, sufixo)):
+            path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
+        else:
+            path = 'ERRO'
     else:
         path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
     return BASEURL+path
