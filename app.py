@@ -209,6 +209,8 @@ def file_exists(preffix, suffix):
 @app.route('/temporalseries', methods=['POST'])
 def gerar_temporal_series():
 
+    params = pd.DataFrame(request.get_json()) 
+
     _relation = pd.DataFrame()
     
     _relation['ratio'] = pd.Series(params['taxa'])
