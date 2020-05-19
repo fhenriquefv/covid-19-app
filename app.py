@@ -150,14 +150,14 @@ def teste():
 
     filepaths = []
     for file in arquivos:
-        filepaths.push(str(file))
+        filepaths.insert(str(file))
     
     nomes = []
 
     for fullpath in filepaths:
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
-        nomes.push(nome)
+        nomes.insert(nome)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
