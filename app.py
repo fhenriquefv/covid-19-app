@@ -207,7 +207,7 @@ def file_exists(preffix, suffix):
     return len(matches) > 0
 
 @app.route('/temporalseries', methods=['POST'])
-def gerar_temporal_series(temporal, gtype):
+def gerar_temporal_series():
 
     _relation = pd.DataFrame()
     
