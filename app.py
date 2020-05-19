@@ -157,7 +157,7 @@ def teste(suffix):
     for fullpath in filepaths:
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
-        nomes.append(nome)
+        nomes.append(nome.encode('utf8'))
     
     matches = []
 
