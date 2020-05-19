@@ -131,7 +131,7 @@ def home():
     return 'Funcionou!'
 
 @app.route('/teste/<string:suffix>', methods=['POST'])
-def teste():
+def teste(suffix):
     #data = dl.DataLoad()
     #params = pd.DataFrame(request.get_json()) 
 
