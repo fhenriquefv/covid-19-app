@@ -158,7 +158,6 @@ def gerar_grafico_barras(method):
     params = pd.DataFrame(request.get_json()) 
 
     _relation = pd.DataFrame()
-
     
     _relation['ratio'] = pd.Series(params['taxa'])
     _relation['deaths'] = pd.Series(params["mortes"])
@@ -169,7 +168,8 @@ def gerar_grafico_barras(method):
     #_relation["ratio"] = pd.Series(params["taxa"])
     if(method == 'city'):
         _relation["state"] = pd.Series(params["estado"])
-        path = staticPlots.totalBarCity(_relation['state'].values[0], _relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+
+        path = staticPlots.totalBarCity(_relation['state'].values[0], _relation['deaths'].values[0], _relation['ratio'].values[0], hash_value+_relation['state'].values[0])
     else:
         path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
     return BASEURL+path
@@ -195,6 +195,7 @@ def gerar_grafico_pizza(coverage):
         if(coverage == 'city'):
             _relation['gvalue'] = pd.Series(params['valor'])
             gvalue = _relation['gvalue'].values[0]
+            hash_value += gvalue
         else:
             gvalue = None
         if(mortes):
@@ -226,7 +227,7 @@ def comparar_estados(method):
     for state in states:
         if(i == len(states) - 1):
             hash_value += states
-        else
+        else:
             hash_value += states+'X'
         i += 1
 
@@ -258,7 +259,7 @@ def comparar_cidades(method):
     for city in cities:
         if(i == len(cities) -1):
             hash_value += city
-        else
+        else:
             hash_value += city+'X'
         i += 1
 
@@ -294,7 +295,7 @@ def mapear_estados():
     for city in cities:
         if(i == len(cities) -1):
             hash_value += city
-        else
+        else:
             hash_value += city+'X'
         i += 1
 
@@ -322,7 +323,7 @@ def mapear_cidades():
     for city in cities:
         if(i == len(cities) -1):
             hash_value += city
-        else
+        else:
             hash_value += city+'X'
         i += 1
 
