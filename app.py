@@ -316,17 +316,34 @@ def comparar_estados(method):
     hash_value = hash_object.hexdigest()
 
     i = 0
+    sufixo = ''
     for state in states:
         if(i == len(states) - 1):
-            hash_value += state
+            sufixo += state
         else:
-            hash_value += state+'X'
+            sufixo += state+'X'
         i += 1
+    
+    hash_value += sufixo
 
     if method == 'Multiple':
-        path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
+        if(deaths):
+            prefixo = 'mcdbs_'
+        else:
+            prefixo = 'mcibs_'
+        if(not file_exists(prefixo, sufixo)):
+            path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
+        else:
+            path = 'ERRO'
     else:
-        path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+        if(deaths):
+            prefixo = 'cdbs_'
+        else:
+            prefixo = 'cibs_'
+        if(not file_exists(prefixo, sufixo)):
+            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+        else:
+            path = 'ERRO'
 
     
     return BASEURL+path
