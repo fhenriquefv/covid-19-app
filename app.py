@@ -365,17 +365,35 @@ def comparar_cidades(method):
     hash_value = hash_object.hexdigest()
 
     i = 0
+    sufixo = ''
     for city in cities:
         if(i == len(cities) -1):
-            hash_value += city
+            sufixo += city
         else:
-            hash_value += city+'X'
+            sufixo += city+'X'
         i += 1
+    hash_value += sufixo
 
     path = ''
+    prefixo = ''
     if method == 'Multiple':
-        path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
+        if(deaths):
+            prefixo = 'mcdbc_'
+        else:
+            prefixo = 'mcibc_'
+        if(not file_exists(prefixo, sufixo)):
+            path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
+        else:
+            path = 'ERRO'
     else:
+        if(deaths):
+            prefixo = 'cdbc_'
+        else:
+            prefixo = 'cibc_'
+        if(not file_exists(prefixo, sufixo)):
+            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+        else:
+            path = 'ERRO'
         path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
         #return 'Comparison Two Cities: '+strMortes+' '+strCidades
     return BASEURL+path
@@ -401,14 +419,23 @@ def mapear_estados():
 
     
     i = 0
+    sufixo = ''
     for state in states_list:
         if(i == len(states_list) -1):
-            hash_value += state
+            sufixo += state
         else:
-            hash_value += state+'X'
+            sufixo += state+'X'
         i += 1
 
-    path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
+    hash_value += sufixo
+    if(deaths):
+        prefixo = 'hdbs_'
+    else:
+        prefixo = 'hibs_'
+    if(not file_exists(prefixo, sufixo)):
+        path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
+    else:
+        path = 'ERRO'
     return BASEURL+path
 
 @app.route('/heatmap/cities', methods=['POST'])
@@ -429,15 +456,26 @@ def mapear_cidades():
     hash_value = hash_object.hexdigest()
 
     i = 0
+    sufixo = ''
     for city in cities_list:
         if(i == len(cities_list) -1):
-            hash_value += city
+            sufixo += city
         else:
-            hash_value += city+'X'
+            sufixo += city+'X'
         i += 1
 
+    hash_value += sufixo
 
-    path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+    
+    if(deaths):
+        prefixo = 'hdbc_'
+    else:
+        prefixo = 'hibc_'
+
+    if(not file_exists(prefixo, sufixo)):
+        path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+    else:
+        path = 'ERRO'
     return BASEURL+path
 
 
