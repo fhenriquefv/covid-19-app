@@ -148,7 +148,7 @@ def teste(suffix):
 
     diretorio = pathlib.Path('__temp')
     
-    arquivos = diretorio.glob('**/*'+str(suffix.encode(sys.getfilesystemencoding(), 'ignore'))+'.png')
+    arquivos = diretorio.glob('**/*.png')
 
     filepaths = []
     for file in arquivos:
@@ -157,18 +157,19 @@ def teste(suffix):
     nomes = []
 
     for fullpath in filepaths:
+        fullpath.encode()
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         nomes.append(nome)
     
-    '''
+    
     matches = []
 
 
     for nome in nomes:
         if(nome.find(suffix) != 1):
             matches.append(nome)    
-    '''
+    
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
@@ -176,7 +177,7 @@ def teste(suffix):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return str(nomes)
+    return str(matches)
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
