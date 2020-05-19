@@ -13,6 +13,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import BRKGA as brkga
 import DataLoad as dl
+import pathlib
 import StaticPlots as sPlots
 import DinamicPlots as dPlots
 from sklearn.externals import joblib
@@ -144,13 +145,17 @@ def teste():
     _relation["select"] = pd.Series(params["selecionado"])
     '''
 
+    diretorio = pathlib.Path('__temp')
+    arquivos = diretorio.glob('__custom')
+
+
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
-    res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
+    '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
     res += BASEURL+staticPlots.totalBarCity('SP', True, 'Population', 'totalBarCidade')+' '
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
-    res += BASEURL+staticPlots.PieRegion(True)+' '
-    return res
+    res += BASEURL+staticPlots.PieRegion(True)+' ' '''
+    return str(arquivos)
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
