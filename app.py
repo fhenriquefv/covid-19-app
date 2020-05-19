@@ -167,7 +167,7 @@ def teste(suffix):
 
 
     for nome in nomes:
-        if(nome.encode('utf8').endswith(suffix)):
+        if(nome.endswith(suffix)):
             matches.append(nome)    
     
 
