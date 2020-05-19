@@ -177,7 +177,7 @@ def teste(suffix):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    if(empty(matches)):
+    if(len(matches) > 0):
         return 'Gera'
     else:
         return 'Não gera' 
