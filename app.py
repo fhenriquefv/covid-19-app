@@ -292,11 +292,11 @@ def mapear_estados():
 
     
     i = 0
-    for city in cities:
-        if(i == len(cities) -1):
-            hash_value += city
+    for state in states_list:
+        if(i == len(states_list) -1):
+            hash_value += state
         else:
-            hash_value += city+'X'
+            hash_value += state+'X'
         i += 1
 
     path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
@@ -320,8 +320,8 @@ def mapear_cidades():
     hash_value = hash_object.hexdigest()
 
     i = 0
-    for city in cities:
-        if(i == len(cities) -1):
+    for city in cities_list:
+        if(i == len(cities_list) -1):
             hash_value += city
         else:
             hash_value += city+'X'
