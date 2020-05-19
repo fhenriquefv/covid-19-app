@@ -266,10 +266,12 @@ def gerar_grafico_pizza(coverage):
     if(coverage == 'region'):
         path = staticPlots.PieRegion(mortes)
     else:
+        sufixo = ''
         if(coverage == 'city'):
             _relation['gvalue'] = pd.Series(params['valor'])
             gvalue = _relation['gvalue'].values[0]
             hash_value += gvalue
+            sufixo = gvalue
         else:
             gvalue = None
         if(mortes):
@@ -278,7 +280,7 @@ def gerar_grafico_pizza(coverage):
                 prefixo = 'pdbs_'
             else:
                 prefixo = 'pdbc_'
-            if(not file_exists(prefixo, gvalue)):
+            if(not file_exists(prefixo, sufixo)):
                 path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
             else:
                 path = 'ERRO'
@@ -288,7 +290,7 @@ def gerar_grafico_pizza(coverage):
                 prefixo = 'pibs_'
             else:
                 prefixo = 'pibc_'
-            if(not file_exists(prefixo, gvalue)):
+            if(not file_exists(prefixo, sufixo)):
                 path = staticPlots.PieInfected(gvalue,coverage,hash_value)
             else:
                 path = 'ERRO'
