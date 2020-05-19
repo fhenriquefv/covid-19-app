@@ -146,7 +146,7 @@ def teste(suffix):
     '''
 
     diretorio = pathlib.Path('__temp')
-    arquivos = diretorio.glob('**/*'+suffix+'.png')
+    arquivos = diretorio.glob('**/*'+suffix.decode('utf8')+'.png')
 
     filepaths = []
     for file in arquivos:
