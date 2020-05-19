@@ -301,7 +301,7 @@ def gerar_grafico_pizza(coverage):
         if(mortes):
             prefixo = ''
             if(coverage == 'state'):
-                prefixo = 'pdbs_'
+                prefixo = 'pdbs'
             else:
                 prefixo = 'pdbc_'
             if(not file_exists(prefixo, sufixo)):
