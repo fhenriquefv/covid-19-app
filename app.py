@@ -146,7 +146,7 @@ def teste():
     '''
 
     diretorio = pathlib.Path('__temp')
-    arquivos = diretorio.glob('__custom')
+    arquivos = diretorio.glob('__custom/**')
 
     filestr = ''
     for file in arquivos:
