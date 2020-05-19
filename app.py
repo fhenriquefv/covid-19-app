@@ -240,7 +240,7 @@ def gerar_grafico_barras(method):
         else:
             sufixo = '_ba'
 
-        if(not file_exists(sufixo, prefixo))
+        if(not file_exists(sufixo, prefixo)):
             path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
         else:
             path = 'ERRO'
