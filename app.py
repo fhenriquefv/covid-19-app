@@ -206,6 +206,16 @@ def file_exists(preffix, suffix):
     
     return len(matches) > 0
 
+@app.route('/temporalseries', methods=['GET'])
+def gerar_temporal_series():
+
+    geral = ''
+
+    geral += BASEURL+staticPlots.TemporalSeries('RJ', 'state','Population', "populacaoRJ")
+    geral += BASEURL+staticPlots.TemporalSeries('RJ', 'city','Area', "areaRJ")
+    return geral
+
+
 @app.route('/totalbar/<string:method>', methods=['POST'])
 def gerar_grafico_barras(method):
     #data = dl.DataLoad()
