@@ -149,11 +149,11 @@ def teste(classe, tipo):
     '''
     pastaClasse = ''
     if(classe == 'dinamic'):
-        pastaClasse = '__custom'
+        pastaClasse = '__custom/'
     elif(classe == 'static'):
-        pastaClasse = '__fixed'  
+        pastaClasse = '__fixed/'  
 
-    diretorio = pathlib.Path('__temp/'pastaClasse+'/__'+tipo)
+    diretorio = pathlib.Path('__temp/'pastaClasse+tipo)
           
     arquivos = diretorio.glob('**/*.png')
 
