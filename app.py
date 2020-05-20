@@ -159,16 +159,13 @@ def teste(classe, tipo):
 
     filepaths = []
     for file in arquivos:
-        filepaths.append(str(file))
-    
-    nomes = []
-
-    for fullpath in filepaths:
+        fullpath = str(file)
         fullpath.encode()
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         if(nome.startswith(tipo)):
-            nomes.append(arquivo)
+            nomes.append(fullpath)
+        
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
