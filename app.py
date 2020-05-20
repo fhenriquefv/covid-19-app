@@ -148,13 +148,13 @@ def teste(classe, tipo):
     _relation["select"] = pd.Series(params["selecionado"])
     '''
 
-    diretorio = pathlib.Path('__temp')
+    diretorio = pathlib.Path('__temp/'pastaClasse+'/__'+tipo+')
     pastaClasse = ''
     if(classe == 'dinamic'):
         pastaClasse = '__custom'
     elif(classe == 'static'):
         pastaClasse = '__fixed'        
-    arquivos = diretorio.glob(pastaClasse+'/__'+tipo+'/*.png')
+    arquivos = diretorio.glob('**/*.png')
 
     filepaths = []
     for file in arquivos:
@@ -174,7 +174,7 @@ def teste(classe, tipo):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return json_response(filenames=nomes, directory=pastaClasse+'/*'+tipo+'/*.png')
+    return json_response(filenames=nomes)
 
 def file_exists(preffix, suffix):
     diretorio = pathlib.Path('__temp')
