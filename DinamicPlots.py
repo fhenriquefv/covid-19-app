@@ -287,12 +287,12 @@ class DinamicPlots:
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_State["deaths"] > 0
             title = "Days Since First Death Case"
-            path = "__temp/__custom/hdbs_"+hash_value+".png"
+            path = "__temp/__custom/__hdbs/hdbs_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
             title = "Days Since First Infected"
-            path = "__temp/__custom/hibs_"+hash_value+".png"
+            path = "__temp/__custom/__hibs/hibs_"+hash_value+".png"
             gtype = 'totalCases'
         
         bol = bol_expr1 & bol_expr2
@@ -341,12 +341,12 @@ class DinamicPlots:
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
             title = "Days Since First Death Case"
-            path = "__temp/__custom/hdbc_"+hash_value+".png"
+            path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
             title = "Days Since First Infected"
-            path = "__temp/__custom/hibc_"+hash_value+".png"
+            path = "__temp/__custom/__hibc/hibc_"+hash_value+".png"
             gtype = 'totalCases'
             
         bol = bol_expr1 & bol_expr2
@@ -420,7 +420,7 @@ class DinamicPlots:
         Axes.tick_params(rotation=0)
         
         Figure.tight_layout()
-        Figure.savefig("__temp/__custom/hdbc_"+hash_value+".png")
+        Figure.savefig("__temp/__custom/__hdbc/hdbc_"+hash_value+".png")
         
         del df
         del lenght

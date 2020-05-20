@@ -16,10 +16,12 @@ import DataLoad as dl
 import pathlib
 import StaticPlots as sPlots
 import DinamicPlots as dPlots
+import FlaskJSON
 import sys
 from sklearn.externals import joblib
 
 app = Flask(__name__)
+json = FlaskJSON(app)
 #CORS(app)
 #app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -131,8 +133,8 @@ def send_js(path):
 def home():
     return 'Funcionou!'
 
-@app.route('/teste/<string:suffix>', methods=['POST'])
-def teste(suffix):
+@app.route('/teste/<string:classe>/<string:tipo>', methods=['POST'])
+def teste(classe, tipo):
     #data = dl.DataLoad()
     #params = pd.DataFrame(request.get_json()) 
 
@@ -147,8 +149,12 @@ def teste(suffix):
     '''
 
     diretorio = pathlib.Path('__temp')
-    
-    arquivos = diretorio.glob('**/*.png')
+    pastaClasse = ''
+    if(classe == 'dinamic'):
+        pastaClasse = '__custom'
+    else if(classe == 'static'):
+        pastaClasse = '__fixed'        
+    arquivos = diretorio.glob(pastaClasse+'/__'+tipo+'*/*.png')
 
     filepaths = []
     for file in arquivos:
@@ -159,17 +165,8 @@ def teste(suffix):
     for fullpath in filepaths:
         fullpath.encode()
         *caminho, arquivo = fullpath.split('/')
-        nome, extensao = arquivo.split('.')
-        nomes.append(nome)
-    
-    
-    matches = []
-
-
-    for nome in nomes:
-        if(nome.endswith(suffix)):
-            matches.append(nome)    
-    
+        #nome, extensao = arquivo.split('.')
+        nomes.append(arquivos)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
     '''res = BASEURL+staticPlots.totalBarState(True, 'Population', 'totalBarEstado')+' '
@@ -177,7 +174,7 @@ def teste(suffix):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return len(matches) > 0
+    return json_response(filenames=nomes)
 
 def file_exists(preffix, suffix):
     diretorio = pathlib.Path('__temp')
