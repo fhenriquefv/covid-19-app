@@ -164,7 +164,7 @@ def teste(classe, tipo):
         *caminho, pasta, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         if(nome.startswith(tipo)):
-            dicionario = get_file_type(nome, pasta)
+            dicionario = create_file_dictionary(nome, pasta)
             dicionario['caminho'] = fullpath
             fileArray.append(dicionario)
         
@@ -175,9 +175,9 @@ def teste(classe, tipo):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return json_response(files=fileArray)
+    return jsonify(fileArray)
 
-def get_file_type(filename, directory):
+def create_file_dictionary(filename, directory):
     dictionary = {'Nome': filename}
     letras = list(directory)
     tipo = ''
@@ -276,11 +276,23 @@ def gerar_temporal_series():
     hash_value += gvalue
     sufixo = gvalue
 
+    dicionario = {}
+    status = 200
     if(not file_exists(prefixo, sufixo)):
-        path = BASEURL+staticPlots.TemporalSeries(gvalue, gtype, ratio, hash_value)
+        path = staticPlots.TemporalSeries(gvalue, gtype, ratio, hash_value)
+        fullpath = str(path)
+        fullpath.encode()
+        *caminho, pasta, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        dicionario = create_file_dictionary(nome, pasta)
+        dicionario['caminho'] = fullpath
     else:
-        path = 'ERRO'
-    return path
+        dicionario['Erro'] = 'Arquivo já existente'
+        status = 400
+    
+
+
+    return jsonify(dicionario), status
 
 
 @app.route('/totalbar/<string:method>', methods=['POST'])
