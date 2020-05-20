@@ -154,17 +154,19 @@ def teste(classe, tipo):
         pastaClasse = '__fixed'  
 
     diretorio = pathlib.Path('__temp/'+pastaClasse)
-          
+    
     arquivos = diretorio.glob('**/*.png')
 
-    filepaths = []
+    fileArray = []
     for file in arquivos:
         fullpath = str(file)
         fullpath.encode()
-        *caminho, arquivo = fullpath.split('/')
+        *caminho, pasta, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         if(nome.startswith(tipo)):
-            filepaths.append(fullpath)
+            dicionario = get_file_type(nome, pasta)
+            dicionario['caminho'] = fullpath
+            fileArray.append(dicionario)
         
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
@@ -173,7 +175,51 @@ def teste(classe, tipo):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return json_response(filenames=filepaths)
+    return json_response(files=fileArray)
+
+def get_file_type(filename, directory):
+    dictionary = {'Nome': filename}
+    letras = list(directory)
+    tipo = ''
+    if(letras[2] == 'p'):
+        tipo = 'pizza'
+    elif(letras[2] == 'ts'):
+        tipo = 'temporal'
+    elif(letras[2] == 't'):
+        tipo = 'barra'
+    elif(letras[2] == 'c' or letras[3] == 'c'):
+        tipo = 'comparativo'
+    elif(letras[2] == 'h')
+        tipo = 'mapa de calor'
+    dictionary['Tipo'] = tipo
+
+    mortes = ''
+    if(letras[3] == 'i' or letras[4] == 'i'):
+        mortes = 'infectados'
+    elif(letras[3] == 'd' or letras[4] == 'd'):
+        mortes = 'mortes'
+
+    alcance = ''
+    if(letras[4] == 's' or letras[5] == 's'):
+        alcance = 'estado'
+    elif(letras[4] == 'c' or letras[5] == 'c'):
+        alcance = 'cidade'
+    else:
+        alcance = 'regiao'
+    dictionary['Alcance'] = alcance
+
+    return dictionary    
+
+    
+    '''
+    if(letras[1] == 'i' or letras[2] == 'i'):
+        mortes = 'infectados'
+    elif(letras[1] == 'd' or letras[2] == 'd'):
+        mortes = 'mortes'
+    '''
+    
+
+
 
 def file_exists(preffix, suffix):
     diretorio = pathlib.Path('__temp')
