@@ -152,7 +152,7 @@ def teste(classe, tipo):
     pastaClasse = ''
     if(classe == 'dinamic'):
         pastaClasse = '__custom'
-    else if(classe == 'static'):
+    elif(classe == 'static'):
         pastaClasse = '__fixed'        
     arquivos = diretorio.glob(pastaClasse+'/__'+tipo+'*/*.png')
 
