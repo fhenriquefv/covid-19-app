@@ -154,7 +154,7 @@ def teste(classe, tipo):
         pastaClasse = '__custom'
     elif(classe == 'static'):
         pastaClasse = '__fixed'        
-    arquivos = diretorio.glob(pastaClasse+'/*'+tipo+'/*.png')
+    arquivos = diretorio.glob(pastaClasse+'/__'+tipo+'/*.png')
 
     filepaths = []
     for file in arquivos:
