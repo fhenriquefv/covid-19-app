@@ -164,7 +164,7 @@ def teste(classe, tipo):
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         if(nome.startswith(tipo)):
-            nomes.append(fullpath)
+            filepaths.append(fullpath)
         
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
@@ -173,7 +173,7 @@ def teste(classe, tipo):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return json_response(filenames=nomes)
+    return json_response(filenames=filepaths)
 
 def file_exists(preffix, suffix):
     diretorio = pathlib.Path('__temp')
