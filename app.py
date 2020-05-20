@@ -183,7 +183,7 @@ def create_file_dictionary(filename, directory):
     tipo = ''
     if(letras[2] == 'p'):
         tipo = 'pizza'
-    elif(letras[2] == 'ts'):
+    elif(letras[2] == 't' and letras[3] == 's'):
         tipo = 'temporal'
     elif(letras[2] == 't'):
         tipo = 'barra'
@@ -289,7 +289,6 @@ def gerar_temporal_series():
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400
-    
 
 
     return jsonify(dicionario), status
@@ -313,6 +312,8 @@ def gerar_grafico_barras(method):
     taxa = _relation['ratio'].values[0]
     mortes = _relation['deaths'].values[0]
 
+    dicionario = {}
+    status = 200
     #_relation["ratio"] = pd.Series(params["taxa"])
     if(method == 'city'):
         _relation["state"] = pd.Series(params["estado"])
@@ -330,9 +331,16 @@ def gerar_grafico_barras(method):
             sufixo += '_ba'
 
         if(not file_exists(prefixo, sufixo)):
-            path = BASEURL+staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
+            path = staticPlots.totalBarCity(_relation['state'].values[0], mortes, taxa, hash_value+_relation['state'].values[0])
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
     else:
         prefixo = ''
         if(mortes):
@@ -347,10 +355,17 @@ def gerar_grafico_barras(method):
             sufixo += '_ba'
 
         if(not file_exists(prefixo, sufixo)):
-            path = BASEURL+staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+            path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
-    return path
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
+    return dicionario, status
 
     
 
@@ -367,6 +382,8 @@ def gerar_grafico_pizza(coverage):
     _relation['deaths'] = pd.Series(params["mortes"])
     mortes = _relation['deaths'].values[0]
 
+    dicionario = {}
+    status = 200
     if(coverage == 'region'):
         prefixo = ''
         if(mortes):
@@ -375,9 +392,16 @@ def gerar_grafico_pizza(coverage):
             prefixo = 'pibr'
 
         if(not file_exists(prefixo, '')):
-            path = BASEURL+staticPlots.PieRegion(mortes)
+            path = staticPlots.PieRegion(mortes)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
     else:
         sufixo = ''
         if(coverage == 'city'):
@@ -394,9 +418,16 @@ def gerar_grafico_pizza(coverage):
             else:
                 prefixo = 'pdbc_'
             if(not file_exists(prefixo, sufixo)):
-                path = BASEURL+staticPlots.PieDeaths(gvalue,coverage,hash_value)
+                path = staticPlots.PieDeaths(gvalue,coverage,hash_value)
+                fullpath = str(path)
+                fullpath.encode()
+                *caminho, pasta, arquivo = fullpath.split('/')
+                nome, extensao = arquivo.split('.')
+                dicionario = create_file_dictionary(nome, pasta)
+                dicionario['caminho'] = fullpath
             else:
-                path = 'ERRO'
+                dicionario['Erro'] = 'Arquivo já existente'
+                status = 400
         else:
             prefixo = ''
             if(coverage == 'state'):
@@ -404,11 +435,19 @@ def gerar_grafico_pizza(coverage):
             else:
                 prefixo = 'pibc_'
             if(not file_exists(prefixo, sufixo)):
-                path = BASEURL+staticPlots.PieInfected(gvalue,coverage,hash_value)
+                path = staticPlots.PieInfected(gvalue,coverage,hash_value)
+
+                fullpath = str(path)
+                fullpath.encode()
+                *caminho, pasta, arquivo = fullpath.split('/')
+                nome, extensao = arquivo.split('.')
+                dicionario = create_file_dictionary(nome, pasta)
+                dicionario['caminho'] = fullpath
             else:
-                path = 'ERRO'
+                dicionario['Erro'] = 'Arquivo já existente'
+                status = 400
     
-    return path
+    return dicionario, status
     
     
 
@@ -438,28 +477,43 @@ def comparar_estados(method):
         i += 1
     
     hash_value += sufixo
-
+    dicionario = {}
+    status = 200
     if method == 'Multiple':
         if(deaths):
             prefixo = 'mcdbs_'
         else:
             prefixo = 'mcibs_'
         if(not file_exists(prefixo, sufixo)):
-            path = BASEURL+dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
+            path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
     else:
         if(deaths):
             prefixo = 'cdbs_'
         else:
             prefixo = 'cibs_'
         if(not file_exists(prefixo, sufixo)):
-            path = BASEURL+dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
 
     
-    return path
+    return dicionario, status
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
@@ -489,27 +543,43 @@ def comparar_cidades(method):
 
     path = ''
     prefixo = ''
+    dicionario = {}
+    status = 200
     if method == 'Multiple':
         if(deaths):
             prefixo = 'mcdbc_'
         else:
             prefixo = 'mcibc_'
         if(not file_exists(prefixo, sufixo)):
-            path = BASEURL+dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
+            path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
     else:
         if(deaths):
             prefixo = 'cdbc_'
         else:
             prefixo = 'cibc_'
         if(not file_exists(prefixo, sufixo)):
-            path = BASEURL+dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = fullpath
         else:
-            path = 'ERRO'
+            dicionario['Erro'] = 'Arquivo já existente'
+            status = 400
         #path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
         #return 'Comparison Two Cities: '+strMortes+' '+strCidades
-    return path
+    return dicionario, status
 
 
 @app.route('/heatmap/states', methods=['POST'])
@@ -545,11 +615,21 @@ def mapear_estados():
         prefixo = 'hdbs_'
     else:
         prefixo = 'hibs_'
+
+    dicionario = {}
+    status = 200
     if(not file_exists(prefixo, sufixo)):
-        path = BASEURL+dinamicPlots.HeatmapState(states_list,deaths,hash_value)
+        path = dinamicPlots.HeatmapState(states_list,deaths,hash_value)
+        fullpath = str(path)
+        fullpath.encode()
+        *caminho, pasta, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        dicionario = create_file_dictionary(nome, pasta)
+        dicionario['caminho'] = fullpath
     else:
-        path = 'ERRO'
-    return path
+        dicionario['Erro'] = 'Arquivo já existente'
+        status = 400
+    return dicionario, status
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -585,11 +665,20 @@ def mapear_cidades():
     else:
         prefixo = 'hibc_'
 
+    dicionario = {}
+    status = 200
     if(not file_exists(prefixo, sufixo)):
-        path = BASEURL+dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+        path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+        fullpath = str(path)
+        fullpath.encode()
+        *caminho, pasta, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        dicionario = create_file_dictionary(nome, pasta)
+        dicionario['caminho'] = fullpath
     else:
-        path = 'ERRO'
-    return path
+        dicionario['Erro'] = 'Arquivo já existente'
+        status = 400
+    return dicionario, status
 
 
 
