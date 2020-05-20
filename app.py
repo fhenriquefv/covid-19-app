@@ -189,7 +189,7 @@ def get_file_type(filename, directory):
         tipo = 'barra'
     elif(letras[2] == 'c' or letras[3] == 'c'):
         tipo = 'comparativo'
-    elif(letras[2] == 'h')
+    elif(letras[2] == 'h'):
         tipo = 'mapa de calor'
     dictionary['Tipo'] = tipo
 
