@@ -147,13 +147,14 @@ def teste(classe, tipo):
     #_relation["ratio"] = pd.Series(params["taxa"])
     _relation["select"] = pd.Series(params["selecionado"])
     '''
-
-    diretorio = pathlib.Path('__temp/'pastaClasse+'/__'+tipo+')
     pastaClasse = ''
     if(classe == 'dinamic'):
         pastaClasse = '__custom'
     elif(classe == 'static'):
-        pastaClasse = '__fixed'        
+        pastaClasse = '__fixed'  
+
+    diretorio = pathlib.Path('__temp/'pastaClasse+'/__'+tipo+')
+          
     arquivos = diretorio.glob('**/*.png')
 
     filepaths = []
