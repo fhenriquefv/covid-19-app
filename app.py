@@ -198,6 +198,7 @@ def get_file_type(filename, directory):
         mortes = 'infectados'
     elif(letras[3] == 'd' or letras[4] == 'd'):
         mortes = 'mortes'
+    dictionary['Mortes'] = mortes
 
     alcance = ''
     if(letras[4] == 's' or letras[5] == 's'):
