@@ -167,7 +167,7 @@ def teste(classe, tipo):
         fullpath.encode()
         *caminho, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
-        if(nome.startswith(tipo))
+        if(nome.startswith(tipo)):
             nomes.append(arquivo)
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
