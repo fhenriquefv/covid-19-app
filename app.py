@@ -133,7 +133,7 @@ def send_js(path):
 def home():
     return 'Funcionou!'
 
-@app.route('/teste/<string:classe>/<string:tipo>', methods=['POST'])
+@app.route('/teste/<string:classe>/<string:tipo>', methods=['GET'])
 def teste(classe, tipo):
     #data = dl.DataLoad()
     #params = pd.DataFrame(request.get_json()) 
