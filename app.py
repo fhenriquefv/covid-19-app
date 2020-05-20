@@ -201,9 +201,9 @@ def create_file_dictionary(filename, directory):
     dictionary['Mortes'] = mortes
 
     alcance = ''
-    if(letras[4] == 's' or letras[5] == 's'):
+    if(letras[4] == 's' or letras[6] == 's'):
         alcance = 'estado'
-    elif(letras[4] == 'c' or letras[5] == 'c'):
+    elif(letras[4] == 'c' or letras[6] == 'c'):
         alcance = 'cidade'
     else:
         alcance = 'regiao'
