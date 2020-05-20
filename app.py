@@ -153,7 +153,7 @@ def teste(classe, tipo):
     elif(classe == 'static'):
         pastaClasse = '__fixed'  
 
-    diretorio = pathlib.Path('__temp/'pastaClasse)
+    diretorio = pathlib.Path('__temp/'+pastaClasse)
           
     arquivos = diretorio.glob('**/*.png')
 
