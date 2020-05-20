@@ -16,7 +16,8 @@ import DataLoad as dl
 import pathlib
 import StaticPlots as sPlots
 import DinamicPlots as dPlots
-from flask_json import FlaskJSON, JsonError, json_response, as_jsonimport sys
+from flask_json import FlaskJSON, JsonError, json_response, as_json
+import sys
 from sklearn.externals import joblib
 
 app = Flask(__name__)
