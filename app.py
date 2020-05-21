@@ -165,8 +165,9 @@ def teste(classe, tipo):
         nome, extensao = arquivo.split('.')
         if(nome.startswith(tipo)):
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
-            fileArray.append(dicionario)
+            dicionario['caminho'] = BASEURL+fullpath
+            if(not(dicionario['Tipo'] == 'temporal' and tipo == 't'))
+                fileArray.append(dicionario)
         
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
