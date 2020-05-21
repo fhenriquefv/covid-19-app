@@ -575,7 +575,7 @@ def comparar_cidades(method):
         else:
             prefixo = 'cibc_'
         if(not file_exists(prefixo, sufixo)):
-            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
+            path = dinamicPlots.ComparisonCities(cities[0],cities[1],deaths,hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
