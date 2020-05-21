@@ -166,7 +166,7 @@ def teste(classe, tipo):
         if(nome.startswith(tipo)):
             dicionario = create_file_dictionary(nome, pasta)
             dicionario['caminho'] = BASEURL+fullpath
-            if(not(dicionario['Tipo'] == 'temporal' and tipo == 't'))
+            if(not(dicionario['Tipo'] == 'temporal' and tipo == 't')):
                 fileArray.append(dicionario)
         
 
