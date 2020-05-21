@@ -285,7 +285,7 @@ def gerar_temporal_series():
         *caminho, pasta, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         dicionario = create_file_dictionary(nome, pasta)
-        dicionario['caminho'] = fullpath
+        dicionario['caminho'] = BASEURL+fullpath
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400
@@ -337,7 +337,7 @@ def gerar_grafico_barras(method):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -361,7 +361,7 @@ def gerar_grafico_barras(method):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -398,7 +398,7 @@ def gerar_grafico_pizza(coverage):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -424,7 +424,7 @@ def gerar_grafico_pizza(coverage):
                 *caminho, pasta, arquivo = fullpath.split('/')
                 nome, extensao = arquivo.split('.')
                 dicionario = create_file_dictionary(nome, pasta)
-                dicionario['caminho'] = fullpath
+                dicionario['caminho'] = BASEURL+fullpath
             else:
                 dicionario['Erro'] = 'Arquivo já existente'
                 status = 400
@@ -442,7 +442,7 @@ def gerar_grafico_pizza(coverage):
                 *caminho, pasta, arquivo = fullpath.split('/')
                 nome, extensao = arquivo.split('.')
                 dicionario = create_file_dictionary(nome, pasta)
-                dicionario['caminho'] = fullpath
+                dicionario['caminho'] = BASEURL+fullpath
             else:
                 dicionario['Erro'] = 'Arquivo já existente'
                 status = 400
@@ -491,7 +491,7 @@ def comparar_estados(method):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -507,7 +507,7 @@ def comparar_estados(method):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -557,7 +557,7 @@ def comparar_cidades(method):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -573,7 +573,7 @@ def comparar_cidades(method):
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = fullpath
+            dicionario['caminho'] = BASEURL+fullpath
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
@@ -625,7 +625,7 @@ def mapear_estados():
         *caminho, pasta, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         dicionario = create_file_dictionary(nome, pasta)
-        dicionario['caminho'] = fullpath
+        dicionario['caminho'] = BASEURL+fullpath
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400
@@ -674,7 +674,7 @@ def mapear_cidades():
         *caminho, pasta, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
         dicionario = create_file_dictionary(nome, pasta)
-        dicionario['caminho'] = fullpath
+        dicionario['caminho'] = BASEURL+fullpath
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400
