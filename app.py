@@ -676,7 +676,10 @@ def mapear_cidades():
     dicionario = {}
     status = 200
     if(not file_exists(prefixo, sufixo)):
-        path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+        if(deaths):
+            path = dinamicPlots.HeatmapDeathsByCity(cities_list,hash_value)
+        else:
+            path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
         fullpath = str(path)
         fullpath.encode()
         *caminho, pasta, arquivo = fullpath.split('/')
