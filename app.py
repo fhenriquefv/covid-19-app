@@ -175,7 +175,7 @@ def teste(classe, tipo):
     res += BASEURL+staticPlots.PieInfected('SP', 'city', 'pieInfectedSP')+' '
     res += BASEURL+staticPlots.PieDeaths('Campinas-SP', 'state', 'pieDeathsCampinas')+' '
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
-    return jsonify(fileArray)
+    return jsonify({filenames: fileArray})
 
 def create_file_dictionary(filename, directory):
     dictionary = {'Nome': filename}
