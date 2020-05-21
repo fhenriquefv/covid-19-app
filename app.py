@@ -366,7 +366,7 @@ def gerar_grafico_barras(method):
         else:
             dicionario['Erro'] = 'Arquivo já existente'
             status = 400
-    return dicionario, status
+    return jsonify(dicionario), status
 
     
 
@@ -448,7 +448,7 @@ def gerar_grafico_pizza(coverage):
                 dicionario['Erro'] = 'Arquivo já existente'
                 status = 400
     
-    return dicionario, status
+    return jsonify(dicionario), status
     
     
 
@@ -514,7 +514,7 @@ def comparar_estados(method):
             status = 400
 
     
-    return dicionario, status
+    return jsonify(dicionario), status
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
 def comparar_cidades(method):
@@ -580,7 +580,7 @@ def comparar_cidades(method):
             status = 400
         #path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
         #return 'Comparison Two Cities: '+strMortes+' '+strCidades
-    return dicionario, status
+    return jsonify(dicionario), status
 
 
 @app.route('/heatmap/states', methods=['POST'])
@@ -630,7 +630,7 @@ def mapear_estados():
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400
-    return dicionario, status
+    return jsonify(dicionario), status
 
 @app.route('/heatmap/cities', methods=['POST'])
 def mapear_cidades():
@@ -679,7 +679,7 @@ def mapear_cidades():
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400
-    return dicionario, status
+    return jsonify(dicionario), status
 
 
 
