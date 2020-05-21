@@ -163,11 +163,18 @@ def teste(classe, tipo):
         fullpath.encode()
         *caminho, pasta, arquivo = fullpath.split('/')
         nome, extensao = arquivo.split('.')
-        if(nome.startswith(tipo)):
-            dicionario = create_file_dictionary(nome, pasta)
-            dicionario['caminho'] = BASEURL+fullpath
-            if(not(dicionario['Tipo'] == 'temporal' and tipo == 't')):
-                fileArray.append(dicionario)
+        if(tipo.startswith('c') or tipo.startswith('mc')):
+            if(nome.startswith('c') or nome.startswith('mc')):
+                dicionario = create_file_dictionary(nome, pasta)
+                dicionario['caminho'] = BASEURL+fullpath
+                if(not(dicionario['Tipo'] == 'temporal' and tipo == 't')):
+                    fileArray.append(dicionario)
+        else:
+            if(nome.startswith(tipo)):
+                dicionario = create_file_dictionary(nome, pasta)
+                dicionario['caminho'] = BASEURL+fullpath
+                if(not(dicionario['Tipo'] == 'temporal' and tipo == 't')):
+                    fileArray.append(dicionario)
         
 
     #res = staticPlots.totalBarState(True, 'Population', 'totalBarEstado')
