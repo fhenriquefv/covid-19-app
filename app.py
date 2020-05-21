@@ -201,7 +201,6 @@ def create_file_dictionary(filename, directory):
     dictionary['Mortes'] = mortes
 
     alcance = ''
-    if()
     if(directory.endswith('s')):
         alcance = 'estado'
     elif(directory.endswith('c')):
