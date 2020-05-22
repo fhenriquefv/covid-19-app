@@ -676,13 +676,25 @@ def mapear_cidades():
     dicionario = {}
     status = 200
     if(not file_exists(prefixo, sufixo)):
-        path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
-        fullpath = str(path)
-        fullpath.encode()
-        *caminho, pasta, arquivo = fullpath.split('/')
-        nome, extensao = arquivo.split('.')
-        dicionario = create_file_dictionary(nome, pasta)
-        dicionario['caminho'] = BASEURL+fullpath
+        if(deaths):
+            resultado = dinamicPlots.HeatMapDeathsByCity(cities_list, hash_value)
+            if(resultado == False):
+                dicionario['Erro'] = 'Cidades sem mortes. Escolha outras'
+            else:
+                fullpath = str(resultado)
+                fullpath.encode()
+                *caminho, pasta, arquivo = fullpath.split('/')
+                nome, extensao = arquivo.split('.')
+                dicionario = create_file_dictionary(nome, pasta)
+                dicionario['caminho'] = BASEURL+fullpath
+        else:
+            path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+            fullpath = str(path)
+            fullpath.encode()
+            *caminho, pasta, arquivo = fullpath.split('/')
+            nome, extensao = arquivo.split('.')
+            dicionario = create_file_dictionary(nome, pasta)
+            dicionario['caminho'] = BASEURL+fullpath
     else:
         dicionario['Erro'] = 'Arquivo já existente'
         status = 400

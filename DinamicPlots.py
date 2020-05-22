@@ -389,6 +389,62 @@ class DinamicPlots:
         del pivot
         return path
     
+
+    def HeatmapDeathsByCity(self,cities_list,hash_value=""):
+        df = pd.DataFrame()
+        bol_expr1 = self.BR_Cases_By_City["city"].values == cities_list[0]
+        bol_expr2 = self.BR_Cases_By_City["deaths"]>0
+        bol = bol_expr1 & bol_expr2
+        comp = len(self.BR_Cases_By_City[bol])
+        
+        print comp
+        if comp == 0:
+            return False     
+        else:
+            for i in cities_list[1:]:
+
+                bol_expr1 = self.BR_Cases_By_City["city"].values == i
+                bol = bol_expr1 & bol_expr2
+                lenght = len(self.BR_Cases_By_City[bol])
+                comp = lenght if lenght < comp else comp
+
+            for i in cities_list:
+
+                bol_expr1 = self.BR_Cases_By_City["city"].values == i
+                bol = bol_expr1 & bol_expr2
+                _temp = self.BR_Cases_By_City[bol].copy()
+                
+                if len(_temp) > 0:
+                    _temp["date"] = range(len(_temp.date))
+                    df = df.append(_temp.loc[_temp.index[:comp]])
+            
+            if len(df) > 0:
+                pivot = df.pivot('city','date','deaths')
+
+                Figure, Axes = plt.subplots(figsize=(8,8))
+                sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes,annot=True,annot_kws={'rotation':90})
+                Axes.set_xlabel("Days Since First Death Case",fontsize=14)
+                Axes.set_ylabel("_")
+                Axes.tick_params(rotation=0)
+
+                Figure.tight_layout()
+                path = "_temp/custom/__hdbc/hdbc"+hash_value+".png"
+                Figure.savefig(path)
+                return path
+            else:
+                return False
+        
+        del df
+        del lenght
+        del comp
+        del _temp
+        Axes.cla()
+        Figure.clear()
+        plt.close()
+        del pivot
+
+    '''
+
     def HeatmapDeathsByCity(self,cities_list,hash_value=""):
         df = pd.DataFrame()
         bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
@@ -431,3 +487,4 @@ class DinamicPlots:
         plt.close()
         del pivot
 
+    '''
