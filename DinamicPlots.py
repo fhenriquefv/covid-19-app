@@ -397,7 +397,7 @@ class DinamicPlots:
         bol = bol_expr1 & bol_expr2
         comp = len(self.BR_Cases_By_City[bol])
         
-        print comp
+        #print comp
         if comp == 0:
             return False     
         else:
