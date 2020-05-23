@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[16]:
+# In[1]:
 
 
 import numpy as np
@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[104]:
+# In[19]:
 
 
 class StaticPlots:
@@ -66,13 +66,13 @@ class StaticPlots:
         
         Figure, Axes = plt.subplots(figsize=(8,8))
 
-        Axes.plot_date("date","totalCases",data = _temp,linestyle="solid",label="Infectados",color='red',markevery=2)
-        Axes.plot_date("date","deaths",data=_temp,linestyle="solid", label="Mortes",color='purple',markevery=2)
+        Axes.plot_date("date","totalCases",data = _temp,linestyle="solid",label="Total Cases",color='red')
+        Axes.plot_date("date","deaths",data=_temp,linestyle="solid", label="Total Deaths",color='purple')
 
-        Axes.set_title(u"Série Temporal - "+gvalue,fontsize=20)
-        Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
-        Axes.set_xlabel("Tempo (Dias)",labelpad=10,fontsize=14)
-        #Axes.set_xticklabels(_temp["date"].dt.strftime("%d-%m-%Y"))
+        Axes.set_title("Temporal Series - "+gvalue,fontsize=20)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
+        Axes.set_xlabel("Time (Days)",labelpad=10,fontsize=14)
+        Axes.set_xticklabels(_temp["date"].dt.strftime("%d-%m-%Y"))
 
         Figure.legend(loc="upper left",bbox_to_anchor=(0.1,0.95),fontsize=12)
         Figure.autofmt_xdate()
@@ -84,6 +84,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
             
     
     def totalBarState(self,deaths=False,ratio = None, hash_value=""):
@@ -116,7 +117,7 @@ class StaticPlots:
                                         i,"Population")),
                                         ignore_index = True)
             hash_value += "_b100k"
-            label_ext = " /100000 Habitantes"
+            label_ext = " / 100000 Habitants"
             co = 100000
             
         elif ratio == "Area":
@@ -137,15 +138,15 @@ class StaticPlots:
         if deaths == False:
             l_values = _temp.totalCases
             l_index = _temp.state
-            label = "Total de Infectados"+label_ext
-            title = u"Número de Infectados Por Estado"+label_ext
+            label = "Total Cases"+label_ext
+            title = "Number of Infecteds by State"+label_ext
             path = "__temp/__fixed/__tibs/tibs_"+hash_value+".png"
         #Else the graph will consider the number of deaths
         else:
             l_values = _temp.deaths
             l_index = _temp.state
-            label = "Total de Mortes"+label_ext
-            title = u"Número de Mortes Por Estado"+label_ext
+            label = "Total Deaths"+label_ext
+            title = "Number of Deaths by State"+label_ext
             path = "__temp/__fixed/__tdbs/tdbs_"+hash_value+".png"
         
         #df is a temporary dataframe
@@ -171,8 +172,8 @@ class StaticPlots:
 
         #Additional parameters
         Axes.set_title(title,fontsize=20)
-        Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
-        Axes.set_xlabel("Estado",labelpad=10,fontsize=14)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
+        Axes.set_xlabel("State",labelpad=10,fontsize=14)
 
         #Figure parameters
         Figure.tight_layout()
@@ -186,6 +187,7 @@ class StaticPlots:
         del bar
         del _temp
         del df
+        return path
     
     def totalBarCity(self,state,deaths=False,ratio=None,hash_value=""):
         """
@@ -197,6 +199,7 @@ class StaticPlots:
         
         hash_value: The suffix of the .png file name, must be unique
         """
+        
         _temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == self.BR_Cases_By_State.date.unique()[-1]]
         _temp = _temp[_temp["state"] == state]
         _temp = _temp[_temp["city"].values != "CASO SEM LOCALIZAÇÃO DEFINIDA-"+state]
@@ -230,14 +233,14 @@ class StaticPlots:
         if deaths == False:
             l_values = _temp.totalCases
             l_index = _temp.state
-            label = "Total de Infectados"+label_ext
-            title = u"Maior Número de Infectados em "+state+" "+label_ext
+            label = "Total Cases"+label_ext
+            title = "Most Infecteds Cities of "+state+" "+label_ext
             path = "__temp/__fixed/__tibc/tibc_"+hash_value+".png"
         else:
             l_values = _temp.deaths
             l_index = _temp.state
-            label = "Total de Mortes"+label_ext
-            title = u"Maior Número de Mortes em "+state+" "+label_ext
+            label = "Total Deaths"+label_ext
+            title = "Most Death Cases in Cities of "+state+" "+label_ext
             path = "__temp/__fixed/__tdbc/tdbc_"+hash_value+".png"
             
         l_values = _temp.totalCases
@@ -263,8 +266,8 @@ class StaticPlots:
         bar.annotate(string,(i.get_x(),i.get_height()),fontsize=10,ha='left')
 
         Axes.set_title(title,fontsize=20)
-        Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
-        Axes.set_xlabel(u"Município",labelpad=10,fontsize=14)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
+        Axes.set_xlabel("City",labelpad=10,fontsize=14)
         Axes.tick_params('x',rotation=90)
         
         Figure.tight_layout()
@@ -279,6 +282,7 @@ class StaticPlots:
         del bar
         del _temp
         del df
+        return path
     
     def PieInfected(self,gvalue=None,gtype='state', hash_value = ""):
         
@@ -286,22 +290,13 @@ class StaticPlots:
         date = self.BR_Cases_By_City.date.unique()[-1]
         
         if gtype == 'state':
-            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("totalCases",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame(None,columns=_main.columns)   
-            _others.loc[0,"state"] = "Outros"
-            _others.loc[0,"totalCases"] = sum(_temp[5:]["totalCases"].values)
+            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("totalCases",ascending=False)[:5]
             path = '__temp/__fixed/__pibs/pibs_'+hash_value+'.png'
         
         else:
-            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("totalCases",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame(None,columns=_main.columns)   
-            _others.loc[0,"state"] = "Outros"
-            _others.loc[0,"totalCases"] = sum(_temp[5:]["totalCases"].values)
+            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("totalCases",ascending=False)[:5]
             path = '__temp/__fixed/__pibc/pibc_'+hash_value+'.png'
 
-        _temp = pd.concat([_main,_others],ignore_index=True)
         colors = ['#FF214B','#FF5745','#FD6865','#FD8978','#FDA978','#DCDCDC']
         
         Figure, Axes = plt.subplots(figsize=(8,8))
@@ -318,7 +313,8 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
-        
+        return path
+
     def PieDeaths(self,gvalue=None,gtype='state',hash_value = ""):
         """
         gvalue: The name of the city or the code of the state
@@ -332,23 +328,13 @@ class StaticPlots:
         date = self.BR_Cases_By_City.date.unique()[-1]
         
         if gtype == 'state':
-            _temp = self.data.BR_Cases_By_State[self.data.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame(None,columns=_main.columns)   
-            _others.loc[0,"state"] = "Outros"
-            _others.loc[0,"deaths"] = sum(_temp[5:]["deaths"].values)
-            path = '__temp/__fixed/pdbs_'+hash_value+'.png'
+            _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)[:5]
+            path = '__temp/__fixed/__pdbs/pdbs_'+hash_value+'.png'
         
         else:
-            _temp = self.data.BR_Cases_By_City[(self.data.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
-            _main = _temp[:5]
-            _others = pd.DataFrame(None,columns=_main.columns)   
-            _others.loc[0,"state"] = "Outros"
-            _others.loc[0,"deaths"] = sum(_temp[5:]["deaths"].values)
+            _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)[:5]
             path = '__temp/__fixed/__pdbc/pdbc_'+hash_value+'.png'
         
-        _temp = pd.concat([_main,_others],ignore_index=True)
-
         colors = ['#FF214B','#FF5745','#FD6865','#FD8978','#FDA978','#DCDCDC']
         
         Figure, Axes = plt.subplots(figsize=(8,8))
@@ -361,14 +347,14 @@ class StaticPlots:
 
         del date
         del _temp
-        del _main
-        del _others
         del colors
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
         
-    def PieRegion(self,deaths=False, hash_value=""):
+    
+    def PieRegion(self,deaths=False, hash_value = ''):
         """
         gvalue: The name of the city or the code of the state
         
@@ -384,12 +370,12 @@ class StaticPlots:
             gtype = "deaths"
             path = "__temp/__fixed/__pdbr/pdbr_"+hash_value+".png"
             
-        reg = {'Norte':["AM","RR","AP","PA","TO","RO","AC"],
-        'Nordeste':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],
-        'Centro-Oeste':["MT","MS","GO"],
-        'Sudeste':["RJ","SP","MG","ES"],
-        'Sul':["PR","RS","SC"]}
-        total = {'Norte':0,'Nordeste':0,'Centro-Oeste':0,'Sudeste':0,'Sul':0}
+        reg = {'North':["AM","RR","AP","PA","TO","RO","AC"],
+        'Northeast':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],
+        'Middle-West':["MT","MS","GO"],
+        'Southeast':["RJ","SP","MG","ES"],
+        'South':["PR","RS","SC"]}
+        total = {'North':0,'Northeast':0,'Middle-West':0,'Southeast':0,'South':0}
 
         date = self.BR_Cases_By_State.date.unique()[-1]
 
@@ -415,11 +401,11 @@ class StaticPlots:
         del colors
         del reg
         del total
-        del path
         del gtype
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
 
     def MakeTemporalSeries(self):
         plt.ioff()
@@ -430,4 +416,7 @@ class StaticPlots:
                     self.TemporalSeries(j.encode('utf-8'),'city',j.encode('utf-8'))
                 else: 
                     break
+
+
+
 

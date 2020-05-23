@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[1]:
+# In[2]:
 
 
 class DinamicPlots:
@@ -50,7 +50,7 @@ class DinamicPlots:
         _temp = self.BR_Cases_By_State[self.BR_Cases_By_State["state"].values == state1].copy()
         _temp2 = self.BR_Cases_By_State[self.BR_Cases_By_State["state"].values == state2].copy()
     
-        legend = "Estados"
+        legend = "States"
         title = state1+" x "+state2
         
         if deaths == True:
@@ -90,10 +90,10 @@ class DinamicPlots:
         
         Axes.legend(fontsize=12).set_title(legend,prop={"size":14})
         Axes.set_title(state1+" x "+state2,fontsize=20)
-        Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
-        Axes.set_xlabel("Dias desde o Primeiro Infectado",labelpad=10,fontsize=14)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
+        Axes.set_xlabel("Days Since First Infected",labelpad=10,fontsize=14)
 
-        plt.xticks(range(comp)[::comp/4],range(comp)[::comp/4])
+        plt.xticks(range(comp)[::int(comp/4)],range(comp)[::int(comp/4)])
         
         Figure.tight_layout()
         Figure.savefig(path)
@@ -106,6 +106,7 @@ class DinamicPlots:
         del _temp
         del _temp2
         del comp
+        return path
         
     def ComparisonMultipleStatesBar(self,states,deaths=False,hash_value=""):
         #hash_value = hash_value.decode('utf-8')
@@ -115,8 +116,8 @@ class DinamicPlots:
         for i in states:
             states_list.append(self.BR_Cases_By_State[self.BR_Cases_By_State["state"].values == i].copy())
     
-        legend = "Estados"
-        title = u"Comparação"
+        legend = "States"
+        title = "Comparison States"
         
         if deaths == True:
             for i in states_list:
@@ -126,12 +127,12 @@ class DinamicPlots:
             _type = "deaths"
             path = u"__temp/__custom/__mcdbs/mcdbs_"+hash_value+".png"
             
-            xlabel = "Dias desde a Primeira Morte"
+            xlabel = "Days Since First Death Case"
         else:
             _type = "totalCases"
             path = u"__temp/__custom/__mcibs/mcibs_"+hash_value+".png"
         
-            xlabel = "Dias desde o Primeiro Infectad"
+            xlabel = "Days Since First Infected"
         Figure, Axes = plt.subplots(figsize=(8,8))
         
         aux = 0
@@ -144,8 +145,8 @@ class DinamicPlots:
             aux+=1
         
         Axes.legend(fontsize=12).set_title(legend,prop={"size":14})
-        Axes.set_title(u"Comparação de Múltiplos Estados",fontsize=20)
-        Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
+        Axes.set_title("Comparison Multiple States",fontsize=20)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
         Axes.set_xlabel(xlabel,labelpad=10,fontsize=14)
         
         Figure.tight_layout()
@@ -155,6 +156,7 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del states_list
+        return path
 
     def ComparisonMultipleCitiesBar(self,cities,deaths=False,hash_value=""):
         #hash_value = hash_value.decode('utf-8')
@@ -164,8 +166,8 @@ class DinamicPlots:
         for i in cities:
             cities_list.append(self.BR_Cases_By_City[self.BR_Cases_By_City["city"].values == i].copy())
     
-        legend = "Cidades"
-        title = "Comparação"
+        legend = "Cities"
+        title = "Comparison States"
         
         if deaths == True:
             for i in cities_list:
@@ -175,12 +177,12 @@ class DinamicPlots:
             _type = "deaths"
             path = u"__temp/__custom/__mcdbc/mcdbc_"+hash_value+".png"
             
-            xlabel = "Dias desde a Primeira Morte"
+            xlabel = "Days Since First Death Case"
         else:
             _type = "totalCases"
             path = u"__temp/__custom/__mcibc/mcibc_"+hash_value+".png"
         
-            xlabel = "Dias desde o Primeiro Infectado"
+            xlabel = "Days Since First Infected"
         Figure, Axes = plt.subplots(figsize=(8,8))
         
         aux = 0
@@ -193,8 +195,8 @@ class DinamicPlots:
             aux+=1
         
         Axes.legend(fontsize=12).set_title(legend,prop={"size":14})
-        Axes.set_title(u"Comparação de Múltiplas Cidades",fontsize=20)
-        Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
+        Axes.set_title("Comparison Multiple Cities",fontsize=20)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
         Axes.set_xlabel(xlabel,labelpad=10,fontsize=14)
         
         Figure.tight_layout()
@@ -204,6 +206,7 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del cities_list
+        return path
         
     def ComparisonCityBar(self,city1,city2,deaths=False,hash_value=""):
         #city1 = city1.decode('utf-8')
@@ -213,7 +216,7 @@ class DinamicPlots:
         _temp = self.BR_Cases_By_City[self.BR_Cases_By_City["city"].values == city1].copy()
         _temp2 = self.BR_Cases_By_City[self.BR_Cases_By_City["city"].values == city2].copy()
         
-        legend = "Cidades"
+        legend = "Cities"
         title = city1+" x "+city2
         
         if deaths == True:
@@ -223,12 +226,12 @@ class DinamicPlots:
             _type = "deaths"
             path = u"__temp/__custom/__cdbc/cdbc_"+hash_value+".png"
             
-            xlabel = "Dias desde a Primeira Morte"
+            xlabel = "Days Since First Death Case"
         else:
             _type = "totalCases"
             path = u"__temp/__custom/__cibc/cibc_"+hash_value+".png"
             
-            xlabel = "Dias desde o Primeiro Infectado"
+            xlabel = "Days Since First Infected"
         
         lenght = len(_temp.index)
         lenght2 = len(_temp2.index)
@@ -257,10 +260,10 @@ class DinamicPlots:
         
         Axes.legend(fontsize=12).set_title(legend,prop={"size":14})
         Axes.set_title(city1+" x "+city2,fontsize=20)
-        Axes.set_ylabel("Número",labelpad=10,fontsize=14)
+        Axes.set_ylabel("Number",labelpad=10,fontsize=14)
         Axes.set_xlabel(xlabel,labelpad=10,fontsize=14)
 
-        plt.xticks(range(comp)[::comp/4],range(comp)[::comp/4])
+        plt.xticks(range(comp)[::int(comp/4)],range(comp)[::int(comp/4)])
         
         Figure.tight_layout()
         Figure.savefig(path)
@@ -273,6 +276,7 @@ class DinamicPlots:
         del _temp
         del _temp2
         del comp
+        return path
 
     
     def HeatmapState(self,states_list,deaths=False,hash_value=""):
@@ -282,12 +286,12 @@ class DinamicPlots:
         
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_State["deaths"] > 0
-            title = "Dias desde a Primeira Morte"
+            title = "Days Since First Death Case"
             path = "__temp/__custom/__hdbs/hdbs_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
-            title = "Dias desde o Primeiro Infectado"
+            title = "Days Since First Infected"
             path = "__temp/__custom/__hibs/hibs_"+hash_value+".png"
             gtype = 'totalCases'
         
@@ -328,20 +332,20 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+        return path
 
     def HeatmapCity(self,cities_list,deaths=False,hash_value=""):
         df = pd.DataFrame()
         
         bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
-        
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
-            title = "Dias desde a Primeira Morte"
+            title = "Days Since First Death Case"
             path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
-            title = "Dias desde o Primeiro Infectado"
+            title = "Days Since First Infected"
             path = "__temp/__custom/__hibc/hibc_"+hash_value+".png"
             gtype = 'totalCases'
             
@@ -383,4 +387,104 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+        return path
+    
 
+    def HeatmapDeathsByCity(self,cities_list,hash_value=""):
+        df = pd.DataFrame()
+        bol_expr1 = self.BR_Cases_By_City["city"].values == cities_list[0]
+        bol_expr2 = self.BR_Cases_By_City["deaths"]>0
+        bol = bol_expr1 & bol_expr2
+        comp = len(self.BR_Cases_By_City[bol])
+        
+        #print comp
+        if comp == 0:
+            return False     
+        else:
+            for i in cities_list[1:]:
+
+                bol_expr1 = self.BR_Cases_By_City["city"].values == i
+                bol = bol_expr1 & bol_expr2
+                lenght = len(self.BR_Cases_By_City[bol])
+                comp = lenght if lenght < comp else comp
+
+            for i in cities_list:
+
+                bol_expr1 = self.BR_Cases_By_City["city"].values == i
+                bol = bol_expr1 & bol_expr2
+                _temp = self.BR_Cases_By_City[bol].copy()
+                
+                if len(_temp) > 0:
+                    _temp["date"] = range(len(_temp.date))
+                    df = df.append(_temp.loc[_temp.index[:comp]])
+            
+            if len(df) > 0:
+                pivot = df.pivot('city','date','deaths')
+
+                Figure, Axes = plt.subplots(figsize=(8,8))
+                sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes,annot=True,annot_kws={'rotation':90})
+                Axes.set_xlabel("Days Since First Death Case",fontsize=14)
+                Axes.set_ylabel("_")
+                Axes.tick_params(rotation=0)
+
+                Figure.tight_layout()
+                path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
+                Figure.savefig(path)
+                return path
+            else:
+                return False
+        
+        del df
+        del lenght
+        del comp
+        del _temp
+        Axes.cla()
+        Figure.clear()
+        plt.close()
+        del pivot
+
+    '''
+
+    def HeatmapDeathsByCity(self,cities_list,hash_value=""):
+        df = pd.DataFrame()
+        bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
+        bol_expr2 = self.BR_Cases_By_City["deaths"]>0
+        bol = bol_expr1 & bol_expr2
+        comp = len(self.BR_Cases_By_City[bol])
+
+        for i in cities_list[1:]:
+            
+            bol_expr1 = self.BR_Cases_By_City["city"].values == i
+            bol = bol_expr1 & bol_expr2
+            lenght = len(self.BR_Cases_By_City[bol])
+            comp = lenght if lenght < comp else comp
+
+        for i in cities_list:
+            
+            bol_expr1 = self.BR_Cases_By_City["city"].values == i
+            bol = bol_expr1 & bol_expr2
+            _temp = self.BR_Cases_By_City[bol].copy()
+            _temp["date"] = range(len(_temp.date))
+            df = df.append(_temp.loc[_temp.index[:comp]])
+
+        pivot = df.pivot('city','date','deaths')
+
+        Figure, Axes = plt.subplots(figsize=(8,8))
+        sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes,annot=True,annot_kws={'rotation':90})
+        Axes.set_xlabel("Days Since First Death Case",fontsize=14)
+        Axes.set_ylabel("_")
+        Axes.tick_params(rotation=0)
+        
+        Figure.tight_layout()
+        Figure.savefig("__temp/__custom/__hdbc/hdbc_"+hash_value+".png")
+        
+        del df
+        del lenght
+        del comp
+        del _temp
+        Axes.cla()
+        Figure.clear()
+        plt.close()
+        del pivot
+
+    '''
