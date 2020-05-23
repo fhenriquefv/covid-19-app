@@ -278,9 +278,9 @@ def gerar_temporal_series():
         prefixo = 'tss_'
     
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
-
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
+    
     hash_value += gvalue
     sufixo = gvalue
 
@@ -313,8 +313,8 @@ def gerar_grafico_barras(method):
     _relation['deaths'] = pd.Series(params["mortes"])
 
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
 
 
     taxa = _relation['ratio'].values[0]
@@ -383,8 +383,8 @@ def gerar_grafico_pizza(coverage):
     params = pd.DataFrame(request.get_json()) 
 
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
 
     _relation = pd.DataFrame()
     _relation['deaths'] = pd.Series(params["mortes"])
@@ -472,8 +472,8 @@ def comparar_estados(method):
     states = _relation['estados'].Value
 
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
 
     i = 0
     sufixo = ''
@@ -535,10 +535,10 @@ def comparar_cidades(method):
     #Tratar os dados
     deaths = _relation['deaths'].values[0]
     cities = _relation['cidades'].Value
-    timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
 
+    timestamp = datetime.datetime.now().timestamp()
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
     i = 0
     sufixo = ''
     for city in cities:
@@ -605,8 +605,8 @@ def mapear_estados():
 
     #Hashvaluee
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
 
     
     i = 0
@@ -653,8 +653,8 @@ def mapear_cidades():
     deaths = _relation['deaths'].values[0]
 
     timestamp = datetime.datetime.now().timestamp()
-    hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = hash_object.hexdigest()
+    #hash_object = hashlib.md5(str(timestamp).encode())
+    hash_value = str(timestamp)
 
     i = 0
     sufixo = ''
