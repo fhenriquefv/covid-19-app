@@ -106,6 +106,7 @@ class DinamicPlots:
         del _temp
         del _temp2
         del comp
+        return path
         
     def ComparisonMultipleStatesBar(self,states,deaths=False,hash_value=""):
         #hash_value = hash_value.decode('utf-8')
@@ -155,6 +156,7 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del states_list
+        return path
 
     def ComparisonMultipleCitiesBar(self,cities,deaths=False,hash_value=""):
         #hash_value = hash_value.decode('utf-8')
@@ -204,6 +206,7 @@ class DinamicPlots:
         plt.close()
         Axes.cla()
         del cities_list
+        return path
         
     def ComparisonCityBar(self,city1,city2,deaths=False,hash_value=""):
         #city1 = city1.decode('utf-8')
@@ -273,6 +276,7 @@ class DinamicPlots:
         del _temp
         del _temp2
         del comp
+        return path
 
     
     def HeatmapState(self,states_list,deaths=False,hash_value=""):
@@ -328,6 +332,7 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+        return path
 
     def HeatmapCity(self,cities_list,deaths=False,hash_value=""):
         df = pd.DataFrame()
@@ -383,4 +388,5 @@ class DinamicPlots:
         Figure.clear()
         plt.close()
         del pivot
+        return path
 

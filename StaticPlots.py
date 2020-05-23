@@ -84,6 +84,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
             
     
     def totalBarState(self,deaths=False,ratio = None, hash_value=""):
@@ -186,6 +187,7 @@ class StaticPlots:
         del bar
         del _temp
         del df
+        return path
     
     def totalBarCity(self,state,deaths=False,ratio=None,hash_value=""):
         """
@@ -279,6 +281,7 @@ class StaticPlots:
         del bar
         del _temp
         del df
+        return path
     
     def PieInfected(self,gvalue=None,gtype='state', hash_value = ""):
         
@@ -318,6 +321,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
         
     def PieDeaths(self,gvalue=None,gtype='state',hash_value = ""):
         """
@@ -367,7 +371,8 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
-        
+        return path
+
     def PieRegion(self,deaths=False, hash_value=""):
         """
         gvalue: The name of the city or the code of the state
@@ -420,6 +425,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
+        return path
 
     def MakeTemporalSeries(self):
         plt.ioff()
