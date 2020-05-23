@@ -329,7 +329,7 @@ class StaticPlots:
         
         if gtype == 'state':
             _temp = self.BR_Cases_By_State[self.BR_Cases_By_State['date'] == date].sort_values("deaths",ascending=False)[:5]
-            path = '__temp/__fixed/__pdbs/pdbs.png'
+            path = '__temp/__fixed/__pdbs/pdbs_'+hash_value+'.png'
         
         else:
             _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)[:5]
@@ -354,7 +354,7 @@ class StaticPlots:
         return path
         
     
-    def PieRegion(self,deaths=False):
+    def PieRegion(self,deaths=False, hash_value = ''):
         """
         gvalue: The name of the city or the code of the state
         
@@ -365,10 +365,10 @@ class StaticPlots:
     
         if deaths == False:
             gtype = "totalCases"
-            path = "__temp/__fixed/__pibr/pibr.png"
+            path = "__temp/__fixed/__pibr/pibr_"+hash_value+".png"
         else:
             gtype = "deaths"
-            path = "__temp/__fixed/__pdbr/pdbr.png"
+            path = "__temp/__fixed/__pdbr/pdbr_"+hash_value+".png"
             
         reg = {'North':["AM","RR","AP","PA","TO","RO","AC"],
         'Northeast':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],
