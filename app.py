@@ -637,7 +637,7 @@ def comparar_estados(method):
             prefixo = 'cibs_'
             pasta += 'cibs'
         fullpath += pasta+'/'
-        repetidos file_exists(prefixo, sufixo)
+        repetidos = file_exists(prefixo, sufixo)
         if(not repetidos):
             path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
             fullpath = str(path)
