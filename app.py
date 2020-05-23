@@ -312,7 +312,7 @@ def gerar_temporal_series():
     else:
         existente = repetidos[0]
         last_update = find_file_date(existente)
-        if(timestamp == last_update)
+        if(timestamp == last_update):
             dicionario = create_file_dictionary(existente, pasta)
             fullpath += existente+'.png'
         else:
@@ -378,7 +378,7 @@ def gerar_grafico_barras(method):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -419,7 +419,7 @@ def gerar_grafico_barras(method):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -475,7 +475,7 @@ def gerar_grafico_pizza(coverage):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -519,7 +519,7 @@ def gerar_grafico_pizza(coverage):
             else:
                 existente = repetidos[0]
                 last_update = find_file_date(existente)
-                if(timestamp == last_update)
+                if(timestamp == last_update):
                     dicionario = create_file_dictionary(existente, pasta)
                     fullpath += existente+'.png'
                 else:
@@ -552,7 +552,7 @@ def gerar_grafico_pizza(coverage):
             else:
                 existente = repetidos[0]
                 last_update = find_file_date(existente)
-                if(timestamp == last_update)
+                if(timestamp == last_update):
                     dicionario = create_file_dictionary(existente, pasta)
                     fullpath += existente+'.png'
                 else:
@@ -618,7 +618,7 @@ def comparar_estados(method):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -648,7 +648,7 @@ def comparar_estados(method):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -714,7 +714,7 @@ def comparar_cidades(method):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -745,7 +745,7 @@ def comparar_cidades(method):
         else:
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
@@ -814,7 +814,7 @@ def mapear_estados():
     else:
         existente = repetidos[0]
         last_update = find_file_date(existente)
-        if(timestamp == last_update)
+        if(timestamp == last_update):
             dicionario = create_file_dictionary(existente, pasta)
             fullpath += existente+'.png'
         else:
@@ -892,7 +892,7 @@ def mapear_cidades():
         if(deaths):
             existente = repetidos[0]
             last_update = find_file_date(existente)
-            if(timestamp == last_update)
+            if(timestamp == last_update):
                 dicionario = create_file_dictionary(existente, pasta)
                 fullpath += existente+'.png'
             else:
