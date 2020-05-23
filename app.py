@@ -232,7 +232,7 @@ def create_file_dictionary(filename, directory):
     
 def find_file_date(filename):
     prefixo, dataSufixo = filename.split('<')
-    data, sufixo = dataSufixo('>')
+    data, sufixo = dataSufixo.split('>')
     return data
 
 
