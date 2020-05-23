@@ -261,7 +261,7 @@ def file_exists(preffix, suffix):
         if(nome.endswith(suffix) and nome.startswith(preffix)):
             matches.append(nome)    
     
-    if(len(matches) > 0)
+    if(len(matches) > 0):
         return False
     else:
         return matches 
