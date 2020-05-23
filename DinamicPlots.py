@@ -428,7 +428,7 @@ class DinamicPlots:
                 Axes.tick_params(rotation=0)
 
                 Figure.tight_layout()
-                path = "_temp/custom/__hdbc/hdbc"+hash_value+".png"
+                path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
                 Figure.savefig(path)
                 return path
             else:
