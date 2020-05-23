@@ -7,7 +7,7 @@ import logging
 import os
 
 import hashlib
-import datetime
+from datetime import date
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -277,10 +277,10 @@ def gerar_temporal_series():
     else:
         prefixo = 'tss_'
     
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
-    
+
     hash_value += gvalue
     sufixo = gvalue
 
@@ -312,7 +312,7 @@ def gerar_grafico_barras(method):
     _relation['ratio'] = pd.Series(params['taxa'])
     _relation['deaths'] = pd.Series(params["mortes"])
 
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
 
@@ -382,7 +382,7 @@ def gerar_grafico_pizza(coverage):
     #data = dl.DataLoad()
     params = pd.DataFrame(request.get_json()) 
 
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
 
@@ -471,7 +471,7 @@ def comparar_estados(method):
     deaths = _relation['deaths'].values[0]
     states = _relation['estados'].Value
 
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
 
@@ -536,7 +536,7 @@ def comparar_cidades(method):
     deaths = _relation['deaths'].values[0]
     cities = _relation['cidades'].Value
 
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
     i = 0
@@ -604,7 +604,7 @@ def mapear_estados():
     deaths = _relation['deaths'].values[0]
 
     #Hashvaluee
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
 
@@ -652,7 +652,7 @@ def mapear_cidades():
     cities_list = _relation['cidades'].Value
     deaths = _relation['deaths'].values[0]
 
-    timestamp = datetime.datetime.now().timestamp()
+    timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
     hash_value = str(timestamp)
 
