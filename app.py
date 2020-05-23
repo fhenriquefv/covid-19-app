@@ -871,37 +871,18 @@ def mapear_cidades():
     status = 200
     repetidos = file_exists(prefixo, sufixo)
     if(not repetidos):
-        if(deaths):
-            resultado = dinamicPlots.HeatmapDeathsByCity(cities_list, hash_value)
-            if(resultado == False):
-                dicionario['Erro'] = 'Cidades sem mortes. Escolha outras'
-            else:
-                fullpath = str(resultado)
-                fullpath.encode()
-                *caminho, pasta, arquivo = fullpath.split('/')
-                nome, extensao = arquivo.split('.')
-                dicionario = create_file_dictionary(nome, pasta)
-        else:
-            path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
-            fullpath = str(path)
-            fullpath.encode()
-            *caminho, pasta, arquivo = fullpath.split('/')
-            nome, extensao = arquivo.split('.')
-            dicionario = create_file_dictionary(nome, pasta)
+        path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
+        fullpath = str(path)
+        fullpath.encode()
+        *caminho, pasta, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        dicionario = create_file_dictionary(nome, pasta)            
     else:
-        if(deaths):
-            existente = repetidos[0]
-            last_update = find_file_date(existente)
-            if(timestamp == last_update):
-                dicionario = create_file_dictionary(existente, pasta)
-                fullpath += existente+'.png'
-            else:
-                path = dinamicPlots.HeatmapDeathsByCity(cities_list, hash_value)
-                fullpath = str(path)
-                fullpath.encode()
-                *caminho, pasta, arquivo = fullpath.split('/')
-                nome, extensao = arquivo.split('.')
-                dicionario = create_file_dictionary(nome, pasta)
+        existente = repetidos[0]
+        last_update = find_file_date(existente)
+        if(timestamp == last_update):
+            dicionario = create_file_dictionary(existente, pasta)
+            fullpath += existente+'.png'
         else:
             path = dinamicPlots.HeatmapCity(cities_list,deaths,hash_value)
             fullpath = str(path)
@@ -909,7 +890,6 @@ def mapear_cidades():
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-
     dicionario['caminho'] = BASEURL+fullpath
     return jsonify(dicionario), status
 
