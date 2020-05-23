@@ -337,7 +337,7 @@ class StaticPlots:
             _others = pd.DataFrame(None,columns=_main.columns)   
             _others.loc[0,"state"] = "Outros"
             _others.loc[0,"deaths"] = sum(_temp[5:]["deaths"].values)
-            path = '__temp/__fixed/pdbs_'+hash_value+'.png'
+            path = '__temp/__fixed/__pdbs/pdbs_'+hash_value+'.png'
         
         else:
             _temp = self.data.BR_Cases_By_City[(self.data.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
