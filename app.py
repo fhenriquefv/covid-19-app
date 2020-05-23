@@ -186,7 +186,7 @@ def teste(classe, tipo):
     return jsonify({'Filenames': fileArray})
 
 def create_file_dictionary(filename, directory):
-    dictionary = {'Nome': filename}
+    dictionary = {'Nome': filename, 'AtualizadoEm': find_file_date(filename)}
     letras = list(directory)
     tipo = ''
     if(letras[2] == 'p'):
@@ -217,6 +217,9 @@ def create_file_dictionary(filename, directory):
         alcance = 'regiao'
     dictionary['Alcance'] = alcance
 
+
+
+
     return dictionary    
 
     
@@ -227,7 +230,11 @@ def create_file_dictionary(filename, directory):
         mortes = 'mortes'
     '''
     
-
+def find_file_date(filename) {
+    prefixo, dataSufixo = filename.split('<')
+    data, sufixo = dataSufixo('>')
+    return data
+}
 
 
 def file_exists(preffix, suffix):
@@ -279,7 +286,7 @@ def gerar_temporal_series():
     
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
+    hash_value = '<'+str(timestamp)+'>'
 
     hash_value += gvalue
     sufixo = gvalue
@@ -314,8 +321,7 @@ def gerar_grafico_barras(method):
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
-
+    hash_value = '<'+str(timestamp)+'>'
 
     taxa = _relation['ratio'].values[0]
     mortes = _relation['deaths'].values[0]
@@ -384,7 +390,7 @@ def gerar_grafico_pizza(coverage):
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
+    hash_value = '<'+str(timestamp)+'>'
 
     _relation = pd.DataFrame()
     _relation['deaths'] = pd.Series(params["mortes"])
@@ -473,7 +479,7 @@ def comparar_estados(method):
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
+    hash_value = '<'+str(timestamp)+'>'
 
     i = 0
     sufixo = ''
@@ -538,7 +544,7 @@ def comparar_cidades(method):
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
+    hash_value = '<'+str(timestamp)+'>'
     i = 0
     sufixo = ''
     for city in cities:
@@ -606,7 +612,7 @@ def mapear_estados():
     #Hashvaluee
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
+    hash_value = '<'+str(timestamp)+'>'
 
     
     i = 0
@@ -654,7 +660,7 @@ def mapear_cidades():
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
-    hash_value = str(timestamp)
+    hash_value = '<'+str(timestamp)+'>'
 
     i = 0
     sufixo = ''
