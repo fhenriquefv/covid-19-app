@@ -230,11 +230,10 @@ def create_file_dictionary(filename, directory):
         mortes = 'mortes'
     '''
     
-def find_file_date(filename) {
+def find_file_date(filename):
     prefixo, dataSufixo = filename.split('<')
     data, sufixo = dataSufixo('>')
     return data
-}
 
 
 def file_exists(preffix, suffix):
