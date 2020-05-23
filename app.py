@@ -677,7 +677,7 @@ def mapear_cidades():
     status = 200
     if(not file_exists(prefixo, sufixo)):
         if(deaths):
-            resultado = dinamicPlots.HeatMapDeathsByCity(cities_list, hash_value)
+            resultado = dinamicPlots.HeatmapDeathsByCity(cities_list, hash_value)
             if(resultado == False):
                 dicionario['Erro'] = 'Cidades sem mortes. Escolha outras'
             else:
