@@ -93,7 +93,7 @@ class DinamicPlots:
         Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
         Axes.set_xlabel("Dias desde o Primeiro Infectado",labelpad=10,fontsize=14)
 
-        plt.xticks(range(comp)[::int(comp/4)],range(comp)[::int(comp/4)])
+        plt.xticks(range(comp)[::comp/4],range(comp)[::comp/4])
         
         Figure.tight_layout()
         Figure.savefig(path)
@@ -263,7 +263,7 @@ class DinamicPlots:
         Axes.set_ylabel("Número",labelpad=10,fontsize=14)
         Axes.set_xlabel(xlabel,labelpad=10,fontsize=14)
 
-        plt.xticks(range(comp)[::int(comp/4)],range(comp)[::int(comp/4)])
+        plt.xticks(range(comp)[::comp/4],range(comp)[::comp/4])
         
         Figure.tight_layout()
         Figure.savefig(path)
@@ -316,7 +316,7 @@ class DinamicPlots:
         pivot = df.pivot('state','date',gtype)
         
         Figure, Axes = plt.subplots(figsize=(8,8))
-        sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes,annot=True,annot_kws={'rotation':90})
+        sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes)
         Axes.set_xlabel(title,fontsize=14)
         Axes.set_ylabel("_")
         Axes.tick_params(rotation=0)
@@ -342,12 +342,12 @@ class DinamicPlots:
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
             title = "Dias desde a Primeira Morte"
-            path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
+            path = "__temp/__custom/__hdbs/hdbc_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
             title = "Dias desde o Primeiro Infectado"
-            path = "__temp/__custom/__hibc/hibc_"+hash_value+".png"
+            path = "__temp/__custom/__hibs/hibc_"+hash_value+".png"
             gtype = 'totalCases'
             
         bol = bol_expr1 & bol_expr2
@@ -372,7 +372,7 @@ class DinamicPlots:
         pivot = df.pivot('city','date',gtype)
 
         Figure, Axes = plt.subplots(figsize=(8,8))
-        sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes,annot=True,annot_kws={'rotation':90})
+        sns.heatmap(pivot,cmap="inferno_r",fmt="",ax=Axes)
         Axes.set_xlabel(title,fontsize=14)
         Axes.set_ylabel("_")
         Axes.tick_params(rotation=0)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[16]:
+# In[1]:
 
 
 import numpy as np
@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[104]:
+# In[9]:
 
 
 class StaticPlots:
@@ -300,7 +300,7 @@ class StaticPlots:
             _temp = self.BR_Cases_By_City[(self.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("totalCases",ascending=False)
             _main = _temp[:5]
             _others = pd.DataFrame(None,columns=_main.columns)   
-            _others.loc[0,"state"] = "Outros"
+            _others.loc[0,"city"] = "Outros"
             _others.loc[0,"totalCases"] = sum(_temp[5:]["totalCases"].values)
             path = '__temp/__fixed/__pibc/pibc_'+hash_value+'.png'
 
@@ -347,7 +347,7 @@ class StaticPlots:
             _temp = self.data.BR_Cases_By_City[(self.data.BR_Cases_By_City["state"] == gvalue) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
             _main = _temp[:5]
             _others = pd.DataFrame(None,columns=_main.columns)   
-            _others.loc[0,"state"] = "Outros"
+            _others.loc[0,"city"] = "Outros"
             _others.loc[0,"deaths"] = sum(_temp[5:]["deaths"].values)
             path = '__temp/__fixed/__pdbc/pdbc_'+hash_value+'.png'
         
@@ -372,8 +372,8 @@ class StaticPlots:
         Figure.clear()
         plt.close()
         return path
-
-    def PieRegion(self,deaths=False, hash_value=""):
+        
+    def PieRegion(self,deaths=False):
         """
         gvalue: The name of the city or the code of the state
         
@@ -384,10 +384,10 @@ class StaticPlots:
     
         if deaths == False:
             gtype = "totalCases"
-            path = "__temp/__fixed/__pibr/pibr_"+hash_value+".png"
+            path = "__temp/__fixed/__pibr/pibr.png"
         else:
             gtype = "deaths"
-            path = "__temp/__fixed/__pdbr/pdbr_"+hash_value+".png"
+            path = "__temp/__fixed/__pdbr/pdbr.png"
             
         reg = {'Norte':["AM","RR","AP","PA","TO","RO","AC"],
         'Nordeste':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],
@@ -420,7 +420,6 @@ class StaticPlots:
         del colors
         del reg
         del total
-        #del path
         del gtype
         Axes.cla()
         Figure.clear()
