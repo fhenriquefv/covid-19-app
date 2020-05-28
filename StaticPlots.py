@@ -373,7 +373,7 @@ class StaticPlots:
         plt.close()
         return path
         
-    def PieRegion(self,deaths=False):
+    def PieRegion(self,deaths=False, hash_value):
         """
         gvalue: The name of the city or the code of the state
         
@@ -384,10 +384,10 @@ class StaticPlots:
     
         if deaths == False:
             gtype = "totalCases"
-            path = "__temp/__fixed/__pibr/pibr.png"
+            path = "__temp/__fixed/__pibr/pibr_"+hash_value+".png"
         else:
             gtype = "deaths"
-            path = "__temp/__fixed/__pdbr/pdbr.png"
+            path = "__temp/__fixed/__pdbr/pdbr_"+hash_value+".png"
             
         reg = {'Norte':["AM","RR","AP","PA","TO","RO","AC"],
         'Nordeste':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],

@@ -93,7 +93,7 @@ class DinamicPlots:
         Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
         Axes.set_xlabel("Dias desde o Primeiro Infectado",labelpad=10,fontsize=14)
 
-        plt.xticks(range(comp)[::comp/4],range(comp)[::comp/4])
+        plt.xticks(range(comp)[::int(comp/4)],range(comp)[::int(comp/4)])
         
         Figure.tight_layout()
         Figure.savefig(path)
@@ -263,7 +263,7 @@ class DinamicPlots:
         Axes.set_ylabel("Número",labelpad=10,fontsize=14)
         Axes.set_xlabel(xlabel,labelpad=10,fontsize=14)
 
-        plt.xticks(range(comp)[::comp/4],range(comp)[::comp/4])
+        plt.xticks(range(comp)[::int(comp/4)],range(comp)[::int(comp/4)])
         
         Figure.tight_layout()
         Figure.savefig(path)
