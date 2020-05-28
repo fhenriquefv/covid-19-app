@@ -373,7 +373,7 @@ class StaticPlots:
         plt.close()
         return path
         
-    def PieRegion(self,deaths=False, hash_value):
+    def PieRegion(self,deaths=False, hash_value=""):
         """
         gvalue: The name of the city or the code of the state
         
