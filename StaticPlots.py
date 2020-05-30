@@ -28,7 +28,7 @@ class StaticPlots:
     BR_Cases_By_City = None
     BR_Cases_Total = None
     states = None
-    cities = None
+    #cities = None
     data = None
     
     def __init__(self,data):
@@ -44,7 +44,7 @@ class StaticPlots:
         self.BR_Cases_By_City = data.BR_Cases_By_City
         self.BR_Cases_Total = data.BR_Cases_Total
         self.states = data.states
-        self.cities = data.cities
+        #self.cities = data.cities
         
     def TemporalSeries(self, gvalue, gtype='state',ratio = None, hash_value=""):
         """
