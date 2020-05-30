@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 
 import numpy as np
@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[9]:
+# In[8]:
 
 
 class StaticPlots:
@@ -28,7 +28,6 @@ class StaticPlots:
     BR_Cases_By_City = None
     BR_Cases_Total = None
     states = None
-    #cities = None
     data = None
     
     def __init__(self,data):
@@ -44,7 +43,6 @@ class StaticPlots:
         self.BR_Cases_By_City = data.BR_Cases_By_City
         self.BR_Cases_Total = data.BR_Cases_Total
         self.states = data.states
-        #self.cities = data.cities
         
     def TemporalSeries(self, gvalue, gtype='state',ratio = None, hash_value=""):
         """
@@ -84,8 +82,7 @@ class StaticPlots:
         Axes.cla()
         Figure.clear()
         plt.close()
-        return path
-            
+        return path    
     
     def totalBarState(self,deaths=False,ratio = None, hash_value=""):
         """
@@ -201,7 +198,7 @@ class StaticPlots:
         """
         _temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == self.BR_Cases_By_State.date.unique()[-1]]
         _temp = _temp[_temp["state"] == state]
-        _temp = _temp[_temp["city"].values != "CASO SEM LOCALIZAÇÃO DEFINIDA-"+state]
+        _temp = _temp[_temp["city"].values != "CASO SEM LOCALIZAÇÃO DEFINIDA*"+state]
         _temp.sort_values("totalCases",ascending=False,inplace=True)
         _temp = _temp.loc[_temp.index[:10]]
         
@@ -214,7 +211,7 @@ class StaticPlots:
             d_ratio = pd.Series()
             for i in _temp["city"].values:
                 d_ratio = d_ratio.append(pd.Series(self.data.getDemographicDataValue(
-                                        state,i.split('-')[0],"Population")),
+                                        state,i.split('*')[0],"Population")),
                                         ignore_index = True)
             hash_value += "_b100k"
             label_ext = "/100000 habitantes"
@@ -223,7 +220,7 @@ class StaticPlots:
             d_ratio = pd.Series()
             for i in _temp["city"].values:
                 d_ratio = d_ratio.append(pd.Series(self.data.getDemographicDataValue(
-                                        state,i.split('-')[0],"Area")),
+                                        state,i.split('*')[0],"Area")),
                                         ignore_index = True)
             hash_value += "_ba"
             label_ext = "/km2"
@@ -384,10 +381,10 @@ class StaticPlots:
     
         if deaths == False:
             gtype = "totalCases"
-            path = "__temp/__fixed/__pibr/pibr_"+hash_value+".png"
+            path = "__temp/__fixed/pibr_"+hash_value+".png"
         else:
             gtype = "deaths"
-            path = "__temp/__fixed/__pdbr/pdbr_"+hash_value+".png"
+            path = "__temp/__fixed/pdbr_"+hash_value+".png"
             
         reg = {'Norte':["AM","RR","AP","PA","TO","RO","AC"],
         'Nordeste':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],
@@ -427,13 +424,28 @@ class StaticPlots:
         plt.close()
         return path
 
-    def MakeTemporalSeries(self):
-        plt.ioff()
-        for i in self.states["State"]:
-            self.TemporalSeries(i,'state',i)
-            for j in self.cities.loc[i]:
-                if j != False:
-                    self.TemporalSeries(j.encode('utf-8'),'city',j.encode('utf-8'))
-                else: 
-                    break
+
+# In[2]:
+
+
+import import_ipynb
+import DataLoad as DL
+
+
+# In[3]:
+
+
+#data = DL.DataLoad()
+
+
+# In[4]:
+
+
+#plots = StaticPlots(data)
+
+
+# In[9]:
+
+
+#plots.totalBarCity("RN",deaths=True,ratio="Area")
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[13]:
 
 
 import pandas as pd
 
 
-# In[96]:
+# In[15]:
 
 
 class DataLoad:
@@ -18,19 +18,18 @@ class DataLoad:
     BR_Cases_By_City = None
     BR_Cases_Total = None
     DemographicData = {}
-    states = pd.read_csv('Instances/BR_States.csv',index_col=0)
-    #cities = pd.read_csv('Instances/BR_Cities_By_State.csv',index_col=0)
+    states = pd.read_csv('States.csv',index_col=0)
     
     
     def __init__(self):
         #Imports the information from the .csv file
         df = pd.read_csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv",
                          encoding="utf-8", parse_dates=['date'])
-        df["city"] = df["city"].str.split("/").str.get(0)+"-"+df["city"].str.split("/").str.get(1)
+        df["city"] = df["city"].str.split("/").str.get(0)+"*"+df["city"].str.split("/").str.get(1)
        
         df2 = pd.read_csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv",
                          encoding="utf-8", parse_dates=['date'])
-        df2["city"] = df2["city"].str.split("/").str.get(0)+"-"+df2["city"].str.split("/").str.get(1)
+        df2["city"] = df2["city"].str.split("/").str.get(0)+"*"+df2["city"].str.split("/").str.get(1)
        
         #Saves the number of rows that are in memory
         self.Skip_Rows_City_Time = len(df.index)
@@ -64,10 +63,10 @@ class DataLoad:
         #the rows that are already in memory
         df = pd.read_csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time.csv",
                          encoding="utf8",skiprows=range(1,self.Skip_Rows_City_Time), parse_dates=['date'])
-        df["city"] = df["city"].str.split("/").str.get(0)+"-"+df["city"].str.split("/").str.get(1)
+        df["city"] = df["city"].str.split("/").str.get(0)+"*"+df["city"].str.split("/").str.get(1)
         df2 = pd.read_csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv",
                          encoding="utf-8", skiprows=range(1,self.Ski_Rows_State), parse_dates=['date'])
-        df2["city"] = df2["city"].str.split("/").str.get(0)+"-"+df2["city"].str.split("/").str.get(1)
+        df2["city"] = df2["city"].str.split("/").str.get(0)+"*"+df2["city"].str.split("/").str.get(1)
         #Updates the number of rows
         self.Skip_Rows_City_Time += len(df.index)
         self.Ski_Rows_State += len(df2.index)
@@ -87,6 +86,7 @@ class DataLoad:
         return self.DemographicData["BR"].loc[state][value]
     
     def saveInstances(self):
+        date = self.BR_Cases_By_City["date"].values[-1]
         for i in self.states.values:
             cond1 = self.BR_Cases_By_City.state == i[0]
             cond2 = self.BR_Cases_By_City.date == date
