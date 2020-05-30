@@ -7,7 +7,7 @@
 import pandas as pd
 
 
-# In[2]:
+# In[96]:
 
 
 class DataLoad:
@@ -18,8 +18,8 @@ class DataLoad:
     BR_Cases_By_City = None
     BR_Cases_Total = None
     DemographicData = {}
-    states = pd.read_csv("Instances/BR_States.csv",index_col=0)
-    cities = pd.read_csv("Instances/BR_Cities_By_State.csv",encoding='utf-8',index_col=0).fillna(False)
+    states = pd.read_csv('States.csv',index_col=0)
+    
     
     def __init__(self):
         #Imports the information from the .csv file
@@ -80,8 +80,18 @@ class DataLoad:
         del df2
     
     def getDemographicDataValue(self,state,city,value):
-        return self.DemographicData[state][self.DemographicData[state]["City"].values == city][value].values[0]    
-
+        return self.DemographicData[state][self.DemographicData[state]["City"].values == city][value].values[0]
+    
     def getStateDemographicDataValue(self,state,value):
         return self.DemographicData["BR"].loc[state][value]
+    
+    def saveInstances(self):
+        for i in self.states.values:
+            cond1 = self.BR_Cases_By_City.state == i[0]
+            cond2 = self.BR_Cases_By_City.date == date
+            cond3 = self.BR_Cases_By_City.deaths > 0
+            
+            self.BR_Cases_By_City[cond1 & cond2 & cond3].to_csv("Instances/Cities/Deaths/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
+            self.BR_Cases_By_City[cond1 & cond2].to_csv("Instances/Cities/Infected/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
+        
 

@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[1]:
+# In[2]:
 
 
 class DinamicPlots:
@@ -132,10 +132,11 @@ class DinamicPlots:
             _type = "totalCases"
             path = u"__temp/__custom/__mcibs/mcibs_"+hash_value+".png"
         
-            xlabel = "Dias desde o Primeiro Infectad"
+            xlabel = "Dias desde o Primeiro Infectado"
         Figure, Axes = plt.subplots(figsize=(8,8))
         
         aux = 0
+        lenght = 1
         for i in states_list:
             lenght = len(i.index)
             i.loc[:,"date"] = range(lenght)
@@ -186,6 +187,7 @@ class DinamicPlots:
         Figure, Axes = plt.subplots(figsize=(8,8))
         
         aux = 0
+        lenght = 1
         for i in cities_list:
             lenght = len(i.index)
             i.loc[:,"date"] = range(lenght)
@@ -343,18 +345,18 @@ class DinamicPlots:
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
             title = "Dias desde a Primeira Morte"
-            path = "__temp/__custom/__hdbs/hdbc_"+hash_value+".png"
+            path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
             title = "Dias desde o Primeiro Infectado"
-            path = "__temp/__custom/__hibs/hibc_"+hash_value+".png"
+            path = "__temp/__custom/__hibc/hibc_"+hash_value+".png"
             gtype = 'totalCases'
             
         bol = bol_expr1 & bol_expr2
         comp = len(self.BR_Cases_By_City[bol])
         
-        lenght = 1
+        length = 1
         for i in cities_list[1:]:
             bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
@@ -391,4 +393,23 @@ class DinamicPlots:
         plt.close()
         del pivot
         return path
+
+
+# In[4]:
+
+
+import import_ipynb
+import DataLoad as DL
+
+
+# In[12]:
+
+
+plots = DinamicPlots(DL.DataLoad())
+
+
+# In[ ]:
+
+
+plots.ComparisonMultipleCitiesBar()
 

@@ -117,7 +117,7 @@ class StaticPlots:
                                         i,"Population")),
                                         ignore_index = True)
             hash_value += "_b100k"
-            label_ext = " /100000 Habitantes"
+            label_ext = " /100000 habitantes"
             co = 100000
             
         elif ratio == "Area":
@@ -217,7 +217,7 @@ class StaticPlots:
                                         state,i.split('-')[0],"Population")),
                                         ignore_index = True)
             hash_value += "_b100k"
-            label_ext = "/100000 Habitants"
+            label_ext = "/100000 habitantes"
             co = 100000
         elif ratio == "Area":
             d_ratio = pd.Series()
@@ -420,6 +420,7 @@ class StaticPlots:
         del colors
         del reg
         del total
+        #del path
         del gtype
         Axes.cla()
         Figure.clear()
