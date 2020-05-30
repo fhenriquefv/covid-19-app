@@ -428,8 +428,8 @@ class StaticPlots:
 # In[2]:
 
 
-import import_ipynb
-import DataLoad as DL
+#import import_ipynb
+#import DataLoad as DL
 
 
 # In[3]:
