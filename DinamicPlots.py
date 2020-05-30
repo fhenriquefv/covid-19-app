@@ -397,7 +397,7 @@ class DinamicPlots:
 
 # In[4]:
 
-
+'''
 import import_ipynb
 import DataLoad as DL
 
@@ -412,4 +412,4 @@ plots = DinamicPlots(DL.DataLoad())
 
 
 plots.ComparisonMultipleCitiesBar()
-
+'''
