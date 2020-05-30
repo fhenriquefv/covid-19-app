@@ -323,7 +323,7 @@ def gerar_temporal_series():
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
     dicionario['caminho'] = BASEURL+fullpath
-
+    dicionario['selecionados'] = sufixo
     return jsonify(dicionario), status
 
 
@@ -343,7 +343,7 @@ def gerar_grafico_barras(method):
 
     taxa = _relation['ratio'].values[0]
     mortes = _relation['deaths'].values[0]
-
+    sufixo = ''
     dicionario = {}
     status = 200
     #_relation["ratio"] = pd.Series(params["taxa"])
@@ -402,7 +402,7 @@ def gerar_grafico_barras(method):
         
         fullpath += pasta+'/'
 
-        sufixo = ''
+        
         if(taxa == 'Population'):
             sufixo += '_b100k'
         else:
@@ -430,7 +430,7 @@ def gerar_grafico_barras(method):
                 nome, extensao = arquivo.split('.')
                 dicionario = create_file_dictionary(nome, pasta)
     dicionario['caminho'] = BASEURL+fullpath
-
+    dicionario['selecionados'] = sufixo 
     return jsonify(dicionario), status
 
     
@@ -450,6 +450,7 @@ def gerar_grafico_pizza(coverage):
 
     dicionario = {}
     status = 200
+    sufixo = ''
 
     pasta = '__'
     fullpath = '__temp/__fixed/'
@@ -486,7 +487,7 @@ def gerar_grafico_pizza(coverage):
                 nome, extensao = arquivo.split('.')
                 dicionario = create_file_dictionary(nome, pasta)
     else:
-        sufixo = ''
+        
         if(coverage == 'city'):
             _relation['gvalue'] = pd.Series(params['valor'])
             gvalue = _relation['gvalue'].values[0]
@@ -563,7 +564,8 @@ def gerar_grafico_pizza(coverage):
                     nome, extensao = arquivo.split('.')
                     dicionario = create_file_dictionary(nome, pasta)
 
-    dicionario['caminho'] = BASEURL+fullpath    
+    dicionario['caminho'] = BASEURL+fullpath
+    dicionario['selecionados'] = sufixo    
     return jsonify(dicionario), status
     
     
@@ -660,7 +662,7 @@ def comparar_estados(method):
                 dicionario = create_file_dictionary(nome, pasta)
 
     dicionario['caminho'] = BASEURL+fullpath
-    
+    dicionario['selecionados'] = sufixo
     return jsonify(dicionario), status
 
 @app.route('/comparison/cities/<string:method>', methods=['POST'])
@@ -757,6 +759,7 @@ def comparar_cidades(method):
                 dicionario = create_file_dictionary(nome, pasta)
 
     dicionario['caminho'] = BASEURL+fullpath
+    dicionario['selecionados'] = sufixo
         #path = dinamicPlots.ComparisonCityBar(cities[0], cities[1], deaths, hash_value)
         #return 'Comparison Two Cities: '+strMortes+' '+strCidades
     return jsonify(dicionario), status
@@ -826,6 +829,7 @@ def mapear_estados():
             dicionario = create_file_dictionary(nome, pasta)
     
     dicionario['caminho'] = BASEURL+fullpath
+    dicionario['selecionados'] = sufixo
     return jsonify(dicionario), status
 
 @app.route('/heatmap/cities', methods=['POST'])
@@ -891,6 +895,7 @@ def mapear_cidades():
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
     dicionario['caminho'] = BASEURL+fullpath
+    dicionario['selecionados'] = sufixo
     return jsonify(dicionario), status
 
 

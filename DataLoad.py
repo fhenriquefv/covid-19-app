@@ -18,7 +18,7 @@ class DataLoad:
     BR_Cases_By_City = None
     BR_Cases_Total = None
     DemographicData = {}
-    states = pd.read_csv('States.csv',index_col=0)
+    states = pd.read_csv('Instances/BR_States.csv',index_col=0)
     
     
     def __init__(self):
