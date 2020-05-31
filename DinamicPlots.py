@@ -345,12 +345,12 @@ class DinamicPlots:
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
             title = "Dias desde a Primeira Morte"
-            path = "_temp/custom/__hdbc/hdbc_"+hash_value+".png"
+            path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
             title = "Dias desde o Primeiro Infectado"
-            path = "_temp/custom/__hibc/hibc_"+hash_value+".png"
+            path = "__temp/__custom/__hibc/hibc_"+hash_value+".png"
             gtype = 'totalCases'
             
         bol = bol_expr1 & bol_expr2
