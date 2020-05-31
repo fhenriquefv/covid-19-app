@@ -356,6 +356,7 @@ class DinamicPlots:
         bol = bol_expr1 & bol_expr2
         comp = len(self.BR_Cases_By_City[bol])
         
+        lenght = 1
         for i in cities_list[1:]:
             bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
