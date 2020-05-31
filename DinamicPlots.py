@@ -340,30 +340,29 @@ class DinamicPlots:
     def HeatmapCity(self,cities_list,deaths=False,hash_value=""):
         df = pd.DataFrame()
         
-        bol_expr1 = self.BR_Cases_By_City["city"] == cities_list[0]
+        bol_expr1 = self.BR_Cases_By_City["city"].values == cities_list[0]
         
         if deaths == True:
             bol_expr2 = self.BR_Cases_By_City["deaths"]>0
             title = "Dias desde a Primeira Morte"
-            path = "__temp/__custom/__hdbc/hdbc_"+hash_value+".png"
+            path = "_temp/custom/__hdbc/hdbc_"+hash_value+".png"
             gtype = 'deaths'
         else:
             bol_expr2 = True
             title = "Dias desde o Primeiro Infectado"
-            path = "__temp/__custom/__hibc/hibc_"+hash_value+".png"
+            path = "_temp/custom/__hibc/hibc_"+hash_value+".png"
             gtype = 'totalCases'
             
         bol = bol_expr1 & bol_expr2
         comp = len(self.BR_Cases_By_City[bol])
         
-        lenght = 1
         for i in cities_list[1:]:
             bol_expr1 = self.BR_Cases_By_City["city"].values == i
             bol = bol_expr1 & bol_expr2
             
             lenght = len(self.BR_Cases_By_City[bol])
             
-        comp = lenght if lenght < comp else comp
+            comp = lenght if lenght < comp else comp
 
         for i in cities_list:
             bol_expr1 = self.BR_Cases_By_City["city"].values == i
@@ -385,7 +384,6 @@ class DinamicPlots:
         Figure.savefig(path)
         
         del df
-        del lenght
         del comp
         del _temp
         Axes.cla()
