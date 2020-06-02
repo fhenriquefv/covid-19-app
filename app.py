@@ -955,7 +955,7 @@ def pegar_estados():
     states = []
     for s in data.states.values:
         states.append(s[0])
-    return jsonify({'Estados': states})
+    return jsonify(states)
 
 def criar_instancias():
     print('Executando de cinco em cinco segs')
