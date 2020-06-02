@@ -18,7 +18,7 @@ import StaticPlots as sPlots
 import DinamicPlots as dPlots
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import sys
-from flask_appscheduler import APScheduler
+from flask_apscheduler import APScheduler
 #from sklearn.externals import joblib
 import joblib
 app = Flask(__name__)
@@ -125,6 +125,10 @@ label = {0: 'negative', 1: 'positive'}
 #def brkga():
 #    data = request.get_json()
 #    return jsonify(data)
+
+@app.route('/Instances/<path:path>')
+def mostrar_csv(path):
+    return send_from_directory('Instances', path)
 
 @app.route('/__temp/<path:path>')
 def send_js(path):
@@ -934,9 +938,10 @@ def extract():
         return json.dumps(result)
 
 def criar_instancias():
+    data.saveInstances()
     print('Executando de cinco em cinco segs')
 
 if __name__ == '__main__':
-    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 5)
+    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 3600)
     scheduler.start()
     app.run(host='0.0.0.0', port=PORT)
