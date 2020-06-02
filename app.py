@@ -939,9 +939,9 @@ def extract():
         }
         return json.dumps(result)
 
-@app.route('dados/<string:mortes>/<string:estado>', methods=['GET'])
+@app.route('/dados/<string:mortes>/<string:estado>', methods=['GET'])
 def pegar_dados_csv(mortes, estado):
-    with open('Instances/'+mortes+'/'+estado+'.csv') as csv_file:
+    with open('Instances/Cities/'+mortes+'/'+estado+'.csv') as csv_file:
         
         csv_reader = csv.reader(csv_file, delimiter=',')
 
