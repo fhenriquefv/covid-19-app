@@ -955,6 +955,6 @@ def criar_instancias():
     data.saveInstances()
 
 if __name__ == '__main__':
-    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 5)
+    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 10)
     scheduler.start()
     app.run(host='0.0.0.0', port=PORT)
