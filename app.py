@@ -32,6 +32,8 @@ staticPlots = sPlots.StaticPlots(data)
 dinamicPlots = dPlots.DinamicPlots(data)
 BASEURL = 'https://covid-19-flask-api.herokuapp.com/'
 
+scheduler = APScheduler()
+
 @app.route('/brkga', methods=['POST'])
 def run_brkga():
 	
@@ -938,8 +940,8 @@ def extract():
         return json.dumps(result)
 
 def criar_instancias():
-    data.saveInstances()
     print('Executando de cinco em cinco segs')
+    data.saveInstances()
 
 if __name__ == '__main__':
     scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 5)
