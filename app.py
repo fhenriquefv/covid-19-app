@@ -954,7 +954,7 @@ def pegar_dados_csv(mortes, estado):
 def pegar_estados():
     states = []
     for s in data.states.values:
-        states.append(s)
+        states.append(s[0])
     return jsonify({'Estados': states})
 
 def criar_instancias():
