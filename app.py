@@ -18,8 +18,9 @@ import StaticPlots as sPlots
 import DinamicPlots as dPlots
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import sys
-from sklearn.externals import joblib
-
+from flask_appscheduler import APScheduler
+#from sklearn.externals import joblib
+import joblib
 app = Flask(__name__)
 json = FlaskJSON(app)
 #CORS(app)
@@ -129,7 +130,7 @@ label = {0: 'negative', 1: 'positive'}
 def send_js(path):
     return send_from_directory('__temp', path)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
     return 'Funcionou!'
 
@@ -932,7 +933,10 @@ def extract():
         }
         return json.dumps(result)
 
+def criar_instancias():
+    print('Executando de cinco em cinco segs')
 
 if __name__ == '__main__':
-
+    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 5)
+    scheduler.start()
     app.run(host='0.0.0.0', port=PORT)

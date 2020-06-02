@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#requirements
+requirements-original
+requirements-alternativo
+requirements2
+get-pip

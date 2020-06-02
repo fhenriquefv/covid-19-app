@@ -1,7 +1,5 @@
-numpy==1.18.4
-scipy==1.1.0
+numpy==1.17.3
 pandas==1.0.3
-scikit-learn==0.20.1
 gunicorn==19.9.0
 Babel==0.9.6
 click==6.7
@@ -21,4 +19,3 @@ flask-cors==3.0.7
 seaborn==0.10.1
 flask-cors==3.0.7
 Flask-JSON==0.3.2
-Flask-APScheduler==1.11.0
