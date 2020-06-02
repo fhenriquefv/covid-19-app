@@ -93,7 +93,8 @@ class DataLoad:
             cond2 = self.BR_Cases_By_City.date == date
             cond3 = self.BR_Cases_By_City.deaths > 0
             
-            self.BR_Cases_By_City[cond1 & cond2 & cond3].to_csv("Instances/Cities/Deaths/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
-            self.BR_Cases_By_City[cond1 & cond2].to_csv("Instances/Cities/Infected/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
-        
+            algo = self.BR_Cases_By_City[cond1 & cond2 & cond3].to_csv("Instances/Cities/Deaths/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
+            algo2 = self.BR_Cases_By_City[cond1 & cond2].to_csv("Instances/Cities/Infected/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
+            print(str(algo))
+            print(str(algo2))
 
