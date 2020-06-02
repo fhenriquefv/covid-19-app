@@ -19,6 +19,8 @@ import DinamicPlots as dPlots
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import sys
 from flask_apscheduler import APScheduler
+from sklearn.externals import joblib
+#import joblib
 app = Flask(__name__)
 json = FlaskJSON(app)
 #CORS(app)
@@ -940,6 +942,6 @@ def criar_instancias():
     print('Executando de cinco em cinco segs')
 
 if __name__ == '__main__':
-    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 10)
+    scheduler.add_job(id = 'New Instances', func = criar_instancias, trigger = 'interval', seconds = 5)
     scheduler.start()
     app.run(host='0.0.0.0', port=PORT)
