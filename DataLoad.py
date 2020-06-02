@@ -90,7 +90,7 @@ class DataLoad:
         #print(str(self.BR_Cases_By_City.state))
         print('Data: '+str(date))
         for i in self.states.values:
-            print('Data CSV: '+str(self.BR_Cases_By_City.date))
+            print('Data CSV: '+str(self.BR_Cases_By_City.date[-1][1]))
             cond1 = self.BR_Cases_By_City.state == i[0]
             cond2 = self.BR_Cases_By_City.date == date
             cond3 = self.BR_Cases_By_City.deaths > 0
