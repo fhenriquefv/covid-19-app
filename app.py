@@ -941,7 +941,7 @@ def extract():
 
 @app.route('/dados/<string:mortes>/<string:estado>', methods=['GET'])
 def pegar_dados_csv(mortes, estado):
-    with open('Instances/Cities/'+mortes+'/'+estado+'.csv') as csv_file:
+    with open('/Instances/Cities/'+mortes+'/'+estado+'.csv') as csv_file:
         
         csv_reader = csv.reader(csv_file, delimiter=',')
 
