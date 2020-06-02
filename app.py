@@ -939,6 +939,17 @@ def extract():
         }
         return json.dumps(result)
 
+@app.route('dados/<string:mortes>/<string:estado>', methods=['GET'])
+def pegar_dados_csv(mortes, estado):
+    with open('Instances/'+mortes+'/'+estado+'.csv') as csv_file:
+        
+        csv_reader = csv.reader(csv_file, delimiter=',')
+
+        csv_reader.__next__()
+
+        for row in csv_reader:
+            print( row[0] + ', ' + row[1] + ', ' + row[2] )
+
 def criar_instancias():
     print('Executando de cinco em cinco segs')
     data.saveInstances()
