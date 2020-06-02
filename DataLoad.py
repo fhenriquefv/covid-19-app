@@ -92,7 +92,11 @@ class DataLoad:
             cond2 = self.BR_Cases_By_City.date == date
             cond3 = self.BR_Cases_By_City.deaths > 0
 
-            print(str(cond1)+str(cond2)+str(cond3))
+            print('Condicao 1: '+str(cond1))
+            
+            print('Condicao 2: '+str(cond2))
+            
+            print('Condicao 3: '+str(cond3))
             
             self.BR_Cases_By_City[cond1 & cond2 & cond3].to_csv("Instances/Cities/Deaths/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
             self.BR_Cases_By_City[cond1 & cond2].to_csv("Instances/Cities/Infected/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
