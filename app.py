@@ -950,7 +950,7 @@ def pegar_dados_csv(mortes, estado):
         for row in csv_reader:
             print( row[0] + ', ' + row[1] + ', ' + row[2] )
 
-@app.route('data/estados', methods=['GET'])
+@app.route('/data/estados', methods=['GET'])
 def pegar_estados():
     states = []
     for s in data.states.values:
