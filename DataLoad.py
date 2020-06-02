@@ -87,9 +87,10 @@ class DataLoad:
     
     def saveInstances(self):
         date = self.BR_Cases_By_City["date"].values[-1]
-        print(str(self.BR_Cases_By_City.state))
-        print(str(self.states.values))
+        #print(str(self.BR_Cases_By_City.state))
+        print('Estados: '+str(self.states.values))
         for i in self.states.values:
+            print('Atual: '+str(i))
             cond1 = self.BR_Cases_By_City.state == i[0]
             cond2 = self.BR_Cases_By_City.date == date
             cond3 = self.BR_Cases_By_City.deaths > 0
