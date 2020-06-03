@@ -951,7 +951,7 @@ def pegar_dados_csv(mortes, estado):
         cidades = []
 
         for row in csv_reader:
-            cidades.append(row[0]..replace("\\/", "/").encode().decode('unicode_escape'))
+            cidades.append(row[0].replace("\\/", "/").encode().decode('unicode_escape'))
     return jsonify(cidades)
 
 
