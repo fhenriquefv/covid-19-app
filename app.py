@@ -944,12 +944,16 @@ def extract():
 def pegar_dados_csv(mortes, estado):
     with open('Instances/Cities/'+mortes+'/'+estado+'.csv') as csv_file:
         
-        csv_reader = csv.reader(csv_file, delimiter='*')
+        csv_reader = csv.reader(csv_file, delimiter='')
 
         csv_reader.__next__()
+        
+        cidades = []
 
         for row in csv_reader:
-            print(row[0] + ', ' + row[1])
+            cidades.append(row)
+    return jsonify(cidades)
+
 
 @app.route('/data/estados', methods=['GET'])
 def pegar_estados():
