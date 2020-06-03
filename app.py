@@ -951,7 +951,7 @@ def pegar_dados_csv(mortes, estado):
         cidades = []
 
         for row in csv_reader:
-            cidades.append(row)
+            cidades.append(row.encode('utf-8'))
     return jsonify(cidades)
 
 
