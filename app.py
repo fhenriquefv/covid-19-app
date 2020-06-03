@@ -944,7 +944,7 @@ def extract():
 def pegar_dados_csv(mortes, estado):
     with open('Instances/Cities/'+mortes+'/'+estado+'.csv') as csv_file:
         
-        csv_reader = csv.reader(csv_file, delimiter='')
+        csv_reader = csv.reader(csv_file, delimiter=',')
 
         csv_reader.__next__()
         
