@@ -91,6 +91,8 @@ class DataLoad:
             cond1 = self.BR_Cases_By_City.state == i[0]
             cond2 = self.BR_Cases_By_City.date == date
             cond3 = self.BR_Cases_By_City.deaths > 0
+
+            print('ESTADO: '+str(i[0]))
             
             print(str(cond1)+'|||'+str(cond2)+'|||'+str(cond3))
 
