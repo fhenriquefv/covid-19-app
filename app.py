@@ -966,8 +966,9 @@ def pegar_estados():
 def pegar_cidades(estado):
     date = data.BR_Cases_By_City.date.unique()[-1]
     _temp = data.BR_Cases_By_City[(data.BR_Cases_By_City["state"] == estado) & (data.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
+    _main = _temp[:5]
+    _others = pd.DataFrame(None,columns=_main.columns)  
     _temp = pd.concat([_main,_others],ignore_index=True)
-
     _temp2 = data.getStateDemographicDataValue('RJ', 'deaths')
     jsonify({'Na mão': _temp, 'No método': _temp2})
 
