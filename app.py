@@ -421,7 +421,7 @@ def gerar_grafico_barras(method):
 
         repetidos = file_exists(prefixo, sufixo)
         if(not repetidos):
-            path = staticPlots.totalBarState(_relation['deaths'].values[0], _relation['ratio'].values[0], hash_value)
+            path = staticPlots.totalBarState(_relation['deaths'].values[0],taxa, hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
