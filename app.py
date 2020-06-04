@@ -969,7 +969,7 @@ def pegar_cidades(estado):
     _main = _temp[:5]
     _others = pd.DataFrame(None,columns=_main.columns)  
     _temp = pd.concat([_main,_others],ignore_index=True)
-    _temp2 = data.getStateDemographicDataValue('RJ', 'deaths')
+    _temp2 = data.getStateDemographicDataValue('RJ', 'Population')
     jsonify({'Na mão': _temp, 'No método': _temp2})
 
 def criar_instancias():
