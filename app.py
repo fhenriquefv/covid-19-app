@@ -963,7 +963,7 @@ def pegar_estados():
     return jsonify(states)
 
 def criar_instancias():
-    print('Executando de cinco em cinco segs')
+    print('Executando a primeira vez')
     data.saveInstances()
 
 if __name__ == '__main__':
