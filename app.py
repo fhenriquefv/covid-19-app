@@ -352,6 +352,7 @@ def gerar_grafico_barras(method):
     taxa = _relation['ratio'].values[0]
     if(taxa == ''):
         taxa = None
+        print('DANONE')
     mortes = _relation['deaths'].values[0]
     sufixo = ''
     dicionario = {}
