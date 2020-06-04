@@ -129,7 +129,7 @@ label = {0: 'negative', 1: 'positive'}
 #    data = request.get_json()
 #    return jsonify(data)
 
-@app.route('/Instances/<path:path>')
+@app.route('/<path:path>')
 def mostrar_csv(path):
     return send_from_directory('Instances', path)
 

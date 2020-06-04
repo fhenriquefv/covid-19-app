@@ -108,3 +108,6 @@ requirements-original
 requirements-alternativo
 requirements2
 get-pip
+
+local/package-lock.json
+local/server.js
