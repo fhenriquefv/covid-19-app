@@ -940,7 +940,7 @@ def extract():
         }
         return json.dumps(result)
 
-@app.route('/dados/<string:mortes>/<string:estado>', methods=['GET'])
+@app.route('/grafico/<string:mortes>/<string:estado>', methods=['GET'])
 def pegar_dados_csv(mortes, estado):
     with open('Instances/Cities/'+mortes+'/'+estado+'.csv', 'r', encoding="ISO-8859-1") as csv_file:
         
@@ -955,12 +955,21 @@ def pegar_dados_csv(mortes, estado):
     return jsonify(cidades)
 
 
-@app.route('/data/estados', methods=['GET'])
+@app.route('/dados/estados', methods=['GET'])
 def pegar_estados():
     states = []
     for s in data.states.values:
         states.append(s[0])
     return jsonify(states)
+
+@app.route('/dados/cidades/<string:estado>', methods=['GET'])
+def pegar_cidades(estado):
+    date = self.BR_Cases_By_City.date.unique()[-1]
+    _temp = data.BR_Cases_By_City[(self.data.BR_Cases_By_City["state"] == estado) & (self.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
+    _temp = pd.concat([_main,_others],ignore_index=True)
+
+    _temp2 = data.getStateDemographicDataValue('RJ', 'deaths')
+    jsonify({'Na mão': _temp, 'No método': _temp2})
 
 def criar_instancias():
     print('Executando a primeira vez')
