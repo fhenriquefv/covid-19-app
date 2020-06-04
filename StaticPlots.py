@@ -100,6 +100,7 @@ class StaticPlots:
         #Checks the value of the param
         if ratio == None:
             #If no ratio is specified, the desired ratio is 1
+            print('DANONE 2')
             d_ratio = pd.Series(1)
             label_ext = ""
             co = 1
