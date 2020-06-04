@@ -965,7 +965,7 @@ def pegar_estados():
 @app.route('/dados/cidades/<string:estado>', methods=['GET'])
 def pegar_cidades(estado):
     date = data.BR_Cases_By_City.date.unique()[-1]
-    _temp = data.BR_Cases_By_City[(data.data.BR_Cases_By_City["state"] == estado) & (data.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
+    _temp = data.BR_Cases_By_City[(data.BR_Cases_By_City["state"] == estado) & (data.BR_Cases_By_City['date'] == date)].sort_values("deaths",ascending=False)
     _temp = pd.concat([_main,_others],ignore_index=True)
 
     _temp2 = data.getStateDemographicDataValue('RJ', 'deaths')
