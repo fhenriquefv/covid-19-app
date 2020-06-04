@@ -129,9 +129,9 @@ label = {0: 'negative', 1: 'positive'}
 #    data = request.get_json()
 #    return jsonify(data)
 
-@app.route('/<path:path>')
+@app.route('/gerador/<path:path>')
 def mostrar_csv(path):
-    return send_from_directory('Instances', path)
+    return send_from_directory('local', path)
 
 @app.route('/__temp/<path:path>')
 def send_js(path):
