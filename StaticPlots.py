@@ -381,10 +381,10 @@ class StaticPlots:
     
         if deaths == False:
             gtype = "totalCases"
-            path = "__temp/__fixed/pibr_"+hash_value+".png"
+            path = "__temp/__fixed/__pibr/pibr_"+hash_value+".png"
         else:
             gtype = "deaths"
-            path = "__temp/__fixed/pdbr_"+hash_value+".png"
+            path = "__temp/__fixed/__pdbr/pdbr_"+hash_value+".png"
             
         reg = {'Norte':["AM","RR","AP","PA","TO","RO","AC"],
         'Nordeste':["MA","PI","CE","RN","PE","PB","SE","AL","BA"],
