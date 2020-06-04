@@ -350,6 +350,8 @@ def gerar_grafico_barras(method):
     hash_value = '<'+str(timestamp)+'>'
 
     taxa = _relation['ratio'].values[0]
+    if(taxa == ''):
+        taxa = None
     mortes = _relation['deaths'].values[0]
     sufixo = ''
     dicionario = {}
@@ -962,6 +964,7 @@ def pegar_estados():
         states.append(s[0])
     return jsonify(states)
 
+'''
 @app.route('/dados/cidades/<string:estado>', methods=['GET'])
 def pegar_cidades(estado):
     date = data.BR_Cases_By_City.date.unique()[-1]
@@ -971,6 +974,7 @@ def pegar_cidades(estado):
     _temp = pd.concat([_main,_others],ignore_index=True)
     _temp2 = data.getStateDemographicDataValue('RJ', 'Population')
     return jsonify({'Na mão': _temp, 'No método': _temp2})
+'''
 
 def criar_instancias():
     print('Executando a primeira vez')
