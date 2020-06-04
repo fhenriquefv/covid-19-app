@@ -129,7 +129,7 @@ label = {0: 'negative', 1: 'positive'}
 #    data = request.get_json()
 #    return jsonify(data)
 
-@app.route('/gerador/<path:path>')
+@app.route('/gerador/<path:path>', methods=['GET'])
 def mostrar_csv(path):
     return send_from_directory('local', path)
 
