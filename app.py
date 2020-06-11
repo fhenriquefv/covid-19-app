@@ -130,16 +130,14 @@ label = {0: 'negative', 1: 'positive'}
 #    return jsonify(data)
 
 
-@app.route('/<string:gvalue>', defaults={'gvalue': None})
-@app.route('/data/absolutos/<string:date>/<string:gvalue>')
+@app.route('/data/absolutos/<string:date>/<string:gvalue>', defaults={'gvalue': None}) 
 def mostrar_dados_gerais(date, gvalue):
     gtype = 'state'
     if(gvalue != None):
         gtype = 'city'
     return jsonify(data.DadosAbsolutos(date, gtype, gvalue))
 
-@user.route('/<string:gvalue>', defaults={'gvalue': None})
-@app.route('/historico/<string:date>/<string:gvalue>')
+@app.route('/historico/<string:date>/<string:gvalue>', defaults={'gvalue': None})
 def mostrar_historico(date, gvalue):
     gtype = 'state'
     if(gvalue != None):
