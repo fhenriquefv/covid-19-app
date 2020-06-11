@@ -137,9 +137,10 @@ def mostrar_dados_gerais():
 def mostrar_historico():
     return jsonify(data.DadosHistoricos(date.today(), 'state', None))
 
-@app.route('/gerador/<path:path>', methods=['GET'])
-def mostrar_csv(path):
-    return send_from_directory('local', path)
+
+@app.route('/Instances/<path:path>')
+def send_js(path):
+    return send_from_directory('Instances', path)
 
 @app.route('/__temp/<path:path>')
 def send_js(path):
