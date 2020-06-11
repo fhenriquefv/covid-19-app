@@ -135,7 +135,7 @@ def mostrar_dados_gerais():
 
 @app.route('/historico')
 def mostrar_historico():
-    return jsonify(data.DadosDadosHistoricos(date.today(), 'state', None))
+    return jsonify(data.DadosHistoricos(date.today(), 'state', None))
 
 @app.route('/gerador/<path:path>', methods=['GET'])
 def mostrar_csv(path):
