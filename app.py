@@ -967,6 +967,21 @@ def pegar_dados_csv(mortes, estado):
     return jsonify(cidades)
 
 
+@app.route('/datas', methods=['GET'])
+def pegar_dados_csv():
+    with open('Instances/Dates/dates.csv', 'r', encoding="ISO-8859-1") as csv_file:
+        
+        csv_reader = csv.reader(csv_file, delimiter=',')
+
+        csv_reader.__next__()
+        
+        datas = []
+
+        for row in csv_reader:
+            datas.append(row[1])
+    return jsonify(datas)
+
+
 @app.route('/dados/estados', methods=['GET'])
 def pegar_estados():
     states = []
