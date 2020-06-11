@@ -131,7 +131,7 @@ label = {0: 'negative', 1: 'positive'}
 
 @app.route('/data/absolutos')
 def mostrar_dados_gerais():
-    return jsonify(data.DadosAbsolutos(date.today(), 'state'))
+    return jsonify(data.DadosAbsolutos(date.today(), 'state', None))
 
 @app.route('/gerador/<path:path>', methods=['GET'])
 def mostrar_csv(path):
