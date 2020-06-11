@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
+# In[1]:
 
 
 import pandas as pd
 
 
-# In[15]:
+# In[129]:
 
 
 class DataLoad:
@@ -18,7 +18,7 @@ class DataLoad:
     BR_Cases_By_City = None
     BR_Cases_Total = None
     DemographicData = {}
-    states = pd.read_csv('Instances/BR_States.csv',index_col=0)
+    states = pd.read_csv('BR_States.csv',index_col=0)
     
     
     def __init__(self):
@@ -91,10 +91,55 @@ class DataLoad:
             cond1 = self.BR_Cases_By_City.state == i[0]
             cond2 = self.BR_Cases_By_City.date == date
             cond3 = self.BR_Cases_By_City.deaths > 0
-
-            print('ESTADO: '+str(i[0]))
             
-            print(str(cond1)+'|||'+str(cond2)+'|||'+str(cond3))
-
             self.BR_Cases_By_City[cond1 & cond2 & cond3].to_csv("Instances/Cities/Deaths/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
             self.BR_Cases_By_City[cond1 & cond2].to_csv("Instances/Cities/Infected/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
+        pd.DataFrame(dl.BR_Cases_By_State.date.unique(),columns=["Data"]).to_csv("dates.csv")
+    
+    def DadosHistoricos(self,date,gtype="state",gvalue=None):
+        if gtype == "state":
+            __temp = self.BR_Cases_By_State[self.BR_Cases_By_State["date"] == date]
+            if len(__temp) == 0:
+                return False
+            return jsonfy(pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
+        
+        else:
+            __temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == date]
+            __temp = __temp[__temp["state"] == gvalue]
+            if len(__temp) == 0:
+                return False
+            return jsonfy(pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())    
+        
+    def DadosAbsolutos(self,date,gtype="state",gvalue=None):
+        if gtype == "state":
+            __temp = self.BR_Cases_By_State[self.BR_Cases_By_State["date"] == date]
+            if len(__temp) == 0:
+                return False
+            return jsonfy(pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
+        
+        else:
+            __temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == date]
+            __temp = __temp[__temp["state"] == gvalue]
+            if len(__temp) == 0:
+                return False
+            return pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict()
+        
+
+
+# In[130]:
+
+
+dl = DataLoad()
+
+
+# In[131]:
+
+
+dl.DadosAbsolutos(date.values[0],"city","GO")
+
+
+# In[ ]:
+
+
+
+

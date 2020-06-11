@@ -129,6 +129,10 @@ label = {0: 'negative', 1: 'positive'}
 #    data = request.get_json()
 #    return jsonify(data)
 
+@app.route('/data/absolutos')
+def mostrar_dados_gerais():
+    return jsonify(data.DadosAbsolutos(date.today(), 'state'))
+
 @app.route('/gerador/<path:path>', methods=['GET'])
 def mostrar_csv(path):
     return send_from_directory('local', path)
