@@ -94,7 +94,7 @@ class DataLoad:
             
             self.BR_Cases_By_City[cond1 & cond2 & cond3].to_csv("Instances/Cities/Deaths/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
             self.BR_Cases_By_City[cond1 & cond2].to_csv("Instances/Cities/Infected/"+i[0]+".csv",encoding='utf-8',columns=['city'],index=False,header=False)
-        pd.DataFrame(dl.BR_Cases_By_State.date.unique(),columns=["Data"]).to_csv("dates.csv")
+        pd.DataFrame(dl.BR_Cases_By_State.date.unique(),columns=["Data"]).to_csv("Instances/dates.csv")
     
     def DadosHistoricos(self,date,gtype="state",gvalue=None):
         if gtype == "state":
