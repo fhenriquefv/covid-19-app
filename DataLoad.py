@@ -108,7 +108,7 @@ class DataLoad:
             __temp = __temp[__temp["state"] == gvalue]
             if len(__temp) == 0:
                 return False
-            return (pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","novosInfectados","novasMortes"]).to_dict())    
+            return (pd.DataFrame(__temp[["city","newCases","newDeaths"]].values,columns=["Estados","novosInfectados","novasMortes"]).to_dict())    
         
     def DadosAbsolutos(self,date,gtype="state",gvalue=None):
         if gtype == "state":
@@ -122,7 +122,7 @@ class DataLoad:
             __temp = __temp[__temp["state"] == gvalue]
             if len(__temp) == 0:
                 return False
-            return pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","novosInfectados","novasMortes"]).to_dict()
+            return pd.DataFrame(__temp[["city","totalCases","deaths"]].values,columns=["Estados","novosInfectados","novasMortes"]).to_dict()
         
 
 
