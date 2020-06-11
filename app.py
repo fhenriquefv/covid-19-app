@@ -133,6 +133,10 @@ label = {0: 'negative', 1: 'positive'}
 def mostrar_dados_gerais():
     return jsonify(data.DadosAbsolutos(date.today(), 'state', None))
 
+@app.route('/historico')
+def mostrar_historico():
+    return jsonify(data.DadosDadosHistoricos(date.today(), 'state', None))
+
 @app.route('/gerador/<path:path>', methods=['GET'])
 def mostrar_csv(path):
     return send_from_directory('local', path)
