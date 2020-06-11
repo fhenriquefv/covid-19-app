@@ -129,13 +129,13 @@ class DataLoad:
 # In[130]:
 
 
-dl = DataLoad()
+#dl = DataLoad()
 
 
 # In[131]:
 
 
-dl.DadosAbsolutos(date.values[0],"city","GO")
+#dl.DadosAbsolutos(date.values[0],"city","GO")
 
 
 # In[ ]:
