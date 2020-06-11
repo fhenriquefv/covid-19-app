@@ -139,11 +139,11 @@ def mostrar_historico():
 
 
 @app.route('/Instances/<path:path>')
-def send_js(path):
+def mostrar_csv(path):
     return send_from_directory('Instances', path)
 
 @app.route('/__temp/<path:path>')
-def send_js(path):
+def mostrar_graficos(path):
     return send_from_directory('__temp', path)
 
 @app.route('/', methods=['GET'])
