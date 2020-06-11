@@ -101,21 +101,21 @@ class DataLoad:
             __temp = self.BR_Cases_By_State[self.BR_Cases_By_State["date"] == date]
             if len(__temp) == 0:
                 return False
-            return jsonfy(pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
+            return (pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
         
         else:
             __temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == date]
             __temp = __temp[__temp["state"] == gvalue]
             if len(__temp) == 0:
                 return False
-            return jsonfy(pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())    
+            return (pd.DataFrame(__temp[["state","newCases","newDeaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())    
         
     def DadosAbsolutos(self,date,gtype="state",gvalue=None):
         if gtype == "state":
             __temp = self.BR_Cases_By_State[self.BR_Cases_By_State["date"] == date]
             if len(__temp) == 0:
                 return False
-            return jsonfy(pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
+            return (pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
         
         else:
             __temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == date]
