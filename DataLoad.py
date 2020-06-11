@@ -115,14 +115,14 @@ class DataLoad:
             __temp = self.BR_Cases_By_State[self.BR_Cases_By_State["date"] == date]
             if len(__temp) == 0:
                 return False
-            return (pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict())
+            return (pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","novosInfectados","novasMortes"]).to_dict())
         
         else:
             __temp = self.BR_Cases_By_City[self.BR_Cases_By_City["date"] == date]
             __temp = __temp[__temp["state"] == gvalue]
             if len(__temp) == 0:
                 return False
-            return pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","Novos Infectados","Novas Mortes"]).to_dict()
+            return pd.DataFrame(__temp[["state","totalCases","deaths"]].values,columns=["Estados","novosInfectados","novasMortes"]).to_dict()
         
 
 
