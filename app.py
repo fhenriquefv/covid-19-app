@@ -129,13 +129,13 @@ label = {0: 'negative', 1: 'positive'}
 #    data = request.get_json()
 #    return jsonify(data)
 
-@app.route('/data/absolutos')
-def mostrar_dados_gerais():
-    return jsonify(data.DadosAbsolutos(date.today(), 'state', None))
+@app.route('/data/absolutos/<string:data>')
+def mostrar_dados_gerais(data):
+    return jsonify(data.DadosAbsolutos(data, 'state', None))
 
-@app.route('/historico')
-def mostrar_historico():
-    return jsonify(data.DadosHistoricos(date.today(), 'state', None))
+@app.route('/historico/<string:data>')
+def mostrar_historico(data):
+    return jsonify(data.DadosHistoricos(data, 'state', None))
 
 
 @app.route('/Instances/<path:path>')
