@@ -968,7 +968,7 @@ def pegar_dados_csv(mortes, estado):
 
 
 @app.route('/datas', methods=['GET'])
-def pegar_dados_csv():
+def pegar_datas():
     with open('Instances/Dates/dates.csv', 'r', encoding="ISO-8859-1") as csv_file:
         
         csv_reader = csv.reader(csv_file, delimiter=',')
