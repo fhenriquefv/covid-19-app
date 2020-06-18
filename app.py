@@ -244,6 +244,7 @@ def create_file_dictionary(filename, directory):
         if(len(prefixo) >= 10):
             i = 8
             tipo, tempo, *resto = antesData.split('_')
+            print(tempo)
             if(tempo == 'total'):
                 dictionary['Tempo'] = 'acumulado'
                 i = 10
