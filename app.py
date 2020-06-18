@@ -343,7 +343,7 @@ def gerar_temporal_series():
         fullpath = str(path)
         fullpath.encode()
         *caminho, pasta, arquivo = fullpath.split('/')
-        nome, extensao = arquivo.split('.')
+        *resto, nome, extensao = arquivo.split('.')
         dicionario = create_file_dictionary(nome, pasta)
     else:
         existente = repetidos[0]
