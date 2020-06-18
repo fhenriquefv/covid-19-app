@@ -241,12 +241,14 @@ def create_file_dictionary(filename, directory):
     else:
         antesData, posData = filename.split('<')
         prefixo = list(antesData)
+        '''
         tipo, tempo, *resto = antesData.split('_')
         print(tempo)
         if(tempo == 'total'):
             dictionary['Tempo'] = 'acumulado'
         else:
             dictionary['Tempo'] = 'diário'
+        '''
 
         #find(prefixo, 'i')
         
@@ -257,6 +259,14 @@ def create_file_dictionary(filename, directory):
 
     dictionary['Mortes'] = mortes
 
+    antesData, posData = filename.split('<')
+    tipo, tempo, *resto = antesData.split('_')
+    print(tempo)
+    if(tempo == 'total'):
+        dictionary['Tempo'] = 'acumulado'
+    else:
+        dictionary['Tempo'] = 'diário'
+    
     alcance = ''
     if(directory.endswith('s')):
         alcance = 'estado'
@@ -719,7 +729,7 @@ def comparar_cidades(method):
     _relation["time"] = pd.Series(params["time"])
     
     deaths = _relation['deaths'].values[0]
-    states = _relation['cidades'].Value
+    cities = _relation['cidades'].Value
     time = _relation["time"].values[0]
 
 
