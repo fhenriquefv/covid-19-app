@@ -210,6 +210,13 @@ def teste(classe, tipo):
     res += BASEURL+staticPlots.PieRegion(True)+' ' '''
     return jsonify({'Filenames': fileArray})
 
+def find(array, element):
+    found = False
+    for item in array:
+        if(item == element):
+            found = True
+    return found 
+
 def create_file_dictionary(filename, directory):
     dictionary = {'Nome': filename, 'AtualizadoEm': find_file_date(filename)}
     letras = list(directory)
@@ -301,10 +308,14 @@ def gerar_temporal_series():
     _relation['ratio'] = pd.Series(params['taxa'])
     _relation['gtype'] = pd.Series(params['tipo'])
     _relation['gvalue'] = pd.Series(params['valor'])
+    _relation['kind'] = pd.Series(params['kind'])
+    _relation['time'] = pd.Series(params['time'])
     
     ratio = _relation['ratio'].values[0]
     gvalue = _relation['gvalue'].values[0]
     gtype = _relation['gtype'].values[0]
+    kind = _relation['kind'].values[0]
+    time = _relation['time'].values[0]
     prefixo = ''
     pasta = '__'
     fullpath = '__temp/__fixed/'
@@ -328,7 +339,7 @@ def gerar_temporal_series():
     status = 200
     repetidos = file_exists(prefixo, sufixo)
     if(not repetidos):
-        path = staticPlots.TemporalSeries(gvalue, gtype, ratio, hash_value)
+        path = staticPlots.TemporalSeries(gvalue, gtype, time,ratio, kind, hash_value)
         fullpath = str(path)
         fullpath.encode()
         *caminho, pasta, arquivo = fullpath.split('/')
@@ -341,7 +352,7 @@ def gerar_temporal_series():
             dicionario = create_file_dictionary(existente, pasta)
             fullpath += existente+'.png'
         else:
-            path = staticPlots.TemporalSeries(gvalue, gtype, ratio, hash_value)
+            path = staticPlots.TemporalSeries(gvalue, gtype, time,ratio, kind, hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
@@ -606,9 +617,12 @@ def comparar_estados(method):
 
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["estados"] = pd.Series(params["selecionado"])
+    _relation["time"] = pd.Series(params["time"])
     
     deaths = _relation['deaths'].values[0]
     states = _relation['estados'].Value
+    time = _relation["time"].values[0]
+
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
@@ -627,67 +641,40 @@ def comparar_estados(method):
     dicionario = {}
     status = 200
     fullpath = '__temp/__custom/'
-    if method == 'Multiple':
-        pasta = '__'
-        if(deaths):
-            prefixo = 'mcdbs_'
-            pasta += 'mcdbs'
+    pasta = '__'
+    if(deaths):
+        prefixo = 'mcdbs_'
+        pasta += 'mcdbs'
+    else:
+        prefixo = 'mcibs_'
+        pasta += 'mcibs'
+
+    if(time == True):
+        prefixo += "t_"
+
+    fullpath += pasta+'/'
+    repetidos = file_exists(prefixo, sufixo)
+    if(not repetidos):
+        path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,time,hash_value)
+        fullpath = str(path)
+        fullpath.encode()
+        *caminho, pasta, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        dicionario = create_file_dictionary(nome, pasta)
+        
+    else:
+        existente = repetidos[0]
+        last_update = find_file_date(existente)
+        if(timestamp == last_update):
+            dicionario = create_file_dictionary(existente, pasta)
+            fullpath += existente+'.png'
         else:
-            prefixo = 'mcibs_'
-            pasta += 'mcibs'
-        fullpath += pasta+'/'
-        repetidos = file_exists(prefixo, sufixo)
-        if(not repetidos):
             path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            
-        else:
-            existente = repetidos[0]
-            last_update = find_file_date(existente)
-            if(timestamp == last_update):
-                dicionario = create_file_dictionary(existente, pasta)
-                fullpath += existente+'.png'
-            else:
-                path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
-                fullpath = str(path)
-                fullpath.encode()
-                *caminho, pasta, arquivo = fullpath.split('/')
-                nome, extensao = arquivo.split('.')
-                dicionario = create_file_dictionary(nome, pasta)
-    else:
-        pasta = '__'
-        if(deaths):
-            prefixo = 'cdbs_'
-            pasta += 'cdbs'
-        else:
-            prefixo = 'cibs_'
-            pasta += 'cibs'
-        fullpath += pasta+'/'
-        repetidos = file_exists(prefixo, sufixo)
-        if(not repetidos):
-            path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
-            fullpath = str(path)
-            fullpath.encode()
-            *caminho, pasta, arquivo = fullpath.split('/')
-            nome, extensao = arquivo.split('.')
-            dicionario = create_file_dictionary(nome, pasta)
-        else:
-            existente = repetidos[0]
-            last_update = find_file_date(existente)
-            if(timestamp == last_update):
-                dicionario = create_file_dictionary(existente, pasta)
-                fullpath += existente+'.png'
-            else:
-                path = dinamicPlots.ComparisonStateBar(states[0],states[1],deaths,hash_value)
-                fullpath = str(path)
-                fullpath.encode()
-                *caminho, pasta, arquivo = fullpath.split('/')
-                nome, extensao = arquivo.split('.')
-                dicionario = create_file_dictionary(nome, pasta)
 
     dicionario['caminho'] = BASEURL+fullpath
     dicionario['selecionados'] = sufixo
@@ -701,10 +688,12 @@ def comparar_cidades(method):
 
     _relation['deaths'] = pd.Series(params["mortes"])
     _relation["cidades"] = pd.Series(params["selecionado"])
+    _relation["time"] = pd.Series(params["time"])
     
-    #Tratar os dados
     deaths = _relation['deaths'].values[0]
-    cities = _relation['cidades'].Value
+    states = _relation['estados'].Value
+    time = _relation["time"].values[0]
+
 
     timestamp = date.today()
     #hash_object = hashlib.md5(str(timestamp).encode())
@@ -724,67 +713,39 @@ def comparar_cidades(method):
     dicionario = {}
     status = 200
     fullpath = '__temp/__custom/'
-    if method == 'Multiple':
-        pasta = '__'
-        if(deaths):
-            prefixo = 'mcdbc_'
-            pasta += 'mcdbc'
-        else:
-            prefixo = 'mcibc_'
-            pasta += 'mcibc'
-        fullpath += pasta+'/'
-        repetidos = file_exists(prefixo, sufixo)
-        if(not repetidos):
-            path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
-            fullpath = str(path)
-            fullpath.encode()
-            *caminho, pasta, arquivo = fullpath.split('/')
-            nome, extensao = arquivo.split('.')
-            dicionario = create_file_dictionary(nome, pasta)
-        else:
-            existente = repetidos[0]
-            last_update = find_file_date(existente)
-            if(timestamp == last_update):
-                dicionario = create_file_dictionary(existente, pasta)
-                fullpath += existente+'.png'
-            else:
-                path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, hash_value)
-                fullpath = str(path)
-                fullpath.encode()
-                *caminho, pasta, arquivo = fullpath.split('/')
-                nome, extensao = arquivo.split('.')
-                dicionario = create_file_dictionary(nome, pasta)
+    pasta = '__'
+    if(deaths):
+        prefixo = 'mcdbc_'
+        pasta += 'mcdbc'
     else:
-        pasta = '__'
-        if(deaths):
-            prefixo = 'cdbc_'
-            pasta += 'cdbc'
+        prefixo = 'mcibc_'
+        pasta += 'mcibc'
+
+    if(time == True):
+        prefixo += "t_"
+    fullpath += pasta+'/'
+    repetidos = file_exists(prefixo, sufixo)
+    if(not repetidos):
+        path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, time, hash_value)
+        fullpath = str(path)
+        fullpath.encode()
+        *caminho, pasta, arquivo = fullpath.split('/')
+        nome, extensao = arquivo.split('.')
+        dicionario = create_file_dictionary(nome, pasta)
+    else:
+        existente = repetidos[0]
+        last_update = find_file_date(existente)
+        if(timestamp == last_update):
+            dicionario = create_file_dictionary(existente, pasta)
+            fullpath += existente+'.png'
         else:
-            prefixo = 'cibc_'
-            pasta += 'cibc'
-        fullpath += pasta+'/'
-        repetidos = file_exists(prefixo, sufixo)
-        if(not repetidos):
-            path = dinamicPlots.ComparisonCityBar(cities[0],cities[1],deaths,hash_value)
+            path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, time, hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
             nome, extensao = arquivo.split('.')
             dicionario = create_file_dictionary(nome, pasta)
-            
-        else:
-            existente = repetidos[0]
-            last_update = find_file_date(existente)
-            if(timestamp == last_update):
-                dicionario = create_file_dictionary(existente, pasta)
-                fullpath += existente+'.png'
-            else:
-                path = dinamicPlots.ComparisonCityBar(cities[0],cities[1],deaths,hash_value)
-                fullpath = str(path)
-                fullpath.encode()
-                *caminho, pasta, arquivo = fullpath.split('/')
-                nome, extensao = arquivo.split('.')
-                dicionario = create_file_dictionary(nome, pasta)
+    
 
     dicionario['caminho'] = BASEURL+fullpath
     dicionario['selecionados'] = sufixo

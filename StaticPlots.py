@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[6]:
+# In[1]:
 
 
 import numpy as np
@@ -13,7 +13,7 @@ register_matplotlib_converters()
 plt.style.use('seaborn')
 
 
-# In[8]:
+# In[25]:
 
 
 class StaticPlots:
@@ -44,13 +44,15 @@ class StaticPlots:
         self.BR_Cases_Total = data.BR_Cases_Total
         self.states = data.states
         
-    def TemporalSeries(self, gvalue, gtype='state',ratio = None, hash_value=""):
+    def TemporalSeries(self, gvalue, gtype='state',time='False',ratio = None, kind = 'deaths', hash_value=""):
         """
         gvalue: The name of the city or the code of the state
         
         gtype: Must be 'state' or 'city'
         
         hash_value: The suffix of the .png file name, must be unique
+
+        Time: true dados por dia false dados acumulados
         """
         #gvalue = gvalue.decode('utf-8')
         #hash_value = hash_value.decode('utf-8')
@@ -61,13 +63,37 @@ class StaticPlots:
         else:
             _temp = self.BR_Cases_By_City[self.BR_Cases_By_City[gtype].values == gvalue]
             path = "__temp/__fixed/__tsc/tsc_"+hash_value+".png"
+            
+        if time == False:
+            t1= "totalCases"
+            t2 = "deaths"
+            ext = "Total"
+            path += "total_"
+        else:
+            t1 = "newCases"
+            t2 = "newDeaths"
+            ext = u"Diário"
+            path += "day_"
+            
         
         Figure, Axes = plt.subplots(figsize=(8,8))
 
-        Axes.plot_date("date","totalCases",data = _temp,linestyle="solid",label="Infectados",color='red',markevery=2)
-        Axes.plot_date("date","deaths",data=_temp,linestyle="solid", label="Mortes",color='purple',markevery=2)
-
-        Axes.set_title(u"Série Temporal - "+gvalue,fontsize=20)
+        if kind == "both":
+            Axes.plot_date("date",t1,data = _temp,linestyle="solid",label="Infectados",color='red',markevery=2)
+            Axes.plot_date("date",t2,data=_temp,linestyle="solid", label="Mortes",color='purple',markevery=2)
+        elif kind == "infected":
+            
+            path += "i_"
+            Axes.plot_date("date",t1,data = _temp,linestyle="solid",label="Infectados",color='red',markevery=2)
+        elif kind == "deaths":
+            
+            path += "d_"
+            Axes.plot_date("date",t2,data=_temp,linestyle="solid", label="Mortes",color='purple',markevery=2)
+        
+        else:
+            raise ValueError("Valor incorreto para o paramêtro 'kind', entre 'both', 'infected' ou 'deaths'.")
+            
+        Axes.set_title(u"Série Temporal - "+gvalue+" ("+ext+")",fontsize=20)
         Axes.set_ylabel(u"Número",labelpad=10,fontsize=14)
         Axes.set_xlabel("Tempo (Dias)",labelpad=10,fontsize=14)
         #Axes.set_xticklabels(_temp["date"].dt.strftime("%d-%m-%Y"))
@@ -76,13 +102,16 @@ class StaticPlots:
         Figure.autofmt_xdate()
         Figure.tight_layout()
 
+        path += hash_value+".png"
+        
         Figure.savefig(path,bbox_inches='tight')
 
         del _temp
         Axes.cla()
         Figure.clear()
         plt.close()
-        return path    
+        return path
+            
     
     def totalBarState(self,deaths=False,ratio = None, hash_value=""):
         """
@@ -100,7 +129,6 @@ class StaticPlots:
         #Checks the value of the param
         if ratio == None:
             #If no ratio is specified, the desired ratio is 1
-            print('DANONE 2')
             d_ratio = pd.Series(1)
             label_ext = ""
             co = 1
@@ -418,35 +446,9 @@ class StaticPlots:
         del colors
         del reg
         del total
-        #del path
         del gtype
         Axes.cla()
         Figure.clear()
         plt.close()
         return path
-
-
-# In[2]:
-
-
-#import import_ipynb
-#import DataLoad as DL
-
-
-# In[3]:
-
-
-#data = DL.DataLoad()
-
-
-# In[4]:
-
-
-#plots = StaticPlots(data)
-
-
-# In[9]:
-
-
-#plots.totalBarCity("RN",deaths=True,ratio="Area")
 
