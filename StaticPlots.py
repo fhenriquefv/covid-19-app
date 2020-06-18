@@ -59,10 +59,10 @@ class StaticPlots:
         
         if gtype == 'state':
             _temp = self.BR_Cases_By_State[self.BR_Cases_By_State[gtype].values == gvalue]
-            path = "__temp/__fixed/__tss/tss_"+hash_value+".png"
+            path = "__temp/__fixed/__tss/tss_"
         else:
             _temp = self.BR_Cases_By_City[self.BR_Cases_By_City[gtype].values == gvalue]
-            path = "__temp/__fixed/__tsc/tsc_"+hash_value+".png"
+            path = "__temp/__fixed/__tsc/tsc_"
             
         if time == False:
             t1= "totalCases"

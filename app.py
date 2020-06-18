@@ -326,6 +326,17 @@ def gerar_temporal_series():
         prefixo = 'tss_'
         pasta += 'tss'
 
+    if(time == False):
+        prefixo += 'total_'
+    else:
+        prefixo += 'day_'
+    
+    if(kind == 'infected'):
+        prefixo += 'i_'
+    else:
+        prefixo += 'd_'
+
+
     fullpath += pasta+'/'
     
     timestamp = date.today()
