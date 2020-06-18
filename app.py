@@ -246,7 +246,7 @@ def create_file_dictionary(filename, directory):
             tipo, tempo, *resto = antesData.split('_')
             if(tempo == 'total'):
                 dictionary['Tempo'] = 'acumulado'
-                i = 10
+                i = 9
             elif(tempo == 'day'):
                 dictionary['Tempo'] = 'diário'
             
