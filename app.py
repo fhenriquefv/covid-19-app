@@ -246,13 +246,15 @@ def create_file_dictionary(filename, directory):
             tipo, tempo, *resto = antesData.split('_')
             if(tempo == 'total'):
                 dictionary['Tempo'] = 'acumulado'
-                i = 9
+                i = 10
             elif(tempo == 'day'):
                 dictionary['Tempo'] = 'diário'
+
+            find(prefixo, 'i')
             
-            if(prefixo[i] == 'i'):
+            if(find(prefixo, 'i')):
                 mortes = 'infectados'
-            elif(prefixo[i] == 'd'):
+            elif(find(prefixo, 'd')):
                 mortes = 'mortes'
 
     dictionary['Mortes'] = mortes
