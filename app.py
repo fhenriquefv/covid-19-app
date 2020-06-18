@@ -240,7 +240,7 @@ def create_file_dictionary(filename, directory):
         tipo, tempo, *resto = antesData.split('_')
         if(find(list(tempo), 't')):
             dictionary['Tempo'] = 'acumulado'
-        else:
+        elif(find(list(tempo), 'y')):
             dictionary['Tempo'] = 'diário'
     elif(letras[3] == 'd' or letras[4] == 'd'):
         mortes = 'mortes'
@@ -248,7 +248,7 @@ def create_file_dictionary(filename, directory):
         tipo, tempo, *resto = antesData.split('_')
         if(find(list(tempo), 't')):
             dictionary['Tempo'] = 'acumulado'
-        else:
+        elif(find(list(tempo), 'y')):
             dictionary['Tempo'] = 'diário'
     else:
         antesData, posData = filename.split('<')
