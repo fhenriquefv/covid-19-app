@@ -680,7 +680,7 @@ def comparar_estados(method):
     fullpath += pasta+'/'
     repetidos = file_exists(prefixo, sufixo)
     if(not repetidos):
-        path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,time,hash_value)
+        path = dinamicPlots.ComparisonMultipleStates(states,deaths,time,hash_value)
         fullpath = str(path)
         fullpath.encode()
         *caminho, pasta, arquivo = fullpath.split('/')
@@ -694,7 +694,7 @@ def comparar_estados(method):
             dicionario = create_file_dictionary(existente, pasta)
             fullpath += existente+'.png'
         else:
-            path = dinamicPlots.ComparisonMultipleStatesBar(states,deaths,hash_value)
+            path = dinamicPlots.ComparisonMultipleStates(states,deaths,hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
@@ -751,7 +751,7 @@ def comparar_cidades(method):
     fullpath += pasta+'/'
     repetidos = file_exists(prefixo, sufixo)
     if(not repetidos):
-        path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, time, hash_value)
+        path = dinamicPlots.ComparisonMultipleCities(cities, deaths, time, hash_value)
         fullpath = str(path)
         fullpath.encode()
         *caminho, pasta, arquivo = fullpath.split('/')
@@ -764,7 +764,7 @@ def comparar_cidades(method):
             dicionario = create_file_dictionary(existente, pasta)
             fullpath += existente+'.png'
         else:
-            path = dinamicPlots.ComparisonMultipleCitiesBar(cities, deaths, time, hash_value)
+            path = dinamicPlots.ComparisonMultipleCities(cities, deaths, time, hash_value)
             fullpath = str(path)
             fullpath.encode()
             *caminho, pasta, arquivo = fullpath.split('/')
