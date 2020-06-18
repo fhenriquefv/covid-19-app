@@ -238,6 +238,20 @@ def create_file_dictionary(filename, directory):
         mortes = 'infectados'
     elif(letras[3] == 'd' or letras[4] == 'd'):
         mortes = 'mortes'
+    else:
+        antesData, posData = filename.split('<')
+        prefixo = list(antesData)
+        if(len(prefixo) == 10):
+            if(prefixo[8] == 'i'):
+                mortes = 'infectados'
+            elif(prefixo[8] == 'd'):
+                mortes = 'mortes'
+        tipo, tempo, *resto = antesData.split('_')
+        if(tempo == 'total'):
+            dictionary['Tempo'] = 'acumulado'
+        else:
+            dicionario['Tempo'] = 'diário'
+
     dictionary['Mortes'] = mortes
 
     alcance = ''
@@ -702,7 +716,7 @@ def comparar_cidades(method):
     _relation["time"] = pd.Series(params["time"])
     
     deaths = _relation['deaths'].values[0]
-    states = _relation['estados'].Value
+    states = _relation['cidades'].Value
     time = _relation["time"].values[0]
 
 
