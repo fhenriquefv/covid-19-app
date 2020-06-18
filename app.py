@@ -241,22 +241,19 @@ def create_file_dictionary(filename, directory):
     else:
         antesData, posData = filename.split('<')
         prefixo = list(antesData)
-        if(len(prefixo) >= 10):
-            i = 8
-            tipo, tempo, *resto = antesData.split('_')
-            print(tempo)
-            if(tempo == 'total'):
-                dictionary['Tempo'] = 'acumulado'
-                i = 10
-            else:
-                dictionary['Tempo'] = 'diário'
+        tipo, tempo, *resto = antesData.split('_')
+        print(tempo)
+        if(tempo == 'total'):
+            dictionary['Tempo'] = 'acumulado'
+        else:
+            dictionary['Tempo'] = 'diário'
 
-            #find(prefixo, 'i')
-            
-            if(find(prefixo, 'i')):
-                mortes = 'infectados'
-            elif(find(prefixo, 'd')):
-                mortes = 'mortes'
+        #find(prefixo, 'i')
+        
+        if(find(prefixo, 'i')):
+            mortes = 'infectados'
+        elif(find(prefixo, 'd')):
+            mortes = 'mortes'
 
     dictionary['Mortes'] = mortes
 
