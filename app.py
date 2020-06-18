@@ -250,7 +250,7 @@ def create_file_dictionary(filename, directory):
         if(tempo == 'total'):
             dictionary['Tempo'] = 'acumulado'
         else:
-            dicionario['Tempo'] = 'diário'
+            dictionary['Tempo'] = 'diário'
 
     dictionary['Mortes'] = mortes
 
