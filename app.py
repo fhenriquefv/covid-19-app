@@ -247,7 +247,7 @@ def create_file_dictionary(filename, directory):
             if(tempo == 'total'):
                 dictionary['Tempo'] = 'acumulado'
                 i = 10
-            else:
+            elif(tempo == 'day'):
                 dictionary['Tempo'] = 'diário'
             
             if(prefixo[i] == 'i'):
