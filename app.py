@@ -247,10 +247,10 @@ def create_file_dictionary(filename, directory):
             if(tempo == 'total'):
                 dictionary['Tempo'] = 'acumulado'
                 i = 10
-            elif(tempo == 'day'):
+            else:
                 dictionary['Tempo'] = 'diário'
 
-            find(prefixo, 'i')
+            #find(prefixo, 'i')
             
             if(find(prefixo, 'i')):
                 mortes = 'infectados'
