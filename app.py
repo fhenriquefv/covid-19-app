@@ -253,7 +253,7 @@ def create_file_dictionary(filename, directory):
     else:
         antesData, posData = filename.split('<')
         prefixo = list(antesData)
-        tipo, tempo, *resto = antesData.split('_')
+        tipo, tempo, resto = antesData.split('_')
         if(tempo == 'total'):
             dictionary['Tempo'] = 'acumulado'
         else:
@@ -261,9 +261,9 @@ def create_file_dictionary(filename, directory):
 
         #find(prefixo, 'i')
         
-        if(find(prefixo, 'i')):
+        if(find(resto, 'i')):
             mortes = 'infectados'
-        elif(find(prefixo, 'd')):
+        elif(find(resto, 'd')):
             mortes = 'mortes'
 
     dictionary['Mortes'] = mortes
