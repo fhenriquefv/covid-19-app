@@ -134,7 +134,7 @@ class DinamicPlots:
             if time == False:
                 _type = "totalCases"
                 path = u"__temp/__custom/__mcibs/mcibs_t_"+hash_value+".png"
-            if time == False:
+            else:
                 _type = "newCases"
                 path = u"__temp/__custom/__mcibs/mcibs_"+hash_value+".png"
         
