@@ -238,17 +238,17 @@ def create_file_dictionary(filename, directory):
         mortes = 'infectados'
         antesData, posData = filename.split('<')
         tipo, tempo, *resto = antesData.split('_')
-        if(find(list(tempo), 't')):
+        if(tempo.endswith('_t_')):
             dictionary['Tempo'] = 'acumulado'
-        elif(find(list(tempo), 'y')):
+        elif(tempo.endswith('_')):
             dictionary['Tempo'] = 'diário'
     elif(letras[3] == 'd' or letras[4] == 'd'):
         mortes = 'mortes'
         antesData, posData = filename.split('<')
         tipo, tempo, *resto = antesData.split('_')
-        if(find(list(tempo), 't')):
+        if(tempo.endswith('_t_')):
             dictionary['Tempo'] = 'acumulado'
-        elif(find(list(tempo), 'y')):
+        elif(tempo.endswith('_')):
             dictionary['Tempo'] = 'diário'
     else:
         antesData, posData = filename.split('<')
